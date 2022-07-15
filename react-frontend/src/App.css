@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding-top: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+.p-tag{
+  color: blue;
+}
+
+.home,
+.services,
+.products,
+
+.services {
+  background-image: url('./images/img-2.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+
+.products {
+  background-image: url('./images/img-1.jpg');
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+
+.sign-up {
+  background-image: url('./images/img-8.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+.login{
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(93, 180, 234);
+  padding: 5%;
+  width: 60%;
+  height:  calc(100vh - 150px);
+  display: table  ;
+  vertical-align: middle;  
+  grid-template-columns: 24rem 5fr;
+  
+}
+.signup{
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(93, 180, 234);
+  padding: 5%;
+  width: 60%;
+  height:  calc(150vh - 150px);
+  display: table  ;
+  vertical-align: middle;  
+  grid-template-columns: 24rem 5fr;
+  
+}
+.login>box{
+
+  width: 100%;
+}
+.logging{
+  
+  margin-top: 10%;
+  
+  vertical-align: middle;
+}
