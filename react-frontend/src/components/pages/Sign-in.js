@@ -32,7 +32,7 @@ export default function SignIn() {
     return (
         <div className="login">
             {!authData ?
-
+                <div>
                 <form onSubmit={handlerSubmit}>
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                         <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
@@ -53,8 +53,10 @@ export default function SignIn() {
                             Login
                         </Button>
                     </div>
-                    <Link to ={'/signup'}>Sign Up if you don't have an account</Link>
+                    
                 </form>
+                <Link to ={'/signup'}>Don't have an account? Sign Up</Link>
+                </div>
                 :
                 <div className="logging">
                     <p>{authData.user.username}</p>

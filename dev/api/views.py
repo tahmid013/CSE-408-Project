@@ -15,6 +15,10 @@ class UserProfileViewset(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
 
+class UserViewset(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 class GroupViewset(viewsets.ModelViewSet):
     queryset  = Group.objects.all()
     serializer_class = GroupSerializer

@@ -8,6 +8,7 @@ from django.urls import path
 
 router = routers.DefaultRouter()
 router.register(r'groups', views.GroupViewset)
+router.register(r'users', views.UserViewset)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

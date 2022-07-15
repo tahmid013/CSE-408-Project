@@ -8,6 +8,8 @@ def Upload_path_handler(instance, filename):
 class UserProfile(models.Model):
     user = models.OneToOneField(User , related_name= 'profile', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=Upload_path_handler, blank= True)
+    is_club_member = models.BooleanField(default=False)
+    bio = models.TextField(max_length=500, blank=True)
 
 
 class Group(models.Model):
