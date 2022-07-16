@@ -38,7 +38,8 @@ export default function SignUp() {
                 }
             })
             if(regData){
-                console.log(regData);
+                const data = await auth({ username, password });
+                setAuth(data);
                 navigate('/account');
             }
         } else {

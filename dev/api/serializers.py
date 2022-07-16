@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ( 'image', 'is_club_member', 'bio')
+        fields = ('id', 'image', 'is_club_member', 'bio')
 
 class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer()
@@ -18,7 +18,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile')
-        user = User.objects.create(**validated_data)
+        user = User(
+            email = validated_data.get('email'),
+            username = validated_data.get('username')
+        )
+        user.set_password(validated_data.get('password'))
+        user.save()
         UserProfile.objects.create(user=user, **profile_data)
         Token.objects.create(user=user)
         return user
