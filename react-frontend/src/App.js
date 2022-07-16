@@ -13,6 +13,7 @@ import Features from './components/pages/Features';
 import HowWorks from './components/pages/HowWorks';
 import DemoGuideVideo from './components/pages/DemoGuideVideo';
 import Category from './components/pages/Category';
+import Account from './components/pages/Account';
 import { AuthProvider } from './hooks/useAuth';
 
 const App = () =>  {
@@ -30,6 +31,7 @@ const App = () =>  {
           <Route exact path = "/howitworks"  element = {<HowWorks/>} />
           <Route exact path = "/features"  element = {<Features/>} />
           <Route exact path = "/about"  element = {<About/>} />
+          <Route exact path = "/account"  element = {<Account/>} />
           <Route exact path = "/signup"  element = {<SignUp/>} />
           <Route exact path = "/signin"  element = {<SignIn/>} />
           <Route exact path = "/quizmainpage"  element = {<QuizMainPage/>} />

@@ -10,7 +10,7 @@ import { auth } from "../../services/user-services";
 import { useAuth } from "../../hooks/useAuth";
 import {Link} from 'react-router-dom';
 import {register} from '../../services/user-services';
-
+import {useNavigate} from 'react-router-dom';
 
 export default function SignUp() {
 
@@ -20,6 +20,7 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
 
     const { authData, setAuth } = useAuth();
+    const navigate = useNavigate();
 
     const passMatch = () => {
         return password === password2;
@@ -38,6 +39,7 @@ export default function SignUp() {
             })
             if(regData){
                 console.log(regData);
+                navigate('/account');
             }
         } else {
             console.log("passwords do not match");

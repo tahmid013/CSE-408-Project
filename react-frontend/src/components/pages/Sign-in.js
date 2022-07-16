@@ -7,6 +7,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import React, { useState } from "react";
 import { auth } from "../../services/user-services";
 import { useAuth } from "../../hooks/useAuth";
+import Account from "./Account";
 
 
 export default function SignIn() {
@@ -60,9 +61,11 @@ export default function SignIn() {
                 :
                 <div className="logging">
                     <p>{authData.user.username}</p>
+                    
                     <Button color="primary" variant="contained" type='submit' onClick={() => logout()}>
                         Logout
                     </Button>
+                    
                 </div>
 
 
