@@ -80,7 +80,7 @@ export default function SignIn() {
                 // </div>
                 <div>
                     <h4>You have successfully logged in!</h4>
-                    <Button onClick = {() => goToUser}>Go to User</Button>
+                    <Button path_name='user'>Go to User</Button>
                     <br/>
                     <Button path_name='signin'  onClick={() => logout()}>
                         Logout
