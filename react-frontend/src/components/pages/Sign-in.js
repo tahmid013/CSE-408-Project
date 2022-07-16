@@ -1,4 +1,5 @@
-import { Button } from "@mui/material";
+
+import { Button } from "../Button";
 import { Link } from "react-router-dom";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
@@ -7,7 +8,9 @@ import LockIcon from '@mui/icons-material/Lock';
 import React, { useState } from "react";
 import { auth } from "../../services/user-services";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import Account from "./Account";
+import User from "./User";
 
 
 export default function SignIn() {
@@ -15,6 +18,7 @@ export default function SignIn() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { authData, setAuth } = useAuth();
+    const navigate = useNavigate();
 
     const handlerSubmit = async e => {
         e.preventDefault();
@@ -23,6 +27,14 @@ export default function SignIn() {
     }
     const logout = () => {
         setAuth(null);
+    }
+
+    const goToAccount = () => {
+        navigate('/account');
+    }
+
+    const goToUser = () => {
+        navigate('/user', { props: authData } );
     }
 
     if (authData) {
@@ -50,7 +62,7 @@ export default function SignIn() {
                         />
                     </Box>
                     <div className="logging">
-                        <Button color="primary" variant="contained" type='submit'>
+                        <Button path_name='signin' type='submit' onClick={handlerSubmit}>
                             Login
                         </Button>
                     </div>
@@ -59,22 +71,21 @@ export default function SignIn() {
                 <Link to ={'/signup'}>Don't have an account? Sign Up</Link>
                 </div>
                 :
-                <div className="logging">
-                    <p>
-                    {authData.user ? 
-                                <>
-                                {authData.user.username} 
-                                </>
-                                : 
-                                <></>
-                                }
-                    </p>
-                    <img src={"http://127.0.0.1:8000"+authData.user.profile.image} alt="avatar" />            
+                // <div className="logging">
+                //     <User user={authData.user} />
+                //     <Button color="primary" variant="contained" type='submit' onClick={() => logout()}>
+                //         Logout
+                //     </Button>
                     
-                    <Button color="primary" variant="contained" type='submit' onClick={() => logout()}>
+                // </div>
+                <div>
+                    <h4>You have successfully logged in!</h4>
+                    <Button onClick = {() => goToUser}>Go to User</Button>
+                    <br/>
+                    <Button path_name='signin'  onClick={() => logout()}>
                         Logout
                     </Button>
-                    
+
                 </div>
 
 

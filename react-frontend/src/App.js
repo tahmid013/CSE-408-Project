@@ -14,6 +14,7 @@ import HowWorks from './components/pages/HowWorks';
 import DemoGuideVideo from './components/pages/DemoGuideVideo';
 import Category from './components/pages/Category';
 import Account from './components/pages/Account';
+import User from './components/pages/User';
 import { AuthProvider } from './hooks/useAuth';
 
 const App = () =>  {
@@ -28,15 +29,16 @@ const App = () =>  {
         <Navbar/>
         <Routes>
           <Route exact path = "/"  element = {<Home/>} />
-          <Route exact path = "/howitworks"  element = {<HowWorks/>} />
-          <Route exact path = "/features"  element = {<Features/>} />
-          <Route exact path = "/about"  element = {<About/>} />
-          <Route exact path = "/account"  element = {<Account/>} />
-          <Route exact path = "/signup"  element = {<SignUp/>} />
-          <Route exact path = "/signin"  element = {<SignIn/>} />
-          <Route exact path = "/quizmainpage"  element = {<QuizMainPage/>} />
-          <Route exact path = "/demo"  element = {<DemoGuideVideo/>} />
-          <Route exact path = "/quizcategory"  element = {<Category/>} />
+          <Route path = "/howitworks"  element = {<HowWorks/>} />
+          <Route path = "/features"  element = {<Features/>} />
+          <Route path = "/about"  element = {<About/>} />
+          <Route path = "/account"  element = {<Account/>} />
+          <Route path = "/signup"  element = {<SignUp/>} />
+          <Route path = "/signin"  element = {<SignIn/>} />
+          <Route path = "/quizmainpage"  element = {<QuizMainPage/>} />
+          <Route path = "/demo"  element = {<DemoGuideVideo/>} />
+          <Route path = "/quizcategory"  element = {<Category/>} />
+          <Route path = "/user"  element = {<User/>} />
         </Routes>
         </AuthProvider>
         </Router>
