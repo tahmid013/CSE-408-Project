@@ -69,6 +69,7 @@ export default function SignIn() {
                                 <></>
                                 }
                     </p>
+                    <img src={"http://127.0.0.1:8000"+authData.user.profile.image} alt="avatar" />            
                     
                     <Button color="primary" variant="contained" type='submit' onClick={() => logout()}>
                         Logout
