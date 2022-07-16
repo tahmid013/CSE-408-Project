@@ -60,7 +60,15 @@ export default function SignIn() {
                 </div>
                 :
                 <div className="logging">
-                    <p>{authData.user.username}</p>
+                    <p>
+                    {authData.user ? 
+                                <>
+                                {authData.user.username} 
+                                </>
+                                : 
+                                <></>
+                                }
+                    </p>
                     
                     <Button color="primary" variant="contained" type='submit' onClick={() => logout()}>
                         Logout
