@@ -16,6 +16,10 @@ import Category from './components/pages/Category';
 import Account from './components/pages/Account';
 import User from './components/pages/User';
 import { AuthProvider } from './hooks/useAuth';
+import ClubsPage from './components/pages/ClubsPage';
+import SinglePlayer from './components/pages/SinglePlayer';
+import MultiPlayer from './components/pages/MultiPlayer';
+import Practice from './components/pages/Practice';
 
 const App = () =>  {
 
@@ -36,8 +40,16 @@ const App = () =>  {
           <Route path = "/signup"  element = {<SignUp/>} />
           <Route path = "/signin"  element = {<SignIn/>} />
           <Route path = "/quizmainpage"  element = {<QuizMainPage/>} />
+          <Route   path = "/type_mcq/quizcategory"  element = {<Category/>} />
+          <Route exact path = "/type_written/quizcategory"  element = {<Category/>} />
+          <Route exact path = "/type_fill/quizcategory"  element = {<Category/>} />
           <Route path = "/demo"  element = {<DemoGuideVideo/>} />
           <Route path = "/quizcategory"  element = {<Category/>} />
+          <Route exact path = "/clubspage"  element = {<ClubsPage/>} />
+          <Route exact path = "/quizmainpage/single"  element = {<SinglePlayer/>} />
+          <Route exact path = "/quizmainpage/multi"  element = {<MultiPlayer/>} />
+          <Route exact path = "/quizmainpage/practice"  element = {<Practice/>} />
+          
           <Route path = "/user"  element = {<User/>} />
         </Routes>
         </AuthProvider>

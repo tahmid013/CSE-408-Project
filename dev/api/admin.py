@@ -1,7 +1,11 @@
 from email.headerregistry import Group
 from django.contrib import admin
-from .models import Group, UserProfile
+from .models import Group, UserProfile,Club
 # Register your models here.
+@admin.register(Club)
+class UserProfileAdmin(admin.ModelAdmin):
+    fields = ('name', 'about', 'institute', 'image')
+    list_display = ('id', 'name', 'about', 'institute', 'image')
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):

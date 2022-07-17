@@ -1,4 +1,5 @@
-import { Button } from "@mui/material";
+//import { Button } from "@mui/material";
+import { Button } from "../Button";
 import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
@@ -59,7 +60,7 @@ export default function Account() {
                     <p>Upload Avatar</p>
                     <TextField type='file' onChange={(e) => setImage(e.target.files[0])} />
                 </label>
-                <Button type="submit" variant="contained" color="primary">Upload</Button>
+                <Button type="submit" path_name="user" buttonSize="btn--medium" buttonStyle="btn--primary">Upload</Button>
             </form>
             
         </div>
