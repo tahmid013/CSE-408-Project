@@ -23,7 +23,7 @@ class Club(models.Model):
     name = models.CharField(max_length=32, null=False, unique= False)
     about = models.CharField(max_length=256, null=False)
     institute = models.CharField(max_length=128, null=False)
-    image = models.ImageField(upload_to=Upload_path_handler, blank= True)
+    image = models.ImageField(upload_to=Upload_path_handler, blank= True, null=True)
     class Meta:
         unique_together  =(('name', 'institute'))
 

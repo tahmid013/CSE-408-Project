@@ -17,6 +17,7 @@ export function auth(credentials){
 export function register(userData){
 
    return fetch('http://127.0.0.1:8000/api/users/',{
+      
       method: 'POST', 
       headers: {
           'Content-Type' : 'application/json'
@@ -27,6 +28,7 @@ export function register(userData){
       console.log(e)
    })
 }
+
 
 // export function uploadAvatar(profileID,data){
 
