@@ -2,7 +2,6 @@
 import React from 'react';
 import { BrowserRouter as Router ,Route , Routes } from 'react-router-dom';
 import './App.css';
-
 import Navbar from './components/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
@@ -21,6 +20,7 @@ import SinglePlayer from './components/pages/SinglePlayer';
 import MultiPlayer from './components/pages/MultiPlayer';
 import Practice from './components/pages/Practice';
 import ClubsInputPage from './components/pages/ClubsInputPage';
+import QuizDetails from './components/pages/QuizDetails';
 
 const App = () =>  {
 
@@ -36,26 +36,27 @@ const App = () =>  {
           <Route exact path = "/"  element = {<Home/>} />
           <Route path = "/howitworks"  element = {<HowWorks/>} />
           <Route path = "/features"  element = {<Features/>} />
-
           <Route path = "/about"  element = {<About/>} />
-          
           <Route path = "/account"  element = {<Account/>} />
           <Route path = "/signup"  element = {<SignUp/>} />
           <Route path = "/signin"  element = {<SignIn/>} />
           <Route path = "/quizmainpage"  element = {<QuizMainPage/>} />
-          <Route   path = "/type_mcq/quizcategory"  element = {<Category/>} />
+          <Route exact path = "/type_mcq/quizcategory"  element = {<Category/>} />
           <Route exact path = "/type_written/quizcategory"  element = {<Category/>} />
           <Route exact path = "/type_fill/quizcategory"  element = {<Category/>} />
           <Route path = "/demo"  element = {<DemoGuideVideo/>} />
-          <Route path = "/quizcategory"  element = {<Category/>} />
           <Route exact path = "/clubspage"  element = {<ClubsPage/>} />
           <Route exact path = "/club_input_form"  element = {<ClubsInputPage/>} />
           <Route exact path = "/quizmainpage/single"  element = {<SinglePlayer/>} />
           <Route exact path = "/quizmainpage/multi"  element = {<MultiPlayer/>} />
-          <Route exact path = "/quizmainpage/practice"  element = {<Practice/>} />
           
+          <Route exact path = "/type_mcq/quizcategory/*" element = {<QuizDetails/>}/>  
+          <Route exact path = "/type_mcq/quizcategory/sport/practice" element = {<Practice/>}/>  
+          <Route exact path = "/type_mcq/quizcategory/sport/single" element = {<SinglePlayer/>}/>  
+          <Route exact path = "/type_mcq/quizcategory/sport/multi"  element = {<MultiPlayer/>} />
+            
           <Route path = "/user"  element = {<User/>} />
-
+          
         </Routes>
         </AuthProvider>
         </Router>

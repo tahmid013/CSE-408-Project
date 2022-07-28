@@ -38,7 +38,7 @@
   color: #fff;
   font-size: 100px;
 }
-.login{
+.login,.clubinput{
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
@@ -102,8 +102,36 @@
   font-size: 18px;
 }
 
+.quiz{
 
-.btn-visit>button {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: white;
+  width: 80%;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  margin: 5%;
+  padding: 2%;
+  text-align: left;
+ 
+}
+.desc-quiz{
+  padding-right: 10%;
+}
+.title-quiz{
+  padding-left: 5%;
+}
+
+.left-cont{
+  flex-direction: column;
+  width: 80%;
+  text-align: left
+}
+.right-cont{
+  width: 20%;
+  text-align: right;
+}
+.btn-visit>button{
   border: none;
   outline: 0;
   display: inline-block;
@@ -114,6 +142,17 @@
   cursor: pointer;
   justify-content: right;
   width: 20%;
+  font-size: 18px;
+}
+.btn-Single, .btn-Practice, .btn-Double, .btn-leader{
+  border: none;
+  outline: 0;
+  display: flex;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  justify-content: right;
+  width: 50%;
   font-size: 18px;
 }
 

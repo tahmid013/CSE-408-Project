@@ -50,7 +50,6 @@ export default function ClubsInputPage() {
                 <div>
                 <form onSubmit={handlerSubmit}>
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                         <TextField id="input-with-sx" label="Club Name" variant="standard"
                             onChange={e => setClubname(e.target.value)}
                         />
@@ -58,14 +57,12 @@ export default function ClubsInputPage() {
 
 
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                         <TextField id="input-with-sx" label="Institution" variant="standard" 
                             onChange={e => setInstitution(e.target.value)}
                         />
                     </Box>
                     
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                         <TextField id="input-with-sx" label="Description" variant="standard" 
                             onChange={e => setDesc(e.target.value)}
                         />

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import './styles/CatBox.css';
 
 function CatBox(props) {
+    
     return(
         <>
         <li className="cards__item">
