@@ -1,4 +1,5 @@
 from dataclasses import field
+
 from .models import Group,UserProfile,Club
 from django.contrib.auth.models import User
 from rest_framework import serializers
@@ -37,3 +38,14 @@ class ClubSerializer(serializers.ModelSerializer   ):
         model = Club
         fields = ('id', 'name', 'about', 'institute', 'image')
 
+"""
+class QuestionSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = Question
+        fields = ('id', 'ques_type', 'answer', 'question_time', 'image')
+
+class OptionsSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = Options
+        fields = ('id', 'op_1', 'op_2', 'op_3', 'op_4')
+"""        

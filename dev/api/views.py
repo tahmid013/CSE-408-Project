@@ -25,6 +25,14 @@ class GroupViewset(viewsets.ModelViewSet):
 class ClubViewset(viewsets.ModelViewSet):
     queryset  = Club.objects.all()
     serializer_class = ClubSerializer
+"""
+class QuestionViewset(viewsets.ModelViewSet):
+    queryset  = Question.objects.all()
+    serializer_class = QuestionSerializer
+class OptionsViewset(viewsets.ModelViewSet):
+    queryset  = Options.objects.all()
+    serializer_class = OptionsSerializer
+"""        
 
 class CustomObtainAuthToken(ObtainAuthToken): 
     def post(self, request, *args, **kwargs):
