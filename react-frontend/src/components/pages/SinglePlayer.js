@@ -30,7 +30,7 @@ export default function SinglePlayer() {
             </div>
 
 
-            <div className="question">The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href?</div>
+            <div className="question">The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. Can you provide a valid href?</div>
             <div className="option-container">
                 <div className="option">Lorem</div>
                 <div className="option">Ipsum</div>
