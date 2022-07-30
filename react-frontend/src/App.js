@@ -47,6 +47,7 @@ const App = () =>  {
           <Route exact path = "/type_mcq/quizcategory"  element = {<Category/>} />
           <Route exact path = "/type_written/quizcategory"  element = {<Category/>} />
           <Route exact path = "/type_fill/quizcategory"  element = {<Category/>} />
+
           <Route path = "/demo"  element = {<DemoGuideVideo/>} />
           <Route exact path = "/clubspage"  element = {<ClubsPage/>} />
           <Route exact path = "/club_input_form"  element = {<ClubsInputPage/>} />
@@ -55,16 +56,20 @@ const App = () =>  {
           
           <Route exact path = "/type_mcq/quizcategory/:category" element = {<QuizDetails/>}/>  
           <Route exact path = "/type_written/quizcategory/:category" element = {<QuizDetails/>}/>  
-          
+          <Route exact path = "/type_fill/quizcategory/:category" element = {<QuizDetails/>}/>  
 
           <Route exact path = "/type_mcq/quizcategory/:category/practice" element = {<Practice/>}/>
           <Route exact path = "/type_written/quizcategory/:category/practice" element = {<Practice/>}/>  
+          <Route exact path = "/type_fill/quizcategory/:category/practice" element = {<Practice/>}/>  
 
           <Route exact path = "/type_mcq/quizcategory/:category/single" element = {<SinglePlayer/>}/>
           <Route exact path = "/type_written/quizcategory/:category/single" element = {<SinglePlayerWritten/>}/> 
+          <Route exact path = "/type_fill/quizcategory/:category/single" element = {<SinglePlayerWritten/>}/> 
 
           <Route exact path = "/type_mcq/quizcategory/:category/multi"  element = {<MultiPlayer/>} />
           <Route exact path = "/type_written/quizcategory/:category/multi" element = {<MultiPlayerWritten/>}/>   
+          <Route exact path = "/type_fill/quizcategory/:category/multi" element = {<MultiPlayerWritten/>}/>   
+
           <Route path = "/user"  element = {<User/>} />
           <Route path = "/result"  element = {<ResultSingle/>} />
           

@@ -9,30 +9,22 @@ import EmailIcon from '@mui/icons-material/Email';
 import React, { useState } from "react";
 import { auth } from "../../services/user-services";
 import { useAuth } from "../../hooks/useAuth";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {register} from '../../services/user-services';
 import { uploadAvatar } from "../../services/user-services";
 import {NotificationManager} from 'react-notifications';
 
-
 export default function Account() {
 
     
-
+    const navigate = useNavigate();
     const { authData, setAuth } = useAuth();
     const [image, setImage] = useState('');
 
-    // const uploadFile = async (e) => {
-    //     e.preventDefault();
-    //     const uploadData = new FormData();
-    //     uploadData.append('image', image, image.name);
     
-    //     console.log(uploadData);
-    //     const profileData = await uploadAvatar(authData.user.profile.id ,uploadData);
-        
-    // }
 
     const uploadPhoto = async (e) => {
+        console.log("Uploading image");
 		e.preventDefault();
 		const uploadData = new FormData();
 		uploadData.append('image', image, image.name);
@@ -46,6 +38,8 @@ export default function Account() {
 			NotificationManager.success(
 				'Image uploaded successfully'
 			);
+            setAuth(null);
+            navigate('/signin');
 		} else {
 			NotificationManager.error('Error, image was not correct');
 		}
@@ -60,7 +54,7 @@ export default function Account() {
                     <p>Upload Avatar</p>
                     <TextField type='file' onChange={(e) => setImage(e.target.files[0])} />
                 </label>
-                <Button type="submit" path_name="user" buttonSize="btn--medium" buttonStyle="btn--primary">Upload</Button>
+                <Button type="submit" path_name="user" buttonSize="btn--medium" buttonStyle="btn--primary" onClick={uploadPhoto}>Upload</Button>
             </form>
             
         </div>

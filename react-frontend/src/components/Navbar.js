@@ -65,13 +65,14 @@ function Navbar() {
                              :
                              <li className='nav-item'>
                                 <Link to = '/signin' className='nav-links' onClick={closeMobileMenu}>
-                                logged in as : 
+                                
                                 {authData.user ? 
                                 <>
+                                logged in as : 
                                 {authData.user.username} 
                                 </>
                                 : 
-                                <></>
+                                <>Sign in</>
                                 }
                                 </Link>
                              </li>

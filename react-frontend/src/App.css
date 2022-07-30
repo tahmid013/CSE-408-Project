@@ -51,6 +51,32 @@
   grid-template-columns: 24rem 5fr;
   
 }
+
+.user{
+  
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(93, 180, 234);
+  padding: 2%;
+  width: 60%;
+  height:  calc(70vh - 30px);
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px
+  
+}
+.user>img{
+  
+  justify-content:left;
+  width: 100px;
+  height: 100px;
+}
+.add-btns{
+  justify-content: right;
+  width: 50%;
+}
+
+
 .signup{
   justify-content: center;
   margin-left: auto;
@@ -64,6 +90,7 @@
   grid-template-columns: 24rem 5fr;
   
 }
+
 .login>box{
 
   width: 100%;

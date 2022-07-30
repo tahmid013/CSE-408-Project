@@ -22,6 +22,7 @@ export default function SignIn() {
     const handlerSubmit = async e => {
         e.preventDefault();
         const data = await auth({ username, password });
+
         setAuth(data);
     }
     const logout = () => {
@@ -33,7 +34,7 @@ export default function SignIn() {
     }
 
     const goToUser = () => {
-        navigate('/user', { props: authData } );
+        navigate('/user', { props: authData });
     }
 
     if (authData) {
@@ -45,29 +46,29 @@ export default function SignIn() {
         <div className="login">
             {!authData ?
                 <div>
-                <form onSubmit={handlerSubmit}>
-                    <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-                        <TextField id="input-with-sx" label="Username" variant="standard"
-                            onChange={e => setUsername(e.target.value)}
-                        />
-                    </Box>
+                    <form onSubmit={handlerSubmit}>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+                            <TextField id="input-with-sx" label="Username" variant="standard"
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                        </Box>
 
 
-                    <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-                        <TextField id="input-with-sx" label="password" variant="standard" type="password"
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </Box>
-                    <div className="logging">
-                        <Button path_name='signin' type='submit' onClick={handlerSubmit}>
-                            Login
-                        </Button>
-                    </div>
-                    
-                </form>
-                <Link to ={'/signup'}>Don't have an account? Sign Up</Link>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+                            <TextField id="input-with-sx" label="password" variant="standard" type="password"
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                        </Box>
+                        <div className="logging">
+                            <Button path_name='signin' type='submit' onClick={handlerSubmit}>
+                                Login
+                            </Button>
+                        </div>
+
+                    </form>
+                    <Link to={'/signup'}>Don't have an account? Sign Up</Link>
                 </div>
                 :
                 // <div className="logging">
@@ -75,15 +76,28 @@ export default function SignIn() {
                 //     <Button color="primary" variant="contained" type='submit' onClick={() => logout()}>
                 //         Logout
                 //     </Button>
-                    
+
                 // </div>
                 <div>
-                    <h4>You have successfully logged in!</h4>
-                    <Button path_name='user'>Go to User</Button>
-                    <br/>
-                    <Button path_name='signin'  onClick={() => logout()}>
-                        Logout
-                    </Button>
+                    {authData.user ?
+                        <>
+                            <h4>You have successfully logged in!</h4>
+                            <Button path_name='user'>Go to User</Button>
+                            <br />
+                            <Button path_name='signin' onClick={() => logout()}>
+                                Logout
+                            </Button>
+                        </>
+                        :
+                        <>
+                        <h4>Wrong Credentials, Please login!</h4>
+                        <Button path_name='signin' onClick={() => logout()}>
+                                Log in
+                            </Button>
+                        </>   
+                    }
+
+
 
                 </div>
 

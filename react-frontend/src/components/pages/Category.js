@@ -10,7 +10,8 @@ import SinglePlayer from "./SinglePlayer";
 function Category() {
     var str = window.location.pathname.substring(1);
     var s = str;
-    console.log(`${s}/sport`);
+    //console.log(`${s}/sport`);
+    console.log("Now in here-> ");
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -57,10 +58,12 @@ function Category() {
             <div className='cards_1'>
            
                 {cat_list && cat_list.map(cat_list_item => {
-                    return <Link key={cat_list_item.numbers} to={`/${cat_list_item.label}`}>
+                    return <Link key={cat_list_item.numbers} to={`/${cat_list_item.label}`} >
 
                         <CatBox
-
+                            
+                            
+                            
                             src={window.location.origin + "/images/category/cat_"+`${cat_list_item.numbers}`+".png"}
                             text={`${cat_list_item.text}`}
                             label={`${cat_list_item.label}`}
