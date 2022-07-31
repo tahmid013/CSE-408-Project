@@ -28,10 +28,10 @@ export default function ClubsInputPage() {
 		const uploaded = await AddClub(
 			name,
 			about,
-            institute,
-            image
+            institute
 		);
 		if (uploaded) {
+            console.log("Club uploaded successfully");
 			NotificationManager.success(
 				'Club uploaded successfully'
 			);
@@ -48,7 +48,7 @@ export default function ClubsInputPage() {
       
             
                 <div>
-                <form onSubmit={handlerSubmit}>
+                <form >
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                         <TextField id="input-with-sx" label="Club Name" variant="standard"
                             onChange={e => setClubname(e.target.value)}
@@ -68,7 +68,7 @@ export default function ClubsInputPage() {
                         />
                     </Box>
                     <div className="logging">
-                        <Button path_name='signin' type='submit' onClick={handlerSubmit}>
+                        <Button type='submit' onClick={handlerSubmit}>
                             Submit
                         </Button>
                     </div>

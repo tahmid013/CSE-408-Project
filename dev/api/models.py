@@ -26,7 +26,7 @@ class Club(models.Model):
     name = models.CharField(max_length=32, null=False, unique= False)
     about = models.CharField(max_length=256, null=False)
     institute = models.CharField(max_length=128, null=False)
-    image = models.ImageField(upload_to=Upload_path_handler, blank= True, null=True)
+    
     class Meta:
         unique_together  =(('name', 'institute'))
 
@@ -49,7 +49,7 @@ class Question(models.Model):
     #options = models.ForeignKey(Options, on_delete=models.CASCADE)
     answer = models.CharField(max_length=128, null=False)
     
-    image = models.ImageField(upload_to=Question_image_path_handler, blank= True, null=True)
+    #image = models.ImageField(upload_to=Question_image_path_handler, blank= True, null=True)
     #question_time = models.CharField(max_length=128, null=False)
     point = models.IntegerField(null=False)
 

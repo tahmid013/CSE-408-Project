@@ -36,13 +36,13 @@ class GroupSerializer(serializers.ModelSerializer   ):
 class ClubSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Club
-        fields = ('id', 'name', 'about', 'institute', 'image')
+        fields = ('id', 'name', 'about', 'institute')
 
 
 class QuestionSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Question
-        fields = ('id', 'ques_type', 'options', 'answer', 'image', 'question_time', 'point')
+        fields = ('id', 'ques_type', 'category','question', 'answer',  'point')
 
 class OptionsSerializer(serializers.ModelSerializer   ):
     class Meta:

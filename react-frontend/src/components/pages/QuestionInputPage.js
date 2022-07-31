@@ -34,7 +34,6 @@ export default function QuastionInputPage() {
       category,
       question,
       answer,
-      image,
       point
     );
     if (uploaded) {
@@ -53,7 +52,7 @@ export default function QuastionInputPage() {
     <div className='clubinput'>
       <div>
         <h1>Add Question</h1>
-        <form onSubmit={handleSubmit}>
+        <form >
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
             <TextField id="input-with-sx" label="Question Type" variant="standard"
               onChange={e => setQues_type(e.target.value)}
