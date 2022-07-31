@@ -4,6 +4,7 @@ import { Button } from '../Button';
 
 export default function User() {
     const { authData } = useAuth();
+    console.log(authData.user.profile.image);
 
   return (
     <div className='signup'>
