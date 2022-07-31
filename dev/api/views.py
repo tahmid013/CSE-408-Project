@@ -7,8 +7,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .models import Group, UserProfile, Club
-from .serializers import GroupSerializer, UserSerializer,UserProfileSerializer ,ClubSerializer
+from .models import *
+from .serializers import *
 
 # Create your views here.
 class UserProfileViewset(viewsets.ModelViewSet):
@@ -25,14 +25,15 @@ class GroupViewset(viewsets.ModelViewSet):
 class ClubViewset(viewsets.ModelViewSet):
     queryset  = Club.objects.all()
     serializer_class = ClubSerializer
-"""
+
 class QuestionViewset(viewsets.ModelViewSet):
     queryset  = Question.objects.all()
     serializer_class = QuestionSerializer
+
 class OptionsViewset(viewsets.ModelViewSet):
     queryset  = Options.objects.all()
     serializer_class = OptionsSerializer
-"""        
+     
 
 class CustomObtainAuthToken(ObtainAuthToken): 
     def post(self, request, *args, **kwargs):

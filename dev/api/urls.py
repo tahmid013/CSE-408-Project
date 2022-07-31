@@ -12,8 +12,8 @@ router.register(r'groups', views.GroupViewset)
 router.register(r'users', views.UserViewset)
 router.register(r'profile', views.UserProfileViewset)
 router.register(r'clubs', views.ClubViewset)
-#router.register(r'questions', views.QuestionViewset)
-#router.register(r'options', views.OptionsViewset)
+router.register(r'questions', views.QuestionViewset)
+router.register(r'options', views.OptionsViewset)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

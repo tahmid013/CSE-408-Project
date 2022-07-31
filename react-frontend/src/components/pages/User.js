@@ -3,14 +3,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../Button';
 
 export default function User() {
-<<<<<<< HEAD
-    const { authData } = useAuth();
-    console.log(authData.user.profile.image);
-=======
   const { authData } = useAuth();
   console.log(authData.user);
   console.log(authData.user.profile.image);
->>>>>>> 459a83dd462ba8315ad6de8b2766ee6960f94dbf
 
   return (
     <div className='user'>
@@ -24,6 +19,9 @@ export default function User() {
       <div className='add-btns'>
         <Button path_name='club_input_form' className='btns' buttonStyle='btn--fit' buttonSize='btn--small'>
           Add Club
+        </Button>
+        <Button path_name='add_question' className='btns' buttonStyle='btn--fit' buttonSize='btn--small'>
+          Add Question
         </Button>
       </div>
      

@@ -24,6 +24,7 @@ import Practice from './components/pages/Practice';
 import ClubsInputPage from './components/pages/ClubsInputPage';
 import QuizDetails from './components/pages/QuizDetails';
 import ResultSingle from './components/pages/ResultSingle';
+import QuestionInputPage from './components/pages/QuestionInputPage';
 
 const App = () =>  {
 
@@ -53,6 +54,8 @@ const App = () =>  {
           <Route exact path = "/club_input_form"  element = {<ClubsInputPage/>} />
           <Route exact path = "/quizmainpage/single"  element = {<SinglePlayer/>} />
           <Route exact path = "/quizmainpage/multi"  element = {<MultiPlayer/>} />
+
+          <Route exact path = "/add_question" element={<QuestionInputPage />} />
           
           <Route exact path = "/type_mcq/quizcategory/:category" element = {<QuizDetails/>}/>  
           <Route exact path = "/type_written/quizcategory/:category" element = {<QuizDetails/>}/>  

@@ -31,44 +31,31 @@ class Club(models.Model):
         unique_together  =(('name', 'institute'))
 
 
-<<<<<<< HEAD
-class Option(models.Model):
-    op1 = models.CharField(max_length=32, null=True, blank=True, unique= False)
-    op2 = models.CharField(max_length=32, null=True, blank=True, unique= False)
-    op3 = models.CharField(max_length=32, null=True, blank=True, unique= False)
-    op4 = models.CharField(max_length=32, null=True, blank=True, unique= False)
-    correct_option = models.CharField(max_length=32, null=True, blank=True, unique= False)
-
-    class Meta:
-        unique_together  =(('op1', 'op2', 'op3', 'op4', 'correct_option'))
-
-
-class Question(models.Model):
-    type = models.CharField(max_length=32, null=False, unique= False)
-    question = models.CharField(max_length=256, null=False)
-    option = models.ForeignKey(Option, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=Question_image_path_handler, blank= True, null=True)
-    answer = models.CharField(max_length=32, null=False)
-    point = models.IntegerField(null=False)
-
-    class Meta:
-        unique_together  =(('question', 'option'))
-    
-
-
-=======
-"""
-class Question(models.Model):
-    ques_type = models.CharField(max_length=32, null=False, unique= False)
-    answer = models.CharField(max_length=128, null=False)
-    
-    image = models.ImageField(upload_to=Upload_path_handler, blank= True, null=True)
-    question_time = models.CharField(max_length=128, null=False)
-
 class Options(models.Model):
-    op_1 = models.CharField(max_length=32, null=False )
+    op_1 = models.CharField(max_length=32, null=False)
     op_2 = models.CharField(max_length=32, null=False)
     op_3 = models.CharField(max_length=32, null=False)
     op_4 = models.CharField(max_length=32, null=False)
-"""
->>>>>>> 459a83dd462ba8315ad6de8b2766ee6960f94dbf
+    correct_op = models.CharField(max_length=32, null=False)
+
+    class Meta:
+        unique_together  =(('op_1', 'op_2', 'op_3', 'op_4', 'correct_op'))
+
+class Question(models.Model):
+    ques_type = models.CharField(max_length=32, null=False, unique= False)
+    category = models.CharField(max_length=32, null=False, unique= False,default='GK')
+
+    question = models.CharField(max_length=256, null=False, unique= False)
+    #options = models.ForeignKey(Options, on_delete=models.CASCADE)
+    answer = models.CharField(max_length=128, null=False)
+    
+    image = models.ImageField(upload_to=Question_image_path_handler, blank= True, null=True)
+    #question_time = models.CharField(max_length=128, null=False)
+    point = models.IntegerField(null=False)
+
+    class Meta:
+        unique_together  =(('ques_type', 'answer', 'point'))
+
+
+
+
