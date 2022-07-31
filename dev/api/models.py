@@ -31,6 +31,7 @@ class Club(models.Model):
         unique_together  =(('name', 'institute'))
 
 
+<<<<<<< HEAD
 class Option(models.Model):
     op1 = models.CharField(max_length=32, null=True, blank=True, unique= False)
     op2 = models.CharField(max_length=32, null=True, blank=True, unique= False)
@@ -55,3 +56,19 @@ class Question(models.Model):
     
 
 
+=======
+"""
+class Question(models.Model):
+    ques_type = models.CharField(max_length=32, null=False, unique= False)
+    answer = models.CharField(max_length=128, null=False)
+    
+    image = models.ImageField(upload_to=Upload_path_handler, blank= True, null=True)
+    question_time = models.CharField(max_length=128, null=False)
+
+class Options(models.Model):
+    op_1 = models.CharField(max_length=32, null=False )
+    op_2 = models.CharField(max_length=32, null=False)
+    op_3 = models.CharField(max_length=32, null=False)
+    op_4 = models.CharField(max_length=32, null=False)
+"""
+>>>>>>> 459a83dd462ba8315ad6de8b2766ee6960f94dbf
