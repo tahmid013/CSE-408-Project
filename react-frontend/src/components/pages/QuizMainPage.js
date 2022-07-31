@@ -21,7 +21,7 @@ export default function QuizMainPage() {
                         </div>
 
                         <div>
-                            <Button path_name='quizmainpage' className='btns' buttonStyle='btn--fit' buttonSize='btn--large'>
+                            <Button path_name='questionspage' className='btns' buttonStyle='btn--fit' buttonSize='btn--large'>
                                 Archive
                             </Button>
                         </div>
