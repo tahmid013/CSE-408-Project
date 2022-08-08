@@ -19,9 +19,7 @@ class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class GroupViewset(viewsets.ModelViewSet):
-    queryset  = Group.objects.all()
-    serializer_class = GroupSerializer
+
 class ClubViewset(viewsets.ModelViewSet):
     queryset  = Club.objects.all()
     serializer_class = ClubSerializer
