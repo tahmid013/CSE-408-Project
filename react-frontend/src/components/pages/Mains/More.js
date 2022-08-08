@@ -1,6 +1,6 @@
 import React from "react";
 import '../../App.css';
-import {Button} from '../Button'; 
+import {Button} from '../../Button'; 
 import { Route } from 'react-router-dom';
 
 export default function More() {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getClubs } from '../../services/club-services';
+import { getClubs } from '../../../services/club-services';
 
 
 function ClubList() {

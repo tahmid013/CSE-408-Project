@@ -6,10 +6,10 @@ import LockIcon from '@mui/icons-material/Lock';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import EmailIcon from '@mui/icons-material/Email';
 import React, { useState } from "react";
-import { auth } from "../../services/user-services";
-import { useAuth } from "../../hooks/useAuth";
+import { auth } from "../../../services/user-services";
+import { useAuth } from "../../../hooks/useAuth";
 import {Link} from 'react-router-dom';
-import {register} from '../../services/user-services';
+import {register} from '../../../services/user-services';
 import {useNavigate} from 'react-router-dom';
 
 export default function SignUp() {

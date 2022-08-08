@@ -1,9 +1,8 @@
 import React from "react";
 import { useLocation, Router, Routes, Route } from "react-router-dom";
-import '../../App.css';
-import { Button } from "../Button";
-import './styles/QuizMainPage.css';
-import Category from "./Category";
+import '../../../Apps/App.css';
+import { Button } from "../../Button";
+import '../styles/QuizMainPage.css';
 
 export default function QuizMainPage() {
     const location = useLocation();

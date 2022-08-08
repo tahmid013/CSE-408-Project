@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../Button';
+import { useAuth } from '../../../hooks/useAuth';
+import { Button } from '../../Button';
 import { useNavigate } from "react-router-dom";
-import { AddClub } from '../../services/club-services';
+import { AddClub } from '../../../services/club-services';
 import { Link } from "react-router-dom";
 
 import {NotificationManager} from 'react-notifications';
