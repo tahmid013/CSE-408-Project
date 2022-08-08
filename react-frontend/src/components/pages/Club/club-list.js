@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import { getClubs } from '../../../services/club-services';
 
-=======
-import { useGlobalContext } from '../../context';
-import { getClubs } from '../../services/club-services';
-import ClubSearch from './ClubSearch';
->>>>>>> 670ae9e8188c049fec71cbc9c4c87e3c914bbb5c
+import { getClubs } from '../../../services/club-services';
+import { useGlobalContext } from '../../../context';
+
+
 
 function ClubList() {
 
