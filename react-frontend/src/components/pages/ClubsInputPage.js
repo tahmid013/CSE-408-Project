@@ -35,6 +35,7 @@ export default function ClubsInputPage() {
 			NotificationManager.success(
 				'Club uploaded successfully'
 			);
+            navigate('/clubspage');
 		} else {
 			NotificationManager.error('Error, Club info was not correct');
 		}
@@ -68,7 +69,7 @@ export default function ClubsInputPage() {
                         />
                     </Box>
                     <div className="logging">
-                        <Button type='submit' onClick={handlerSubmit}>
+                        <Button  type='submit' onClick={handlerSubmit}>
                             Submit
                         </Button>
                     </div>

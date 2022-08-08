@@ -4,7 +4,7 @@ from urllib import response
 from django.shortcuts import render
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-from rest_framework import viewsets
+from rest_framework import viewsets,filters
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from .models import *
@@ -25,6 +25,9 @@ class GroupViewset(viewsets.ModelViewSet):
 class ClubViewset(viewsets.ModelViewSet):
     queryset  = Club.objects.all()
     serializer_class = ClubSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['name', 'about', 'institute']
+
 
 class QuestionViewset(viewsets.ModelViewSet):
     queryset  = Question.objects.all()
