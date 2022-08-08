@@ -23,6 +23,7 @@ export default function User() {
         <Button path_name='add_question' className='btns' buttonStyle='btn--fit' buttonSize='btn--small'>
           Add Question
         </Button>
+        
       </div>
      
     </div>

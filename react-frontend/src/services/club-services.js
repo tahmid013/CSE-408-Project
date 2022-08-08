@@ -7,8 +7,8 @@ export function getClub(id){
     })
 }
 
-export function getClubs(){
-    return fetch(`http://127.0.0.1:8000/api/clubs/`)
+export function getClubs(SearchTerm){
+    return fetch(`http://127.0.0.1:8000/api/clubs/?search=${SearchTerm}`)
     .then(data => {
         return data.json();
     }).catch(e => {

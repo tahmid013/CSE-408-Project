@@ -27,6 +27,7 @@ import ResultSingle from '../components/pages/Quiz/ResultSingle';
 import QuestionInputPage from '../components/pages/Question/QuestionInputPage';
 import QuestionsPage from '../components/pages/Question/QuestionsPage';
 
+
 const App = () =>  {
 
    const user = JSON.parse(localStorage.getItem('quizz-user'));
