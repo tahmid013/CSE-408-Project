@@ -8,7 +8,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
-router.register(r'groups', views.GroupViewset)
 router.register(r'users', views.UserViewset)
 router.register(r'profile', views.UserProfileViewset)
 router.register(r'clubs', views.ClubViewset)

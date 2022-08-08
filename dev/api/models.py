@@ -8,19 +8,15 @@ def Upload_path_handler(instance, filename):
 def Question_image_path_handler(instance, filename):
     return "questions/{id}/{file}".format(id= instance.id, file = filename)
 
+def Category_image_path_handler(instance, filename):
+    return "categories/{id}/{file}".format(id= instance.id, file = filename)
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User , related_name= 'profile', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=Upload_path_handler, blank= True)
     is_club_member = models.BooleanField(default=False)
     bio = models.TextField(max_length=500, blank=True)
 
-
-class Group(models.Model):
-    name = models.CharField(max_length=32, null=False, unique= False)
-    location = models.CharField(max_length=32, null=False)
-    description = models.CharField(max_length=256, null=False, unique= False)
-    class Meta:
-        unique_together  =(('name', 'location'))
 
 class Club(models.Model):
     name = models.CharField(max_length=32, null=False, unique= False)
@@ -36,25 +32,40 @@ class Options(models.Model):
     op_2 = models.CharField(max_length=32, null=False)
     op_3 = models.CharField(max_length=32, null=False)
     op_4 = models.CharField(max_length=32, null=False)
-    correct_op = models.CharField(max_length=32, null=False)
 
+class Category(models.Model):
+    name = models.CharField(max_length=32, null=False)
+    about = models.CharField(max_length=256, null=True)
+    image = models.ImageField(upload_to=Category_image_path_handler, blank= True,null=True)
     class Meta:
-        unique_together  =(('op_1', 'op_2', 'op_3', 'op_4', 'correct_op'))
+        unique_together  =(('name','about'))
+
 
 class Question(models.Model):
     ques_type = models.CharField(max_length=32, null=False, unique= False)
     category = models.CharField(max_length=32, null=False, unique= False,default='GK')
 
     question = models.CharField(max_length=256, null=False, unique= False)
-    #options = models.ForeignKey(Options, on_delete=models.CASCADE)
+    options = models.ForeignKey(Options, on_delete=models.CASCADE,null=True)
     answer = models.CharField(max_length=128, null=False)
     
-    #image = models.ImageField(upload_to=Question_image_path_handler, blank= True, null=True)
-    #question_time = models.CharField(max_length=128, null=False)
+    image = models.ImageField(upload_to=Question_image_path_handler, blank= True, null=True)
     point = models.IntegerField(null=False)
 
     class Meta:
-        unique_together  =(('ques_type', 'answer', 'point'))
+        unique_together  =(('ques_type', 'options' , 'category', 'answer', 'point'))
+
+
+class Quiz(models.Model):
+    name = models.CharField(max_length=32, null=False, unique= False)
+    about = models.CharField(max_length=256, null=False)
+    questions = models.ManyToManyField(Question, related_name='quiz')
+    club = models.ForeignKey(Club, on_delete=models.CASCADE,null=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    class Meta:
+        unique_together  =(('name', 'created_by'))
 
 
 

@@ -29,10 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)
         return user
 
-class GroupSerializer(serializers.ModelSerializer   ):
-    class Meta:
-        model = Group
-        fields = ('id', 'name', 'location', 'description')
 class ClubSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Club
@@ -47,4 +43,4 @@ class QuestionSerializer(serializers.ModelSerializer   ):
 class OptionsSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Options
-        fields = ('id', 'op_1', 'op_2', 'op_3', 'op_4', 'correct_op')        
+        fields = ('id', 'op_1', 'op_2', 'op_3', 'op_4')        
