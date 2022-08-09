@@ -1,5 +1,5 @@
 //import { Button } from "@mui/material";
-import { Button } from "../Button";
+import { Button } from "../../Button";
 import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
@@ -7,11 +7,9 @@ import LockIcon from '@mui/icons-material/Lock';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import EmailIcon from '@mui/icons-material/Email';
 import React, { useState } from "react";
-import { auth } from "../../services/user-services";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
 import {Link, useNavigate} from 'react-router-dom';
-import {register} from '../../services/user-services';
-import { uploadAvatar } from "../../services/user-services";
+import { uploadAvatar } from "../../../services/user-services";
 import {NotificationManager} from 'react-notifications';
 
 export default function Account() {

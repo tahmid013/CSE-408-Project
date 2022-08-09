@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
 import AlarmIcon from '@mui/icons-material/Alarm';
-import { Button } from "../Button";
+import { Button } from "../../Button";
 
 import React, { useState } from "react";
 

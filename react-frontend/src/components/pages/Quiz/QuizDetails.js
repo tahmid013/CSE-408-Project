@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link , useParams} from 'react-router-dom';
-import { getClubs } from '../../services/club-services';
-import { Button } from '../Button';
-import SinglePlayer from './SinglePlayer';
+import { Button } from '../../Button';
+
 
 function QuizDetails() {
     var str = window.location.pathname.substring(1);

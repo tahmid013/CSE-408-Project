@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import '../../App.css';
+import '../../../Apps/App.css';
 import CatBox from './CatBox';
 import { Link, Route, Routes } from "react-router-dom";
 import './Category.css';
-import { getClubs } from '../../services/club-services';
-import SinglePlayer from "./SinglePlayer";
+import { getClubs } from '../../../services/club-services';
+import SinglePlayer from "../Quiz/SinglePlayer";
 
 
 function Category() {

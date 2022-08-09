@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../Button';
+import { useAuth } from '../../../hooks/useAuth';
+import { Button } from '../../Button';
 import { useNavigate } from "react-router-dom";
-import { AddClub } from '../../services/club-services';
-import { Link } from "react-router-dom";
+
 
 import { NotificationManager } from 'react-notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LockIcon from '@mui/icons-material/Lock';
-import { AddQuestion } from '../../services/quiz-services';
+import { AddQuestion } from '../../../services/quiz-services';
 
 
 export default function QuastionInputPage() {

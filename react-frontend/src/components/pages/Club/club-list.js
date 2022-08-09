@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useGlobalContext } from '../../context';
-import { getClubs } from '../../services/club-services';
-import ClubSearch from './ClubSearch';
+
+import { getClubs } from '../../../services/club-services';
+import { useGlobalContext } from '../../../context';
+
+
 
 function ClubList() {
 

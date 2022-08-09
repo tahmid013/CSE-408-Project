@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link ,useParams} from 'react-router-dom';
-import { useFetchClubs } from '../../hooks/fetch-clubs';
+import { useFetchClubs } from '../../../hooks/fetch-clubs';
 
 function ClubDetails() {
 

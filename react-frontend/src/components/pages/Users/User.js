@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../Button';
+import { useAuth } from '../../../hooks/useAuth';
+import { Button } from '../../Button';
 
 export default function User() {
   const { authData } = useAuth();

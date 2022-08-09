@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from './Button';
+import { Button } from '../../Button';
 import './HeroSection.css';
-import '../App.css';
-import logo from '../images/logo_1.png';
+import '../../../Apps/App.css';
+import logo from '../../../images/logo_1.png';
 
 
 function HeroSection() {

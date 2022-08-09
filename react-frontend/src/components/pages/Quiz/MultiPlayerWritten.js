@@ -1,4 +1,4 @@
-import { Button } from "../Button";
+import { Button } from "../../Button";
 import { Link } from "react-router-dom";
 import AlarmIcon from '@mui/icons-material/Alarm';
 import PersonIcon from '@mui/icons-material/Person';
