@@ -19,7 +19,7 @@ export function getQuestions(){
 
 
 
-export function AddQuestion(ques_type, category, question, answer, point){
+export function AddQuestion(ques_type, category, question,options, answer,image, point){
 
     console.log(ques_type);
     console.log(category);
@@ -32,7 +32,7 @@ export function AddQuestion(ques_type, category, question, answer, point){
        headers: {
            'Content-Type' : 'application/json'
        }, 
-       body: JSON.stringify({ques_type, category, question, answer, point}),
+       body: JSON.stringify({ques_type, category,options, question, answer, point}),
     }).then(resp => resp.json())
     .catch(e =>{
        console.log(e)

@@ -19,6 +19,7 @@ export default function QuastionInputPage() {
   const [answer, setAnswer] = useState('');
   const [image, setImage] = useState('');
   const [point, setPoint] = useState('');
+  const [options, setOptions] = useState('');
 
   const { authData, setAuth } = useAuth();
   const navigate = useNavigate();
@@ -27,12 +28,15 @@ export default function QuastionInputPage() {
   const handleSubmit = async e => {
     e.preventDefault();
     setImage(null);
+    setOptions(null);
     console.log("Adding question");
     const uploaded = await AddQuestion(
       ques_type,
       category,
       question,
+      options,
       answer,
+      image,
       point
     );
     if (uploaded) {

@@ -53,7 +53,7 @@ class Question(models.Model):
     point = models.IntegerField(null=False)
 
     class Meta:
-        unique_together  =(('ques_type', 'options' , 'category', 'answer', 'point'))
+        unique_together  =(('ques_type', 'options' , 'category', 'answer'))
 
 
 class Quiz(models.Model):

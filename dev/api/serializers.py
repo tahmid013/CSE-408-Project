@@ -38,7 +38,7 @@ class ClubSerializer(serializers.ModelSerializer   ):
 class QuestionSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Question
-        fields = ('id', 'ques_type', 'category','question', 'answer',  'point')
+        fields = ('id', 'ques_type', 'category','question', 'options','answer','image','point')
 
 class OptionsSerializer(serializers.ModelSerializer   ):
     class Meta:
