@@ -36,7 +36,7 @@ class OptionsViewset(viewsets.ModelViewSet):
     serializer_class = OptionsSerializer
 
 class CategoryViewset(viewsets.ModelViewSet):
-    queryset  = Options.objects.all()
+    queryset  = Category.objects.all()
     serializer_class = CategorySerializer
 
 class CustomObtainAuthToken(ObtainAuthToken): 

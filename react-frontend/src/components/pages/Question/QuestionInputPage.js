@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../hooks/useAuth';
 import { Button } from '../../Button';
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LockIcon from '@mui/icons-material/Lock';
-import { AddQuestion } from '../../../services/quiz-services';
+import { AddQuestion, getQuestions, getCategories } from '../../../services/quiz-services';
+
 
 
 export default function QuastionInputPage() {
@@ -59,24 +60,76 @@ export default function QuastionInputPage() {
   const [answer_, setAnswer_] = useState(false);
   const toggleAnswer = () => setAnswer_(!answer_);
 
+
+  const ques_type_list = ['MCQ', 'Written', 'Fill In the Blanks']
+
+  const [cat_s, setCats] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      await getCategories().then(data => {
+        setCats(data);
+        setLoading(false);
+      })
+    }
+    getData();
+  }, [])
+
+
+  const getInitialState = () => {
+    const value = "sports";
+    return value;
+  };
+
+  const [value, setValue] = useState(getInitialState);
+
+  const handleChangeBtn = (e) => {
+    setValue(e.target.value);
+    setCategory(value);
+  };
+
+  const getInitialStateSt = () => {
+    const value_st = "MCQ";
+    return value_st;
+  };
+
+  const [value_st, setValuest] = useState(getInitialStateSt);
+
+  const handleChangeBtnst = (e) => {
+    setValue(e.target.value_st);
+    setQues_type(value_st);
+  };
+
+
   return (
 
 
     <div className='clubinput'>
       <div>
-        <h1>Add Question</h1>
+        
         <form >
-          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <TextField id="input-with-sx" label="Question Type" variant="standard"
-              onChange={e => setQues_type(e.target.value)}
-            />
-          </Box>
+         
+        <div>
+            <select value={value_st} onChange={handleChangeBtnst}>
+                {ques_type_list && ques_type_list.map(l_s => {
+                     return <option value={`${l_s}`}>{l_s}</option>
+                })   
+                }
+            </select>
+            
+          </div>
 
-          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <TextField id="input-with-sx" label="Category" variant="standard"
-              onChange={e => setCategory(e.target.value)}
-            />
-          </Box>
+          <div>
+            <select value={value} onChange={handleChangeBtn}>
+                {cat_s && cat_s.map(c_s => {
+                     return <option value={`${c_s.name}`}>{c_s.name}</option>
+                })   
+                }
+            </select>
+            
+          </div>
 
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
             <TextField id="input-with-sx" label="Question" variant="standard"

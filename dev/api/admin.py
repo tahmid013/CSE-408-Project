@@ -29,6 +29,6 @@ class QuizAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    fields = ('id','name','about','image')
+    fields = ('name','about','image')
     list_display = ('id','name','about','image')
 
