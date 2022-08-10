@@ -34,7 +34,10 @@ class QuestionViewset(viewsets.ModelViewSet):
 class OptionsViewset(viewsets.ModelViewSet):
     queryset  = Options.objects.all()
     serializer_class = OptionsSerializer
-     
+
+class CategoryViewset(viewsets.ModelViewSet):
+    queryset  = Options.objects.all()
+    serializer_class = CategorySerializer
 
 class CustomObtainAuthToken(ObtainAuthToken): 
     def post(self, request, *args, **kwargs):

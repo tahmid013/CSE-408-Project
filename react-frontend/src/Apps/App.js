@@ -59,6 +59,7 @@ const App = () =>  {
           <Route exact path = "/quizmainpage/multi"  element = {<MultiPlayer/>} />
 
           <Route exact path = "/add_question" element={<QuestionInputPage />} />
+          <Route exact path = "/add_category" element={<QuestionInputPage />} />
           
           <Route exact path = "/type_mcq/quizcategory/:category" element = {<QuizDetails/>}/>  
           <Route exact path = "/type_written/quizcategory/:category" element = {<QuizDetails/>}/>  

@@ -38,3 +38,19 @@ export function AddQuestion(ques_type, category, question,options, answer,image,
        console.log(e)
     })
 }
+
+export function AddOptions(op_1, op_2,op_3, op_4){
+
+    
+
+    return fetch('http://127.0.0.1:8000/api/options/',{
+       method: 'POST', 
+       headers: {
+           'Content-Type' : 'application/json'
+       }, 
+       body: JSON.stringify({op_1,op_2,op_3,op_4}),
+    }).then(resp => resp.json())
+    .catch(e =>{
+       console.log(e)
+    })
+}

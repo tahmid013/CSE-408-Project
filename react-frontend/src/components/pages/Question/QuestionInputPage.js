@@ -21,6 +21,13 @@ export default function QuastionInputPage() {
   const [point, setPoint] = useState('');
   const [options, setOptions] = useState('');
 
+  const [op_1, setOption_1] = useState('');
+  const [op_2, setOption_2] = useState('');
+  const [op_3, setOption_3] = useState('');
+  const [op_4, setOption_4] = useState('');
+
+
+
   const { authData, setAuth } = useAuth();
   const navigate = useNavigate();
 
@@ -48,6 +55,9 @@ export default function QuastionInputPage() {
     }
   }
 
+
+  const [answer_, setAnswer_] = useState(false);
+  const toggleAnswer = () => setAnswer_(!answer_);
 
   return (
 
@@ -86,13 +96,55 @@ export default function QuastionInputPage() {
             />
           </Box>
 
-          
+          <div>
+            <input type="radio" value={true} name="option" onClick={toggleAnswer} />
+            <span>Give Options</span>
+
+          </div>
+          {answer_ ?
+            <form >
+              <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                <TextField id="input-with-sx" label="Option 1" variant="standard"
+                  onChange={e => setOption_1(e.target.value)}
+                />
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                <TextField id="input-with-sx" label="Option 2" variant="standard"
+                  onChange={e => setOption_2(e.target.value)}
+                />
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                <TextField id="input-with-sx" label="Option 3" variant="standard"
+                  onChange={e => setOption_3(e.target.value)}
+                />
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                <TextField id="input-with-sx" label="Option 4" variant="standard"
+                  onChange={e => setOption_4(e.target.value)}
+                />
+              </Box>
+
+            </form>
+
+
+            : <div>You said no! </div>
+          }
+
+
           <div className="logging">
             <Button path_name='user' type='submit' onClick={handleSubmit}>
               Add Question
             </Button>
           </div>
+
+
+
         </form>
+
+
       </div>
 
     </div>

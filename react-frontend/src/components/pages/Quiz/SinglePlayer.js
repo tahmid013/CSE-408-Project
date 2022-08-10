@@ -8,7 +8,8 @@ import React, { useState } from "react";
 
 export default function SinglePlayer() {
 
-
+    const active_count =  Array(3).fill(0) 
+    const inactive_count = Array(6).fill(0)  
 
     return (
         <div className="content-container">
@@ -19,13 +20,16 @@ export default function SinglePlayer() {
 
             <div className="container-bar">
                 <ul className="progressbar">
-                    <li className="active"></li>
-                    <li className="active"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-
+                    
+                {active_count.map(ac => {
+                     return <li className="active"></li>
+                })
+                
+                }
+                {inactive_count.map(inc => {
+                    return <li ></li>
+                })
+                }
                 </ul>
             </div>
 

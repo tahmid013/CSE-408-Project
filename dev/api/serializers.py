@@ -44,3 +44,7 @@ class OptionsSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Options
         fields = ('id', 'op_1', 'op_2', 'op_3', 'op_4')        
+class CategorySerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'about', 'image')     
