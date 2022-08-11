@@ -8,7 +8,7 @@ from rest_framework.authtoken.models import Token
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('id', 'image', 'is_club_member', 'bio')
+        fields = ('id', 'image','club', 'is_club_admin', 'bio')
 
 class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer()
@@ -47,4 +47,4 @@ class OptionsSerializer(serializers.ModelSerializer   ):
 class CategorySerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Category
-        fields = ('id', 'name', 'about', 'image')     
+        fields = ('id', 'name', 'about', 'image', 'quote')     
