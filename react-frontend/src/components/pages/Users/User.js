@@ -15,7 +15,12 @@ export default function User() {
 
         alt="avatar"
       />
-       <h4>{authData.user.username}</h4>
+      <br/>
+       <h4 className='userName'>{authData.user.username}</h4>
+       {authData.user.profile.is_club_admin ? <h4>Admin</h4> : <h4>User</h4>}
+      <Button onClick={() => {}}>Edit Profile</Button>
+      <br/>
+       <p>{authData.user.profile.bio}</p>
       <div className='add-btns'>
         <Button path_name='club_input_form' className='btns' buttonStyle='btn--fit' buttonSize='btn--small'>
           Add Club

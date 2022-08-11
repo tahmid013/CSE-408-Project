@@ -58,8 +58,8 @@
   margin-right: auto;
   background-color: rgb(93, 180, 234);
   padding: 2%;
-  width: 60%;
-  height:  calc(70vh - 30px);
+  width: 100%;
+  height:  calc(100vh);
   display: grid;
   grid-template-columns: auto auto auto;
   grid-gap: 10px
@@ -74,6 +74,10 @@
 .add-btns{
   justify-content: right;
   width: 50%;
+}
+
+.userName{
+  text-align: left;
 }
 
 
