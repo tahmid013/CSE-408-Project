@@ -23,23 +23,16 @@ export function getCategories(){
         console.log(e)
     })
 }
-export function getOption(id){
-    return fetch(`http://127.0.0.1:8000/api/options/${id}/`)
+export function getCategory(id){
+    return fetch(`http://127.0.0.1:8000/api/category/${id}/`)
     .then(data => {
         return data.json();
     }).catch(e => {
         console.log(e)
     })
+
 }
 
-export function getOptions(){
-    return fetch(`http://127.0.0.1:8000/api/options/`)
-    .then(data => {
-        return data.json();
-    }).catch(e => {
-        console.log(e)
-    })
-}
 
 
 
@@ -78,3 +71,21 @@ export function AddOptions(op_1, op_2,op_3, op_4){
        console.log(e)
     })
 }
+export function getOption(id){
+    return fetch(`http://127.0.0.1:8000/api/options/${id}/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
+
+export function getOptions(){
+    return fetch(`http://127.0.0.1:8000/api/options/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
+
