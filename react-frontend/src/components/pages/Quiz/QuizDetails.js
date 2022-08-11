@@ -41,7 +41,6 @@ function QuizDetails() {
             setLoading(true);
             await getCategory(categoryID).then(data => {
                 setCategory(data);
-                console.log(data)
             })
         }
         getData().catch(console.error);
@@ -52,7 +51,6 @@ function QuizDetails() {
         setLoading(false);
     },[category])
 
-    console.log(category)
 
 
     return (

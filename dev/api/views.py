@@ -25,11 +25,13 @@ class ClubViewset(viewsets.ModelViewSet):
     serializer_class = ClubSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ['name', 'about', 'institute']
+    
 
 
 class QuestionViewset(viewsets.ModelViewSet):
     queryset  = Question.objects.all()
     serializer_class = QuestionSerializer
+    
 
 class OptionsViewset(viewsets.ModelViewSet):
     queryset  = Options.objects.all()

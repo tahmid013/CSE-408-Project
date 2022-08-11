@@ -15,6 +15,7 @@ router.register(r'questions', views.QuestionViewset)
 router.register(r'options', views.OptionsViewset)
 router.register(r'category', views.CategoryViewset)
 
+
 urlpatterns = [
     url(r'^', include(router.urls)),
     url('authenticate/', views.CustomObtainAuthToken.as_view())
