@@ -26,7 +26,7 @@ import QuizDetails from '../components/pages/Quiz/QuizDetails';
 import ResultSingle from '../components/pages/Quiz/ResultSingle';
 import QuestionInputPage from '../components/pages/Question/QuestionInputPage';
 import QuestionsPage from '../components/pages/Question/QuestionsPage';
-
+import AddMember from '../components/pages/Club/AddMember';
 
 const App = () =>  {
 
@@ -53,6 +53,8 @@ const App = () =>  {
 
           <Route path = "/demo"  element = {<DemoGuideVideo/>} />
           <Route exact path = "/clubspage"  element = {<ClubsPage/>} />
+          <Route exact path = "/add_member"  element = {<AddMember/>} />
+
           <Route exact path = "/questionspage"  element = {<QuestionsPage/>} />
           <Route exact path = "/club_input_form"  element = {<ClubsInputPage/>} />
           <Route exact path = "/quizmainpage/single"  element = {<SinglePlayer/>} />
