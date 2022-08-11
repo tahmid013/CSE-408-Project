@@ -24,6 +24,16 @@ export function getCategories(){
     })
 }
 
+export function getCategory(id){
+    return fetch(`http://127.0.0.1:8000/api/category/${id}/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+
+}
+
 
 
 

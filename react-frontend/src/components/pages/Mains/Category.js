@@ -5,7 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import './Category.css';
 import { getClubs } from '../../../services/club-services';
 import SinglePlayer from "../Quiz/SinglePlayer";
-
+import {getCategories} from '../../../services/quiz-services';
 
 function Category() {
     var str = window.location.pathname.substring(1);
@@ -15,31 +15,31 @@ function Category() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [clubs, setClubs] = useState(null);
+    const [categories, setCategories] = useState([]);
 
-    const cat_list = [
-            {text: 'Sports', label : 'sport', numbers: '1'},
-            {text: 'History', label : 'history', numbers: '2'},
-            {text: 'Geography', label : 'geography', numbers: '3'},
-            {text: 'Science and Math', label : 'science', numbers: '4'},
-            {text: 'Literature', label : 'literature', numbers: '5'},
-            {text: 'Movies and Series', label : 'movies', numbers: '8'},
-            {text: 'Gk', label : 'GK', numbers: '6'},
-            {text: 'Space', label : 'space', numbers: '7'},
+    // const cat_list = [
+    //         {text: 'Sports', label : 'sport', numbers: '1'},
+    //         {text: 'History', label : 'history', numbers: '2'},
+    //         {text: 'Geography', label : 'geography', numbers: '3'},
+    //         {text: 'Science and Math', label : 'science', numbers: '4'},
+    //         {text: 'Literature', label : 'literature', numbers: '5'},
+    //         {text: 'Movies and Series', label : 'movies', numbers: '8'},
+    //         {text: 'Gk', label : 'GK', numbers: '6'},
+    //         {text: 'Space', label : 'space', numbers: '7'},
 
-    ];
+    // ];
     
     
-    const listItems = cat_list.map((cat_list_) =>
-        console.log(cat_list_.text)
+    // const listItems = cat_list.map((cat_list_) =>
+    //     console.log(cat_list_.text)
 
-    );
+    // );
 
     useEffect(() => {
         const getData = async () => {
             setLoading(true);
-            await getClubs().then(data => {
-                setClubs(data);
+            await getCategories().then(data => {
+                setCategories(data);
                 setLoading(false);
             })
         }
@@ -57,17 +57,19 @@ function Category() {
             <h1>Quiz Categories</h1>
             <div className='cards_1'>
            
-                {cat_list && cat_list.map(cat_list_item => {
-                    return <Link key={cat_list_item.numbers} to={`/${cat_list_item.label}`} >
+                {categories && categories.map(cat_list_item => {
+                    console.log(cat_list_item.id);
+                    console.log(cat_list_item.name);
+                    return <Link key={cat_list_item.id} to={`/${cat_list_item.id}`} >
 
                         <CatBox
                             
                             
                             
-                            src={window.location.origin + "/images/category/cat_"+`${cat_list_item.numbers}`+".png"}
-                            text={`${cat_list_item.text}`}
-                            label={`${cat_list_item.label}`}
-                            path={`/${s}/${cat_list_item.label}`}
+                            src={window.location.origin + "/images/category/cat_"+`${cat_list_item.id}`+".png"}
+                            text={`${cat_list_item.name}`}
+                            label={`${cat_list_item.name}`}
+                            path={`/${s}/${cat_list_item.id}`}
 
                         />
 
