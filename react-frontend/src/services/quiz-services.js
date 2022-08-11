@@ -23,7 +23,23 @@ export function getCategories(){
         console.log(e)
     })
 }
+export function getOption(id){
+    return fetch(`http://127.0.0.1:8000/api/options/${id}/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
 
+export function getOptions(){
+    return fetch(`http://127.0.0.1:8000/api/options/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
 
 
 
@@ -40,7 +56,7 @@ export function AddQuestion(ques_type, category, question,options, answer,image,
        headers: {
            'Content-Type' : 'application/json'
        }, 
-       body: JSON.stringify({ques_type, category,options, question, answer, point}),
+       body: JSON.stringify({ques_type, category, question,options, answer, point}),
     }).then(resp => resp.json())
     .catch(e =>{
        console.log(e)

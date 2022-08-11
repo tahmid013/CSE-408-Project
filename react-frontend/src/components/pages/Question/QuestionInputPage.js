@@ -9,8 +9,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LockIcon from '@mui/icons-material/Lock';
-import { AddQuestion, getQuestions, getCategories } from '../../../services/quiz-services';
-
+import { AddOptions, AddQuestion, getCategories, getOptions } from '../../../services/quiz-services';
+import { useGlobalContext } from '../../../context';
 
 
 export default function QuastionInputPage() {
@@ -20,7 +20,6 @@ export default function QuastionInputPage() {
   const [answer, setAnswer] = useState('');
   const [image, setImage] = useState('');
   const [point, setPoint] = useState('');
-  const [options, setOptions] = useState('');
 
   const [op_1, setOption_1] = useState('');
   const [op_2, setOption_2] = useState('');
@@ -28,21 +27,47 @@ export default function QuastionInputPage() {
   const [op_4, setOption_4] = useState('');
 
 
+  const [matched, setMatched] = useState(false);
+
+  const { optionSearchTerm } = useGlobalContext();
 
   const { authData, setAuth } = useAuth();
   const navigate = useNavigate();
 
 
+  const [options, setopts] = useState('');
+
+  const checkOptionMatched = ()  => {
+
+      if(answer == op_1 || answer == op_2 || answer == op_3 || answer == op_4 ){
+          setMatched(true);
+          handleSubmit();
+      }
+
+      else{
+          setMatched(false);
+      }
+
+  }
+
   const handleSubmit = async e => {
-    e.preventDefault();
+
+   
+    const op_added = await AddOptions(
+      op_1,op_2,op_3,op_4
+    );
+
+    console.log(op_added);
+        
+    console.log("Now opt id: "+op_added.id);
+    // to be fetched option id first
     setImage(null);
-    setOptions(null);
     console.log("Adding question");
     const uploaded = await AddQuestion(
       ques_type,
       category,
       question,
-      options,
+      op_added.id,
       answer,
       image,
       point
@@ -59,7 +84,6 @@ export default function QuastionInputPage() {
 
   const [answer_, setAnswer_] = useState(false);
   const toggleAnswer = () => setAnswer_(!answer_);
-
 
   const ques_type_list = ['MCQ', 'Written', 'Fill In the Blanks']
 
@@ -186,9 +210,17 @@ export default function QuastionInputPage() {
             : <div>You said no! </div>
           }
 
+          { matched ? 
+            <div></div>
+            :
+            <>
+              <div>Please provide valid options</div>
+              <div>Answer does not match with any of the options</div>
+            </>
+          }
 
           <div className="logging">
-            <Button path_name='user' type='submit' onClick={handleSubmit}>
+            <Button path_name='add_question' type='submit' onClick={checkOptionMatched}>
               Add Question
             </Button>
           </div>
