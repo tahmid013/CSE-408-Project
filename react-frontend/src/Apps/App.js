@@ -27,6 +27,7 @@ import ResultSingle from '../components/pages/Quiz/ResultSingle';
 import QuestionInputPage from '../components/pages/Question/QuestionInputPage';
 import QuestionsPage from '../components/pages/Question/QuestionsPage';
 import AddMember from '../components/pages/Club/AddMember';
+import ClubDetails from '../components/pages/Club/club-details';
 
 const App = () =>  {
 
@@ -53,6 +54,8 @@ const App = () =>  {
 
           <Route path = "/demo"  element = {<DemoGuideVideo/>} />
           <Route exact path = "/clubspage"  element = {<ClubsPage/>} />
+          <Route exact path = "/club/:id/"  element = {<ClubDetails/>} />
+
           <Route exact path = "/add_member"  element = {<AddMember/>} />
 
           <Route exact path = "/questionspage"  element = {<QuestionsPage/>} />

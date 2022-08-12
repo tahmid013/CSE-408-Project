@@ -20,7 +20,14 @@ class OptionAdmin(admin.ModelAdmin):
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     fields = (  'user', 'image', 'is_club_admin', 'bio')
-    list_display = ('id', 'user', 'image', 'is_club_admin','bio')
+    list_display = ('id', 'user', 'image', 'is_club_admin','bio','get_clubs')
+
+    def get_clubs(self,obj):
+        if obj.club.all():
+            return list(obj.club.all().values_list('name', flat=True))
+        else:
+            return 'NA'
+
 
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):

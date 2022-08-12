@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
         fields = ('id', 'username' ,'email','password','profile')
-        extra_kwargs = {'password': {'write_only': True, 'required': False}}
+        extra_kwargs = {'password': {'write_only': True, 'required': False},'club': {'required': False},'username': {'required': False} }
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile')
@@ -30,9 +30,11 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class ClubSerializer(serializers.ModelSerializer   ):
+    user = UserSerializer(many = True,read_only=True)
     class Meta:
         model = Club
-        fields = ('id', 'name', 'about', 'institute')
+        fields = ('id', 'name', 'about', 'institute','user')
+        extra_kwargs = {'user': {'required': False}}
 
 
 class QuestionSerializer(serializers.ModelSerializer   ):
