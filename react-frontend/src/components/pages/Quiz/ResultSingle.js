@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
@@ -9,7 +9,13 @@ import React, { useState } from "react";
 
 
 
-export default function ResultSingle() {
+export default function ResultSingle(props) {
+
+
+    const location = useLocation();
+    const {id, name } = location;
+    console.log(id);
+    console.log(name);
 
     const handlerSubmit = async e => {
         e.preventDefault();
@@ -18,13 +24,15 @@ export default function ResultSingle() {
     }
 
     return (
+        <>
         <div className="content-container">
 
             <div className="quiz-type-heading"><b>Congratulations</b></div>
 
             <div className="footer-container">
                 <PersonIcon sx={{  fontSize: "100px", color: 'action.active', mr: 1, my: 0.5 }} /> 
-                <div className="badge">100</div>
+                <div className="badge">3</div>
+                
             </div>
 
             <div className="option-container-written">
@@ -33,5 +41,6 @@ export default function ResultSingle() {
             </div>
             
         </div>
+        </>
     )
 }

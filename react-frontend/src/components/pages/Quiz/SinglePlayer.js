@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link ,useLocation} from "react-router-dom";
 import AlarmIcon from '@mui/icons-material/Alarm';
 
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect,useRef } from "react";
 import { getCategories, getOption, getQuestion, getQuestions } from "../../../services/quiz-services";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +11,59 @@ import { useNavigate } from "react-router-dom";
 export default function SinglePlayer() {
 
 
+    const location = useLocation();
+    var str = window.location.pathname.substring(0);
+    //var str ="/hello";
 
-    var str = window.location.pathname.substring(1);
+    const Ref = useRef(null);
+    const [timer ,setTimer] = useState('00');
+
+    const getTimeRemaining = (e) =>{
+        const total = Date.parse(e) - Date.parse(new Date());
+        const seconds = Math.floor((total / 1000) % 60);
+        return {
+            total, seconds
+        };
+    }
+    const startTimer = (e) => {
+        let { total, seconds } 
+                    = getTimeRemaining(e);
+        if (total >= 0) {
+  
+            setTimer(
+                 (seconds > 9 ? seconds : '0' + seconds)
+            )
+        }
+        if(total <=0){
+            navigate(`${str}/result`,{
+                state: {
+                    id:7,
+                    name: 'hello',
+                  }
+            });
+        }
+    }
+    const clearTimer = (e) => {
+  
+      
+        setTimer('10');
+  
+        if (Ref.current) clearInterval(Ref.current);
+        const id = setInterval(() => {
+            startTimer(e);
+        }, 1000)
+        Ref.current = id;
+    }
+    const getDeadTime = () => {
+        let deadline = new Date();
+  
+        deadline.setSeconds(deadline.getSeconds() + 10);
+        return deadline;
+    }
+    useEffect(() => {
+        clearTimer(getDeadTime());
+    }, []);
+
 
     const navigate = useNavigate();
 
@@ -35,6 +86,7 @@ export default function SinglePlayer() {
             setLoading(true);
             await getQuestions().then(data => {
                 setQuesList(data);
+                setPoint(0);
                 setTotalQuesCount(data.length);
                 setQuesCount(1);
                 setLoading(false);
@@ -62,23 +114,27 @@ export default function SinglePlayer() {
 
 
     
-    const optClickChange = () => {
+    const optClickChange = param => e => {
 
-
+        if(ques_list[cur_ques_count-1].answer  == param){
+            setPoint(cur_point + ques_list[cur_ques_count-1].point);
+        }
 
         if (cur_ques_count < total_ques_count) {
             console.log(cur_ques_count);
             setQuesCount(cur_ques_count + 1);
             console.log(cur_ques_count);
         }
+        else{
+            navigate(`${str}/result`,{
+                state: {
+                    color: cur_point,
+                  }
+            });
+        }
 
 
         console.log(total_ques_count);
-    }
-    const optClickChange_1 = () => {
-
-
-
     }
 
 
@@ -108,16 +164,16 @@ export default function SinglePlayer() {
             <div className="question">{cur_ques_count}.    {ques_list && ques_list[cur_ques_count-1].question}</div>
             <div className="option-container">
 
-                <div className="option" onClick={optClickChange}>{each_option_list && each_option_list.op_1}</div>
-                <div className="option" onClick={optClickChange}>{each_option_list && each_option_list.op_2}</div>
-                <div className="option" onClick={optClickChange}>{each_option_list && each_option_list.op_3}</div>
-                <div className="option" onClick={optClickChange}>{each_option_list && each_option_list.op_4}</div>
+                <div className="option" onClick={optClickChange(each_option_list && each_option_list.op_1)}>{each_option_list && each_option_list.op_1}</div>
+                <div className="option" onClick={optClickChange(each_option_list && each_option_list.op_2)}>{each_option_list && each_option_list.op_2}</div>
+                <div className="option" onClick={optClickChange(each_option_list && each_option_list.op_3)}>{each_option_list && each_option_list.op_3}</div>
+                <div className="option" onClick={optClickChange(each_option_list && each_option_list.op_4)}>{each_option_list && each_option_list.op_4}</div>
             </div>
 
 
             <div className="footer-container">
                 <div className="left-footer">TIME REMAINING </div>
-                <div className="middle-footer"> 50s <AlarmIcon sx={{ fontSize: "40px", color: 'action.active', mr: 1, my: 0.5 }} />  100 </div>
+                <div className="middle-footer"> {timer}s <AlarmIcon sx={{ fontSize: "40px", color: 'action.active', mr: 1, my: 0.5 }} />  {cur_point} </div>
                 <div className="right-footer">YOUR POINT </div>
             </div>
         </div>

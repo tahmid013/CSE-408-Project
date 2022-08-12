@@ -77,7 +77,7 @@ const App = () =>  {
           <Route exact path = "/type_fill/quizcategory/:category/multi" element = {<MultiPlayerWritten/>}/>   
 
           <Route path = "/user"  element = {<User/>} />
-          <Route path = "/result"  element = {<ResultSingle/>} />
+          <Route path = "/type_mcq/quizcategory/:category/:single/result"  element = {<ResultSingle/>} />
           
         </Routes>
         </AuthProvider>
