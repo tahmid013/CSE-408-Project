@@ -1,68 +1,103 @@
 import { Button } from "@mui/material";
-import { Link ,useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AlarmIcon from '@mui/icons-material/Alarm';
 
-import React, { useState, useLayoutEffect, useEffect,useRef } from "react";
+import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { getCategories, getOption, getQuestion, getQuestions } from "../../../services/quiz-services";
 import { useNavigate } from "react-router-dom";
+
+const STATUS = {
+    STARTED: 'Started',
+    STOPPED: 'Stopped',
+}
+
+const INITIAL_COUNT = 10
+
+function useInterval(callback, delay) {
+    const savedCallback = useRef()
+
+    useEffect(() => {
+        savedCallback.current = callback
+    }, [callback])
+
+    useEffect(() => {
+        function tick() {
+            savedCallback.current()
+        }
+        if (delay !== null) {
+            let id = setInterval(tick, delay)
+            return () => clearInterval(id)
+        }
+    }, [delay])
+}
+
+
 
 
 
 export default function SinglePlayer() {
 
 
+
+
+    const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT)
+    const [status, setStatus] = useState(STATUS.STOPPED)
+
+    
+
+    const handleStart = () => {
+        setStatus(STATUS.STARTED)
+    }
+    
+    useInterval(
+        () => {
+            if (secondsRemaining > 0) {
+                setSecondsRemaining(secondsRemaining - 1)
+            } else {
+                console.log("Navigating to result-> ");
+                console.log(cur_point);
+                localStorage.setItem('point',cur_point);
+                navigate('/result' );
+                setStatus(STATUS.STOPPED)
+            }
+        },
+        status === STATUS.STARTED ? 1000 : null,
+        // passing null stops the interval
+    )
+    useEffect(() => {
+       handleStart();
+    }, )
+
+
     const location = useLocation();
     var str = window.location.pathname.substring(0);
     //var str ="/hello";
 
-    const Ref = useRef(null);
-    const [timer ,setTimer] = useState('00');
 
-    const getTimeRemaining = (e) =>{
-        const total = Date.parse(e) - Date.parse(new Date());
-        const seconds = Math.floor((total / 1000) % 60);
-        return {
-            total, seconds
-        };
+    const [timer, setTimer] = useState('00');
+
+    function useInterval(callback, delay) {
+        const savedCallback = useRef()
+
+        // Remember the latest callback.
+        useEffect(() => {
+            savedCallback.current = callback
+        }, [callback])
+
+        // Set up the interval.
+        useEffect(() => {
+            function tick() {
+                savedCallback.current()
+            }
+            if (delay !== null) {
+                let id = setInterval(tick, delay)
+                return () => clearInterval(id)
+            }
+        }, [delay])
     }
-    const startTimer = (e) => {
-        let { total, seconds } 
-                    = getTimeRemaining(e);
-        if (total >= 0) {
-  
-            setTimer(
-                 (seconds > 9 ? seconds : '0' + seconds)
-            )
-        }
-        if(total <=0){
-            navigate(`${str}/result`,{
-                state: {
-                    id:7,
-                    name: 'hello',
-                  }
-            });
-        }
-    }
-    const clearTimer = (e) => {
-  
-      
-        setTimer('10');
-  
-        if (Ref.current) clearInterval(Ref.current);
-        const id = setInterval(() => {
-            startTimer(e);
-        }, 1000)
-        Ref.current = id;
-    }
-    const getDeadTime = () => {
-        let deadline = new Date();
-  
-        deadline.setSeconds(deadline.getSeconds() + 10);
-        return deadline;
-    }
-    useEffect(() => {
-        clearTimer(getDeadTime());
-    }, []);
+
+    // https://stackoverflow.com/a/2998874/1673761
+    const twoDigits = (num) => String(num).padStart(2, '0')
 
 
     const navigate = useNavigate();
@@ -92,32 +127,32 @@ export default function SinglePlayer() {
                 setLoading(false);
 
             })
-            
+
         }
         getData();
 
-    },[])
+    }, [])
 
     useEffect(() => {
         const getData2 = async () => {
             setLoading(true);
-            await getOption(ques_list[cur_ques_count-1].options).then(data => {
+            await getOption(ques_list[cur_ques_count - 1].options).then(data => {
                 setEachOptionList(data);
                 setLoading(false);
             })
         }
         getData2();
 
-   
-    },[cur_ques_count])
+
+    }, [cur_ques_count])
 
 
 
-    
+
     const optClickChange = param => e => {
 
-        if(ques_list[cur_ques_count-1].answer  == param){
-            setPoint(cur_point + ques_list[cur_ques_count-1].point);
+        if (ques_list[cur_ques_count - 1].answer == param) {
+            setPoint(cur_point + ques_list[cur_ques_count - 1].point);
         }
 
         if (cur_ques_count < total_ques_count) {
@@ -125,12 +160,8 @@ export default function SinglePlayer() {
             setQuesCount(cur_ques_count + 1);
             console.log(cur_ques_count);
         }
-        else{
-            navigate(`${str}/result`,{
-                state: {
-                    color: cur_point,
-                  }
-            });
+        else {
+            navigate("/result", { state: { searchResult: cur_point } });
         }
 
 
@@ -161,7 +192,7 @@ export default function SinglePlayer() {
                 </ul>
             </div>
 
-            <div className="question">{cur_ques_count}.    {ques_list && ques_list[cur_ques_count-1].question}</div>
+            <div className="question">{cur_ques_count}.    {ques_list && ques_list[cur_ques_count - 1].question}</div>
             <div className="option-container">
 
                 <div className="option" onClick={optClickChange(each_option_list && each_option_list.op_1)}>{each_option_list && each_option_list.op_1}</div>
@@ -173,7 +204,7 @@ export default function SinglePlayer() {
 
             <div className="footer-container">
                 <div className="left-footer">TIME REMAINING </div>
-                <div className="middle-footer"> {timer}s <AlarmIcon sx={{ fontSize: "40px", color: 'action.active', mr: 1, my: 0.5 }} />  {cur_point} </div>
+                <div className="middle-footer"> {secondsRemaining}s <AlarmIcon sx={{ fontSize: "40px", color: 'action.active', mr: 1, my: 0.5 }} />  {cur_point} </div>
                 <div className="right-footer">YOUR POINT </div>
             </div>
         </div>

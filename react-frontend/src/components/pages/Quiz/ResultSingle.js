@@ -12,10 +12,9 @@ import React, { useState } from "react";
 export default function ResultSingle(props) {
 
 
-    const location = useLocation();
-    const {id, name } = location;
-    console.log(id);
-    console.log(name);
+    
+    const user = JSON.parse(localStorage.getItem('quizz-user'));
+   
 
     const handlerSubmit = async e => {
         e.preventDefault();
@@ -27,11 +26,11 @@ export default function ResultSingle(props) {
         <>
         <div className="content-container">
 
-            <div className="quiz-type-heading"><b>Congratulations</b></div>
+            <div className="quiz-type-heading"><b>Congratulations {user.user.username}</b></div>
 
             <div className="footer-container">
                 <PersonIcon sx={{  fontSize: "100px", color: 'action.active', mr: 1, my: 0.5 }} /> 
-                <div className="badge">3</div>
+                <div className="badge">{localStorage.getItem('point')}</div>
                 
             </div>
 
