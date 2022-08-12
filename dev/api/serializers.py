@@ -48,3 +48,13 @@ class CategorySerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Category
         fields = ('id', 'name', 'about', 'image', 'quote')     
+
+class QuizTakenSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = QuizTaken
+        fields = ('id', 'user', 'quiz', 'score','started_at','finished_at')
+
+class EventSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = Event
+        fields = ('id', 'name', 'about', 'image', 'club', 'quiz', 'created_by', 'created_at')

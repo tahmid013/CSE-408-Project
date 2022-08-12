@@ -11,11 +11,15 @@ def Question_image_path_handler(instance, filename):
 def Category_image_path_handler(instance, filename):
     return "categories/{id}/{file}".format(id= instance.id, file = filename)
 
+def Event_image_path_handler(instance, filename):
+    return "events/{id}/{file}".format(id= instance.id, file = filename)
+
 
 class Club(models.Model):
     name = models.CharField(max_length=32, null=False, unique= False)
     about = models.CharField(max_length=256, null=False)
     institute = models.CharField(max_length=128, null=False)
+    #members = models.ManyToManyField(User, related_name='members',null=True)
     
     def __str__(self):
         return self.name
@@ -26,7 +30,8 @@ class Club(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User , related_name= 'profile', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=Upload_path_handler, blank= True)
-    club = models.ForeignKey(Club, related_name= 'club', on_delete=models.CASCADE, null=True, blank=True)
+    #club = models.ForeignKey(Club, related_name= 'club', on_delete=models.CASCADE, null=True, blank=True)
+    club = models.ManyToManyField(Club, related_name='club',null=True,blank=True)
     is_club_admin = models.BooleanField(default=False)
     bio = models.TextField(max_length=500, blank=True)
 
@@ -76,6 +81,33 @@ class Quiz(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        unique_together  =(('name', 'created_by'))
+
+
+class QuizTaken(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.IntegerField(null=False)
+    started_at = models.DateTimeField(auto_now_add=True)
+    finished_at = models.DateTimeField(auto_now=True)
+    
+
+    class Meta:
+        unique_together  =(('quiz', 'user'))
+
+class Event(models.Model):
+    name = models.CharField(max_length=32, null=False, unique= False)
+    about = models.CharField(max_length=256, null=False)
+    image = models.ImageField(upload_to=Event_image_path_handler, blank= True, null=True)
+    club = models.ForeignKey(Club, on_delete=models.CASCADE,null=False)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE,null=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name

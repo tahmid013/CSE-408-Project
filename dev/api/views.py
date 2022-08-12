@@ -42,6 +42,18 @@ class OptionsViewset(viewsets.ModelViewSet):
 class CategoryViewset(viewsets.ModelViewSet):
     queryset  = Category.objects.all()
     serializer_class = CategorySerializer
+
+class QuizTakenViewset(viewsets.ModelViewSet):
+    queryset  = QuizTaken.objects.all()
+    serializer_class = QuizTakenSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['user', 'quiz', 'score','started_at','finished_at']
+
+class EventViewset(viewsets.ModelViewSet):
+    queryset  = Event.objects.all()
+    serializer_class = EventSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['name', 'about', 'image', 'club', 'quiz', 'created_by', 'created_at']
     
 
 class CustomObtainAuthToken(ObtainAuthToken): 

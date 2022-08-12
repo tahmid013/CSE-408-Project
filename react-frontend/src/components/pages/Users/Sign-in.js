@@ -80,12 +80,13 @@ export default function SignIn() {
                 <div>
                     {authData.user ?
                         <>
-                            <h4>You have successfully logged in!</h4>
+                            <h4>Logged in as : {authData.user.username}</h4>
                             <Button path_name='user'>Go to User</Button>
                             <br />
                             <Button path_name='signin' onClick={() => logout()}>
                                 Logout
                             </Button>
+                            
                         </>
                         :
                         <>
