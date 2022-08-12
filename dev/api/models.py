@@ -19,7 +19,7 @@ class Club(models.Model):
     name = models.CharField(max_length=32, null=False, unique= False)
     about = models.CharField(max_length=256, null=False)
     institute = models.CharField(max_length=128, null=False)
-    members = models.ManyToManyField(User, related_name='members',null=True)
+    #members = models.ManyToManyField(User, related_name='members',null=True)
     
     def __str__(self):
         return self.name
@@ -30,7 +30,8 @@ class Club(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User , related_name= 'profile', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=Upload_path_handler, blank= True)
-    club = models.ForeignKey(Club, related_name= 'club', on_delete=models.CASCADE, null=True, blank=True)
+    #club = models.ForeignKey(Club, related_name= 'club', on_delete=models.CASCADE, null=True, blank=True)
+    club = models.ManyToManyField(Club, related_name='club',null=True,blank=True)
     is_club_admin = models.BooleanField(default=False)
     bio = models.TextField(max_length=500, blank=True)
 

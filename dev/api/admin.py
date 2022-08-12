@@ -19,8 +19,8 @@ class OptionAdmin(admin.ModelAdmin):
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    fields = (  'user', 'image','club', 'is_club_admin', 'bio')
-    list_display = ('id', 'user', 'image', 'club', 'is_club_admin','bio')
+    fields = (  'user', 'image', 'is_club_admin', 'bio')
+    list_display = ('id', 'user', 'image', 'is_club_admin','bio')
 
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
