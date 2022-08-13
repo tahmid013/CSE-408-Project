@@ -63,9 +63,7 @@ export default function User() {
         
         <div className='add-btns'>
         
-        <Button path_name='add_member' className='btns' buttonStyle='btn--fit' buttonSize='btn--small'>
-          Add Member
-        </Button>
+        
         {
           authData.user.profile.is_club_admin ?
           <Button path_name='add_question' className='btns' buttonStyle='btn--fit' buttonSize='btn--small'>

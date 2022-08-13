@@ -118,8 +118,11 @@ class Event(models.Model):
 
     
 class ClubUser(models.Model):
-    club_id = models.CharField(max_length=32, null=True, unique= False)
-    user_id = models.CharField(max_length=256, null=True)
+    club_id = models.ForeignKey(Club, on_delete=models.CASCADE,null=False, blank=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,null=False, blank=True)
+    is_admin = models.BooleanField(default=False)
+    designation = models.CharField(max_length=32, null=False, unique= False,default='Member')
+    
     class Meta:
         unique_together  =(('club_id', 'user_id'))
 

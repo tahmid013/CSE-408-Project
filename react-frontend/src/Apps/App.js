@@ -28,6 +28,7 @@ import QuestionInputPage from '../components/pages/Question/QuestionInputPage';
 import QuestionsPage from '../components/pages/Question/QuestionsPage';
 import AddMember from '../components/pages/Club/AddMember';
 import ClubDetails from '../components/pages/Club/club-details';
+import ClubMembers from '../components/pages/Club/ClubMembers';
 import HostMainPage from '../components/pages/Hosting/HostMainPage';
 import QuestionTypePage from '../components/pages/Hosting/QuestionTypePage';
 
@@ -57,6 +58,7 @@ const App = () =>  {
           <Route path = "/demo"  element = {<DemoGuideVideo/>} />
           <Route exact path = "/clubspage"  element = {<ClubsPage/>} />
           <Route exact path = "/club/:id/"  element = {<ClubDetails/>} />
+          <Route exact path = "/club/:id/members"  element = {<ClubMembers/>} />
           <Route exact path = "/club/:id/host-event"  element = {<HostMainPage/>} />
           <Route exact path = "/club/:id/host-event/new-page"  element = {<QuestionTypePage/>} />
 

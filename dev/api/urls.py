@@ -6,6 +6,9 @@ from api import views
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_extensions.routers import NestedRouterMixin
+
+
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewset)
@@ -14,6 +17,9 @@ router.register(r'clubs', views.ClubViewset)
 router.register(r'questions', views.QuestionViewset)
 router.register(r'options', views.OptionsViewset)
 router.register(r'category', views.CategoryViewset)
+router.register(r'quiztaken', views.QuizTakenViewset)
+router.register(r'events', views.EventViewset)
+router.register(r'clubuser', views.ClubUserViewset)
 
 
 urlpatterns = [

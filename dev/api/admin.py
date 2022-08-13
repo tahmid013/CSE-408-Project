@@ -46,5 +46,5 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(ClubUser)
 class UserProfileAdmin(admin.ModelAdmin):
-    fields = (  'user_id', 'club_id')
-    list_display = ('id', 'user_id', 'club_id')
+    fields = (  'user_id', 'club_id','is_admin','designation')
+    list_display = ('id', 'user_id', 'club_id','is_admin','designation')
