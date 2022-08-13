@@ -19,6 +19,8 @@ class UserProfileViewset(viewsets.ModelViewSet):
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['username']
 
 
 class ClubViewset(viewsets.ModelViewSet):

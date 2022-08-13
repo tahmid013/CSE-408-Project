@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useFetchClubs } from '../../../hooks/fetch-clubs'
+import { useFetchClubs } from '../../../hooks/fetch-clubs';
+import { useFetchClubMember } from '../../../hooks/fetch-club-member';
 import { Button } from '../../Button';
 import './club-details.css';
+import {useAuth} from '../../../hooks/useAuth';
 
 
 
@@ -12,7 +14,16 @@ function ClubDetails() {
 
     const { id } = useParams();
 
+    const [clubId, setClubId] = useState(id);
+    const { authData } = useAuth();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isMember, setIsMember] = useState(false);
+
+    console.log(clubId);
+    console.log(authData.user.id);
+
     const [data, loading, error] = useFetchClubs(id);
+    const[memberData, loading2, error2] = useFetchClubMember(clubId,authData.user.id);
     const [club, setClub] = useState(null);
 
     const [name, setName] = useState('');
@@ -31,12 +42,21 @@ function ClubDetails() {
         setName(data.name);
         localStorage.setItem('clubId', id);
         }
-    }, [data])
+        if(memberData&& memberData.length > 0){
+            setIsAdmin(memberData[0].is_admin);
+            setIsMember(true);
+        }
+        else if(!memberData){
+            setIsMember(false);
+        }
+    }, [data,memberData])
 
     if (error) return <h1>Error</h1>
     if (loading) return <h1>Loading....</h1>
 
     console.log(data);
+    console.log(isAdmin);
+    console.log(isMember);
     
 
     var str = window.location.pathname.substring(1);
@@ -54,9 +74,31 @@ function ClubDetails() {
 
             </div>
 
+            <div>
+                {isMember ?
+                    <>
+                        {isAdmin ?
+                            <>
+                                <h4>You are the admin of this club</h4>
+                            </>
+                            :
+                            <>
+                                <h4>You are a member of this club</h4>
+                            </>
+}
+                    </>
+                    :
+                    <>
+                        <h4>You are not a member of this club</h4>
+                    </>
+
+                }
+            </div>
+
 
             <div className='club-btns'>
-                <Button
+                {isAdmin ?
+                    <Button
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
@@ -64,6 +106,8 @@ function ClubDetails() {
                 >
                     Edit Info
                 </Button>
+                    :
+                    null}
                 <Button
                     className='btns'
                     buttonStyle='btn--outline'
@@ -74,7 +118,8 @@ function ClubDetails() {
                     Members
                 </Button>
 
-                <Button
+                {isAdmin ?
+                    <Button
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
@@ -82,8 +127,11 @@ function ClubDetails() {
                 >
                     Add Member
                 </Button>
+                    :
+                    null}
 
-                <Button
+                {isAdmin ?
+                    <Button
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
@@ -91,6 +139,8 @@ function ClubDetails() {
                 >
                     Approved Quiz
                 </Button>
+                    :
+                    null}
                 <Button
                     className='btns'
                     buttonStyle='btn--outline'
@@ -99,7 +149,8 @@ function ClubDetails() {
                 >
                     Events
                 </Button>
-                <Button
+                {isMember ?
+                    <Button
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
@@ -107,6 +158,8 @@ function ClubDetails() {
                 >
                     Host Event
                 </Button>
+                    :
+                    null}
             </div>
             <hr/>
             <hr/>

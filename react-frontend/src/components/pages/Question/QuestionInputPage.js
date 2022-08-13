@@ -75,6 +75,7 @@ export default function QuastionInputPage({nav_path}) {
     if (uploaded) {
       NotificationManager.success("Question added successfully");
       navigate('/');
+      
     }
     else {
       NotificationManager.error("Error adding question");
