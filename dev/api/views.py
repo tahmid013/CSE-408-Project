@@ -63,3 +63,8 @@ class CustomObtainAuthToken(ObtainAuthToken):
         user = User.objects.get(id = token.user_id)
         userSerializer = UserSerializer(user, many = False)
         return Response({'token':token.key, 'user': userSerializer.data }) 
+class ClubUserViewset(viewsets.ModelViewSet):
+    queryset  = Event.objects.all()
+    serializer_class = ClubUserSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['club_id', 'usesr_id']

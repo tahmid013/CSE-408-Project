@@ -1,88 +1,31 @@
-video {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: -1;
+*{
+  color: #114084;
 }
+h2,h4 ,.club-name,.ins-name{
+  margin-left: 5%;
+}
+.club-name{
+width: 9%;
+border: 3px solid #114084;
+}
+.ins-name{
+  width: 5%;
+  border: 3px solid #114084;
+  }
 
-.club-int-container {
-    /* background: url('imgss/cat-1.png') center center/cover
-    no-repeat;  */
-    color: #114084;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0,2);
-    object-fit: contain;
+h3{
+  text-align: center;
 }
- .club__int__pic-wrap {
-    position: relative;
-    width: 100%;
-    padding-top: 67%;
-    overflow: hidden;
-  }
+p{
   
-  .fade-img {
-    animation-name: fade-img;
-    animation-duration: 2s;
-  }
-  
-  .club__int__pic-wrap::after {
-    content: attr(data-category);
-    position: absolute;
-    bottom: 0;
-    margin-left: 10px;
-    padding: 6px 8px;
-    max-width: calc((100%) - 60px);
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    background-color: #1f98f4;
-    box-sizing: border-box;
-  }
-  
-  .club__int__img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    transition: all 0.2s linear;
-  }
-  
-  .club__int__img:hover {
-    transform: scale(1.1);
-  }
- 
-.club-int-container > h3 {
-    color: #114084;
-    font-size: 100px;
-    margin-top: -100px;
-}
-
-.club-int-container > p {
-    margin-top: 8px;
-    color: #114084;
-    font-size: 32px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
-     'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
 }
 .club-btns {
-   
+   margin-left: 20%;
     align-items: flex-start;
     margin-top: 32px;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto ;
     grid-gap: 10px
 
   }
@@ -97,33 +40,4 @@ video {
     justify-content: left;
   }
   
-  .fa-play-circle {
-    margin-left: 4px;
-  }
   
-  @media screen and (max-width: 960px) {
-    .club-int-container > h1 {
-      font-size: 70px;
-      margin-top: -150px;
-    }
-  }
-  
-  @media screen and (max-width: 768px) {
-    .club-int-container > h1 {
-      font-size: 50px;
-      margin-top: -100px;
-    }
-  
-    .club-int-container > p {
-      font-size: 30px;
-    }
-  
-    .btn-mobile {
-      display: block;
-      text-decoration: none;
-    }
-  
-    .btn {
-      width: 100%;
-    }
-  }

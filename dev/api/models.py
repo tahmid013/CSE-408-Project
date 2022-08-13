@@ -31,7 +31,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User , related_name= 'profile', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=Upload_path_handler, blank= True)
     #club = models.ForeignKey(Club, related_name= 'club', on_delete=models.CASCADE, null=True, blank=True)
-    club = models.ManyToManyField(Club, related_name='club',null=True,blank=True)
+    
     is_club_admin = models.BooleanField(default=False)
     bio = models.TextField(max_length=500, blank=True)
 
@@ -56,6 +56,7 @@ class Category(models.Model):
         return self.name
     class Meta:
         unique_together  =(('name','about'))
+
 
 
 class Question(models.Model):
@@ -114,6 +115,13 @@ class Event(models.Model):
 
     class Meta:
         unique_together  =(('name', 'created_by'))
+
+    
+class ClubUser(models.Model):
+    club_id = models.CharField(max_length=32, null=True, unique= False)
+    user_id = models.CharField(max_length=256, null=True)
+    class Meta:
+        unique_together  =(('club_id', 'user_id'))
 
 
 

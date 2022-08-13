@@ -20,14 +20,9 @@ class OptionAdmin(admin.ModelAdmin):
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     fields = (  'user', 'image', 'is_club_admin', 'bio')
-    list_display = ('id', 'user', 'image', 'is_club_admin','bio','get_clubs')
+    list_display = ('id', 'user', 'image', 'is_club_admin','bio')
 
-    def get_clubs(self,obj):
-        if obj.club.all():
-            return list(obj.club.all().values_list('name', flat=True))
-        else:
-            return 'NA'
-
+   
 
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
@@ -49,3 +44,7 @@ class EventAdmin(admin.ModelAdmin):
     fields = ('name','about','image','club','quiz','created_by','created_at')
     list_display = ('id','name','about','image','club','quiz','created_by','created_at')
 
+@admin.register(ClubUser)
+class UserProfileAdmin(admin.ModelAdmin):
+    fields = (  'user_id', 'club_id')
+    list_display = ('id', 'user_id', 'club_id')

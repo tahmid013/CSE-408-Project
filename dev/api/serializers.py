@@ -8,14 +8,14 @@ from rest_framework.authtoken.models import Token
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('id', 'image','club', 'is_club_admin', 'bio')
+        fields = ('id', 'image', 'is_club_admin', 'bio')
 
 class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer()
     class Meta:
         model = User 
         fields = ('id', 'username' ,'email','password','profile')
-        extra_kwargs = {'password': {'write_only': True, 'required': False},'club': {'required': False},'username': {'required': False} }
+        extra_kwargs = {'password': {'write_only': True, 'required': False},'username': {'required': False} }
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile')
@@ -30,11 +30,11 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class ClubSerializer(serializers.ModelSerializer   ):
-    user = UserSerializer(many = True,read_only=True)
+    
     class Meta:
         model = Club
-        fields = ('id', 'name', 'about', 'institute','user')
-        extra_kwargs = {'user': {'required': False}}
+        fields = ('id', 'name', 'about', 'institute')
+        
 
 
 class QuestionSerializer(serializers.ModelSerializer   ):
@@ -60,3 +60,7 @@ class EventSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = Event
         fields = ('id', 'name', 'about', 'image', 'club', 'quiz', 'created_by', 'created_at')
+class ClubUserSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = ClubUser
+        fields = ('id', '', 'club_id', 'user_id')

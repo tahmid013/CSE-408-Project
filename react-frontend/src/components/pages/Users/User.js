@@ -55,7 +55,7 @@ export default function User() {
             <h4>Normal User</h4>
           </>
        }
-       {authData.user.profile.club ? <h4>{club.name}</h4> : <h4>No Club</h4>}
+       {authData && authData.user && authData.user.profile && authData.user.profile.club && authData.user.profile.club.name ? <h4>{club.name}</h4> : <h4>No Club</h4>}
       <Button onClick={() => {}}>Edit Profile</Button>
       <br/>
        <p>{authData.user.profile.bio}</p>
