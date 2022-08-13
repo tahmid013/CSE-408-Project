@@ -161,7 +161,11 @@ export default function SinglePlayer() {
             console.log(cur_ques_count);
         }
         else {
-            navigate("/result", { state: { searchResult: cur_point } });
+            console.log("Navigating to result-> ");
+            console.log(cur_point);
+            localStorage.setItem('point',cur_point);
+            navigate('/result' );
+            setStatus(STATUS.STOPPED)
         }
 
 

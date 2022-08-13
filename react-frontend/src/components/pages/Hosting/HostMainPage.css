@@ -6,3 +6,8 @@ p{
     color: black;
     width: 50%;
 }
+.type-cont{
+    display: grid;
+    grid-template-columns: auto auto ;
+    grid-gap: 10px
+}

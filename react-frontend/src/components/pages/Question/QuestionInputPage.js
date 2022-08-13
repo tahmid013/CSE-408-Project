@@ -13,7 +13,9 @@ import { AddOptions, AddQuestion, getCategories, getOptions } from '../../../ser
 import { useGlobalContext } from '../../../context';
 
 
-export default function QuastionInputPage() {
+export default function QuestionInputPage({
+  nav_path
+}){
   const [ques_type, setQues_type] = useState('');
   const [category, setCategory] = useState('');
   const [question, setQuestion] = useState('');
@@ -74,7 +76,9 @@ export default function QuastionInputPage() {
     );
     if (uploaded) {
       NotificationManager.success("Question added successfully");
-      navigate('/');
+      localStorage.setItem('ques_set_id', uploaded.id);
+      
+      navigate(`${nav_path}/`);
     }
     else {
       NotificationManager.error("Error adding question");

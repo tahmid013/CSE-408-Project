@@ -66,7 +66,8 @@ function QuizDetails() {
                         <div className='eachClubBox'>
                             <div className="quiz">
                                 <div className='left-cont'>
-                                    <h1 className=''>{category.id}</h1>
+                                
+                                    <img src={window.location.origin + "/images/category/cat_"+`${category.id}`+".png"} alt= "Quiz Category" className="cards__item__IMG"/>
                                     <h2 className=''>{category.name}</h2>
                                     <p className='desc-quiz'> {category.about} </p>
                                     <p className="title-quiz">Football Bloody Hell - Sir Alex Farguson</p>
