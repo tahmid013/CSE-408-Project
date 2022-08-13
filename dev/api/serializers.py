@@ -63,4 +63,4 @@ class EventSerializer(serializers.ModelSerializer   ):
 class ClubUserSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = ClubUser
-        fields = ('id', '', 'club_id', 'user_id')
+        fields = ('id', 'club_id', 'user_id','is_admin','designation')

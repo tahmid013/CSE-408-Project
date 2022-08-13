@@ -5,10 +5,12 @@ from django.shortcuts import render
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets,filters
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from .models import *
 from .serializers import *
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 # Create your views here.
 class UserProfileViewset(viewsets.ModelViewSet):
@@ -64,7 +66,8 @@ class CustomObtainAuthToken(ObtainAuthToken):
         userSerializer = UserSerializer(user, many = False)
         return Response({'token':token.key, 'user': userSerializer.data }) 
 class ClubUserViewset(viewsets.ModelViewSet):
-    queryset  = Event.objects.all()
+    queryset  = ClubUser.objects.all()
     serializer_class = ClubUserSerializer
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ['club_id', 'usesr_id']
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['club_id', 'user_id']
+    filterset_fields = ['club_id', 'user_id']

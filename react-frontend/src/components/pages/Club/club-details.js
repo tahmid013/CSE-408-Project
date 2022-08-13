@@ -19,6 +19,10 @@ function ClubDetails() {
     const [about, setAbout] = useState('');
     const [institute, setInstitute] = useState('');
 
+    const sendClubId = () => {
+        localStorage.setItem('clubId', id);
+    }
+
     useEffect(() => {
         setClub(data);
         if(data){
@@ -63,9 +67,19 @@ function ClubDetails() {
                     className='btns'
                     buttonStyle='btn--outline'
                     buttonSize='btn--large'
-                    path_name='members'
+                    path_name={`${str}/members`}
+                    onClick = {sendClubId}
                 >
                     Members
+                </Button>
+
+                <Button
+                    className='btns'
+                    buttonStyle='btn--outline'
+                    buttonSize='btn--large'
+                    path_name='add_member'
+                >
+                    Add Member
                 </Button>
 
                 <Button
