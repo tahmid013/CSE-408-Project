@@ -7,7 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { getClubMembersByClubId } from "../../../services/club-services";
+import {
+  getClubMembersByClubId,
+  getUser,
+} from "../../../services/club-services";
+import { useInRouterContext } from "react-router-dom";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170, align: "center" },
@@ -34,19 +38,18 @@ const columns = [
   },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(name, designation, expertise, socials) {
+  return { name, designation, expertise, socials };
 }
 
-const rows = [
-];
+let rows = [];
 
 export default function ClubMembers() {
   const [members, setMembers] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const [clubId, setClubId] = React.useState('');
-
+  const [clubId, setClubId] = React.useState("");
+  const [userList, setUserList] = React.useState([]);
+  const [listArr, setListArr] = React.useState([]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -63,26 +66,93 @@ export default function ClubMembers() {
   React.useEffect(() => {
     const getData = async () => {
       setLoading(true);
-      setClubId(localStorage.getItem('clubId'));
-      await getClubMembersByClubId(clubId).then(data => {
-        setMembers(data);
-    })
+      await getClubMembersByClubId(localStorage.getItem("clubId")).then(
+        (data) => {
+          setMembers(data);
+        }
+      );
+    };
+    getData().catch(console.error);
+  }, []);
+
+  React.useEffect(() => {
+    const getData = async () => {
+      const userList = await Promise.all(
+        members.map(async (member) => {
+            const user = await getUser(member.user_id);
+            console.log(user);
+            return {
+              id: user.id,
+              name: user.username,
+            };
+          })
+      );
+      setUserList(userList);
       
-  }
-  getData().catch(console.error);
-  },[clubId]);
+    };
+    getData().catch(console.error);
+  }, [members]);
 
-  for (let i = 0; i < members.length; i++) {
-    rows.push(createData(members[i].user_id, members[i].designation, "Hello", "Hello"));
-  }
+  //setArray(oldArray => [newValue,...oldArray] );
 
+    React.useEffect(() => {
+        console.log(userList);
+        rows = [];
+        for (let i = 0; i < members.length; i++) {
+            console.log(userList[i]);
+            rows.push(
+              createData(userList[i].name, members[i].designation, "Hello", "Hello")
+            );
+            setListArr(listArr => [createData(userList[i].name, members[i].designation, "Hello", "Hello"),...listArr]);
+          } 
+          console.log(rows);
+          setLoading(false);
+    } , [userList]);
 
-  console.log(members);
+    React.useEffect(() => {
+        console.log(listArr);
+    } , [listArr]);
+
+  //   React.useEffect(() => {
+  //     const getData = async () => {
+  //       const userList = members.map(member => {
+  //         const user = getUser(member.user_id);
+  //         return {
+  //             id: useInRouterContext.id,
+  //             name: user.name,
+  //         }
+  //       })
+  //     })
+
+  //   getData().catch(console.error);
+  //   },[members]);
+
   
 
+  console.log(members);
+
   return (
+    
     <>
       <h3>Club Members</h3>
+      {/* <table>
+        <tr>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Expertise</th>
+            <th>Socials</th>
+        </tr>
+        {rows.map((row) => (
+            <tr>
+                <td>{row.name}</td>
+                <td>{row.designation}</td>
+                <td>{row.expertise}</td>
+                <td>{row.socials}</td>
+            </tr>
+        ))}
+
+      </table> */}
+     
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -101,7 +171,6 @@ export default function ClubMembers() {
             </TableHead>
             <TableBody>
               {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
                     <TableRow
