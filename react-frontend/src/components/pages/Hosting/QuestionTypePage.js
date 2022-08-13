@@ -14,6 +14,8 @@ import QuestionInputPage from '../Question/QuestionInputPage';
 function QuestionTypePage() {
 
 
+    var str = window.location.pathname.substring(1);
+
     const [club, setClub] = useState(null);
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -33,6 +35,7 @@ function QuestionTypePage() {
             await getCategories().then(data => {
                 setCats(data);
                 setLoading(false);
+                localStorage.setItem('nav-path', str);
             })
         }
         getData();
@@ -72,21 +75,16 @@ function QuestionTypePage() {
         Clicked(true);
         //Inputpage = <QuestionsInputPage/>;
     }
-    const [ques_set_id,SetQues_Id] = useState(-1);
     const addQues = () => {
-
-
-        SetQues_Id(localStorage.getItem('ques_set_id'));
-
         setType('');
         Clicked(false);
+        localStorage.setItem('nav-path', "");    
         //Inputpage = <QuestionsInputPage/>;
     }
 
     const [btn_clicked, Clicked] = useState(false);
-    
-    var str = window.location.pathname.substring(1);
 
+    
 
     return (
         <>
@@ -100,20 +98,29 @@ function QuestionTypePage() {
             <div className="login">
                 <div className="type-cont">
                     {!btn_clicked ? <>
-                        <div>{ques_set_id}</div>
-                        <button onClick={handlerSubmit_MCQ}>MCQ</button>
-                        <button onClick={handlerSubmit_Written}>Written</button>
-                        <button onClick={handlerSubmit_Fill}>Fill Blanks</button>
-
-                    </>
+                        <div>{localStorage.getItem('ques_set_id')}</div>
+                            
+                            <button onClick={handlerSubmit_MCQ}>MCQ</button>
+                            <button onClick={handlerSubmit_Written}>Written</button>
+                            <button onClick={handlerSubmit_Fill}>Fill Blanks</button>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <button onClick={addQues}>Finish</button>
+                        </>
                         :
                         <>
-                            
+
                             <div>
                                 {(ques_type_state == "mcq") ?
                                     <>
-                                        <QuestionInputPage nav_path = "" />
-                                        <button onClick={addQues}>Finish</button>
+                                        <QuestionInputPage nav_path={`${str}`} />
+                                        
                                     </>
                                     :
                                     <></>
@@ -125,10 +132,10 @@ function QuestionTypePage() {
                     }
 
 
-                </div>
+                    </div>
             </div>
-        </>
-    );
+            </>
+            );
 }
 
-export default QuestionTypePage;
+            export default QuestionTypePage;

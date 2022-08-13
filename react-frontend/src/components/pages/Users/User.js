@@ -59,7 +59,7 @@ export default function User() {
       <Button onClick={() => {}}>Edit Profile</Button>
       <br/>
        <p>{authData.user.profile.bio}</p>
-      {authData.user.profile.club ?
+      
         
         <div className='add-btns'>
         
@@ -74,8 +74,7 @@ export default function User() {
         }
         
       </div>
-      :
-      <></>}
+      
      
     </div>
   );

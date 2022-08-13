@@ -11,7 +11,7 @@ const STATUS = {
     STOPPED: 'Stopped',
 }
 
-const INITIAL_COUNT = 10
+var INITIAL_COUNT = 10;
 
 function useInterval(callback, delay) {
     const savedCallback = useRef()
@@ -123,6 +123,7 @@ export default function SinglePlayer() {
                 setQuesList(data);
                 setPoint(0);
                 setTotalQuesCount(data.length);
+                setSecondsRemaining(data.length*2);
                 setQuesCount(1);
                 setLoading(false);
 
@@ -152,18 +153,23 @@ export default function SinglePlayer() {
     const optClickChange = param => e => {
 
         if (ques_list[cur_ques_count - 1].answer == param) {
+            console.log("current point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
             setPoint(cur_point + ques_list[cur_ques_count - 1].point);
         }
 
         if (cur_ques_count < total_ques_count) {
-            console.log(cur_ques_count);
+            console.log("current ques count : " + cur_ques_count);
             setQuesCount(cur_ques_count + 1);
             console.log(cur_ques_count);
         }
-        else {
+        else{
             console.log("Navigating to result-> ");
-            console.log(cur_point);
-            localStorage.setItem('point',cur_point);
+            var temp_point = cur_point;
+            if (ques_list[cur_ques_count - 1].answer == param) {
+                temp_point = temp_point + ques_list[cur_ques_count - 1].point;
+            }
+            console.log("Final point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
+            localStorage.setItem('point',temp_point);
             navigate('/result' );
             setStatus(STATUS.STOPPED)
         }

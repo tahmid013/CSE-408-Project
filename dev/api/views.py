@@ -10,7 +10,6 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from .models import *
 from .serializers import *
-from rest_framework_extensions.mixins import NestedViewSetMixin
 
 # Create your views here.
 class UserProfileViewset(viewsets.ModelViewSet):

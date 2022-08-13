@@ -89,3 +89,16 @@ export function getOptions(){
     })
 }
 
+export function AddEvent(heading,short_desc, event_tag,ques_id){
+
+    return fetch('http://127.0.0.1:8000/api/events/',{
+       method: 'POST', 
+       headers: {
+           'Content-Type' : 'application/json'
+       }, 
+       body: JSON.stringify({heading,short_desc, event_tag,ques_id}),
+    }).then(resp => resp.json())
+    .catch(e =>{
+       console.log(e)
+    })
+}

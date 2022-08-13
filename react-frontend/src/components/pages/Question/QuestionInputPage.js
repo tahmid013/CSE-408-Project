@@ -13,9 +13,7 @@ import { AddOptions, AddQuestion, getCategories, getOptions } from '../../../ser
 import { useGlobalContext } from '../../../context';
 
 
-export default function QuestionInputPage({
-  nav_path
-}){
+export default function QuastionInputPage({nav_path}) {
   const [ques_type, setQues_type] = useState('');
   const [category, setCategory] = useState('');
   const [question, setQuestion] = useState('');
@@ -77,8 +75,8 @@ export default function QuestionInputPage({
     if (uploaded) {
       NotificationManager.success("Question added successfully");
       localStorage.setItem('ques_set_id', uploaded.id);
-      
-      navigate(`${nav_path}/`);
+      console.log(nav_path);
+      navigate(`/${localStorage.getItem('nav-item')}`);
     }
     else {
       NotificationManager.error("Error adding question");
@@ -89,7 +87,7 @@ export default function QuestionInputPage({
   const [answer_, setAnswer_] = useState(false);
   const toggleAnswer = () => setAnswer_(!answer_);
 
-  const ques_type_list = ['MCQ', 'Written', 'Fill In the Blanks']
+  const [ques_type_list, setques_type_list] = useState(['MCQ', 'Written', 'Fill In the Blanks']);
 
   const [cat_s, setCats] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -99,6 +97,7 @@ export default function QuestionInputPage({
       setLoading(true);
       await getCategories().then(data => {
         setCats(data);
+        setques_type_list(['MCQ', 'Written', 'Fill In the Blanks']);
         setLoading(false);
       })
     }
@@ -107,28 +106,20 @@ export default function QuestionInputPage({
 
 
   const getInitialState = () => {
-    const value = "sports";
+    const value = "";
     return value;
   };
 
   const [value, setValue] = useState(getInitialState);
 
   const handleChangeBtn = (e) => {
+    
     setValue(e.target.value);
     setCategory(value);
+    setQues_type(value);
+    console.log(value);
   };
-
-  const getInitialStateSt = () => {
-    const value_st = "MCQ";
-    return value_st;
-  };
-
-  const [value_st, setValuest] = useState(getInitialStateSt);
-
-  const handleChangeBtnst = (e) => {
-    setValue(e.target.value_st);
-    setQues_type(value_st);
-  };
+  
 
 
   return (
@@ -140,7 +131,7 @@ export default function QuestionInputPage({
         <form >
          
         <div>
-            <select value={value_st} onChange={handleChangeBtnst}>
+            <select value={value} onChange={handleChangeBtn}>
                 {ques_type_list && ques_type_list.map(l_s => {
                      return <option value={`${l_s}`}>{l_s}</option>
                 })   
