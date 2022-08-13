@@ -6,6 +6,7 @@ const AppProvider = ({ children }) => {
   //#region 
   const [clubSearchTerm, setClubSearchTerm] = useState('');
   const [optionSearchTerm, setOptionSearchTerm] = useState('');
+  const [memberSearchTerm, setMemberSearchTerm] = useState('');
 
   return <AppContext.Provider value={
     {
@@ -15,6 +16,9 @@ const AppProvider = ({ children }) => {
 
       optionSearchTerm,
       setOptionSearchTerm,
+
+      memberSearchTerm,
+      setMemberSearchTerm,
     
     }
   }>{children}</AppContext.Provider>

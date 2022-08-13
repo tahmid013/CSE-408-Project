@@ -75,7 +75,7 @@ export default function QuastionInputPage({nav_path}) {
     if (uploaded) {
       NotificationManager.success("Question added successfully");
       localStorage.setItem('ques_set_id', uploaded.id);
-      console.log(nav_path);
+      console.log("nav path "+ nav_path);
       navigate(`/${localStorage.getItem('nav-item')}`);
     }
     else {
