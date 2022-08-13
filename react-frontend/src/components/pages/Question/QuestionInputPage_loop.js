@@ -9,11 +9,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LockIcon from '@mui/icons-material/Lock';
-import { AddOptions, AddQuestion, getCategories, getOptions } from '../../../services/quiz-services';
+import { AddOptions, AddQuestion, AddQuiz, AddQuizQuestion, getCategories, getOptions } from '../../../services/quiz-services';
 import { useGlobalContext } from '../../../context';
 
 
-export default function QuastionInputPage({nav_path}) {
+export default function QuastionInputPageLoop({nav_path}) {
   const [ques_type, setQues_type] = useState('');
   const [category, setCategory] = useState('');
   const [question, setQuestion] = useState('');
@@ -74,7 +74,18 @@ export default function QuastionInputPage({nav_path}) {
     );
     if (uploaded) {
       NotificationManager.success("Question added successfully");
-      navigate('/');
+      localStorage.setItem('ques_set_id', uploaded.id);
+      console.log(nav_path);
+
+      console.log(localStorage.getItem('clubId'));      
+      const quiz_added = await AddQuizQuestion(
+        localStorage.getItem('quiz-info'),uploaded.id
+        
+      );
+
+
+
+      navigate(`/club/${localStorage.getItem('clubId')}/host-event/new-page`);
     }
     else {
       NotificationManager.error("Error adding question");
@@ -116,6 +127,7 @@ export default function QuastionInputPage({nav_path}) {
     setCategory(value);
     setQues_type(value);
     console.log(value);
+    
   };
   
 

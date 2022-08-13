@@ -31,6 +31,7 @@ import ClubDetails from '../components/pages/Club/club-details';
 import ClubMembers from '../components/pages/Club/ClubMembers';
 import HostMainPage from '../components/pages/Hosting/HostMainPage';
 import QuestionTypePage from '../components/pages/Hosting/QuestionTypePage';
+import QuestionInputPageLoop from '../components/pages/Question/QuestionInputPage_loop';
 
 const App = () =>  {
 
@@ -69,7 +70,8 @@ const App = () =>  {
           <Route exact path = "/quizmainpage/single"  element = {<SinglePlayer/>} />
           <Route exact path = "/quizmainpage/multi"  element = {<MultiPlayer/>} />
 
-          <Route exact path = "/add_question" element={<QuestionInputPage  nav_path = "" />} />
+          <Route exact path = "/add_question" element={<QuestionInputPage/>} />
+          <Route exact path = "/add_question" element={<QuestionInputPageLoop/>} />
           
           <Route exact path = "/type_mcq/quizcategory/:categoryID" element = {<QuizDetails/>}/>  
           <Route exact path = "/type_written/quizcategory/:category" element = {<QuizDetails/>}/>  

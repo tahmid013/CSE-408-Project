@@ -64,3 +64,14 @@ class ClubUserSerializer(serializers.ModelSerializer   ):
     class Meta:
         model = ClubUser
         fields = ('id', 'club_id', 'user_id','is_admin','designation')
+class QuizSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = Quiz
+        fields = ('id', 'name', 'about','club', 'created_by','created_at','updated_at')
+class QuizQuestionSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = QuizQuestion
+        fields = ('id', 'quiz_id', 'question_id')
+
+
+                

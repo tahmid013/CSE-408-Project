@@ -89,14 +89,28 @@ export function getOptions(){
     })
 }
 
-export function AddEvent(heading,short_desc, event_tag,ques_id){
+export function AddQuiz(name,about, club,created_by){
 
-    return fetch('http://127.0.0.1:8000/api/events/',{
+    return fetch('http://127.0.0.1:8000/api/quiz/',{
        method: 'POST', 
        headers: {
            'Content-Type' : 'application/json'
        }, 
-       body: JSON.stringify({heading,short_desc, event_tag,ques_id}),
+       body: JSON.stringify({name,about, club,created_by}),
+    }).then(resp => resp.json())
+    .catch(e =>{
+       console.log(e)
+    })
+}
+
+export function AddQuizQuestion(quiz_id,question_id){
+
+    return fetch('http://127.0.0.1:8000/api/quiz_question/',{
+       method: 'POST', 
+       headers: {
+           'Content-Type' : 'application/json'
+       }, 
+       body: JSON.stringify({quiz_id,question_id}),
     }).then(resp => resp.json())
     .catch(e =>{
        console.log(e)

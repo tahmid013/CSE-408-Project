@@ -20,7 +20,7 @@ function ClubDetails() {
     const [institute, setInstitute] = useState('');
 
     const sendClubId = () => {
-        localStorage.setItem('clubId', id);
+        
     }
 
     useEffect(() => {
@@ -29,6 +29,7 @@ function ClubDetails() {
         setAbout(data.about);
         setInstitute(data.institute);
         setName(data.name);
+        localStorage.setItem('clubId', id);
         }
     }, [data])
 

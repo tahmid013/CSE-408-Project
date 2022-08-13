@@ -8,7 +8,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import './HostMainPage.css';
 import { getCategories } from '../../../services/quiz-services';
-
+import { AddQuiz } from '../../../services/quiz-services';
+import { useAuth } from '../../../hooks/useAuth';
 
 function HostMainPage() {
 
@@ -18,6 +19,7 @@ function HostMainPage() {
     const [button, setButton] = useState(true);
     const [heading, setHeading] = useState('');
     const [desc, setDesc] = useState('');
+    const { authData, setAuth } = useAuth();
 
     
 
@@ -51,8 +53,16 @@ function HostMainPage() {
         setValuest(e.target.value_st);
     };
 
-    const handlerSubmit = () => {
+    const handlerSubmit = async e => {
 
+        const quiz_added =await AddQuiz(
+            heading,desc,localStorage.getItem('clubId'),authData.user.id
+            
+          );
+        
+        console.log("Heading "+heading);
+        
+        localStorage.setItem('quiz-info', quiz_added.id);
     }
 
     var str = window.location.pathname.substring(1);
@@ -69,7 +79,7 @@ function HostMainPage() {
                 <form onSubmit={handlerSubmit}>
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
 
-                        <p>Heading</p>
+                        <p>Name</p>
                         <TextField className='txt' id="input-with-sx" label="" variant="filled"
                             onChange={e => setHeading(e.target.value)}
                         />
@@ -77,7 +87,7 @@ function HostMainPage() {
 
 
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <p>Short Description</p>
+                        <p>About</p>
                         <TextField className='txt' id="input-with-sx" label="" variant="filled"
                             onChange={e => setDesc(e.target.value)}
                         />

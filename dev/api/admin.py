@@ -26,7 +26,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
-    fields = ('name','about','questions','club','created_by','created_at','updated_at')
+    fields = ('name','about','club','created_by','created_at','updated_at')
     list_display = ('id','name','about','club','created_by','created_at','updated_at')
 
 @admin.register(Category)
@@ -44,7 +44,7 @@ class EventAdmin(admin.ModelAdmin):
     fields = ('name','about','image','club','quiz','created_by','created_at')
     list_display = ('id','name','about','image','club','quiz','created_by','created_at')
 
-@admin.register(ClubUser)
-class UserProfileAdmin(admin.ModelAdmin):
-    fields = (  'user_id', 'club_id','is_admin','designation')
-    list_display = ('id', 'user_id', 'club_id','is_admin','designation')
+@admin.register(QuizQuestion)
+class QuizQuestionAdmin(admin.ModelAdmin):
+    fields = ('quiz_id','question_id')
+    list_display = ('id','quiz_id','question_id')

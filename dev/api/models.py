@@ -76,8 +76,8 @@ class Question(models.Model):
 
 class Quiz(models.Model):
     name = models.CharField(max_length=32, null=False, unique= False)
-    about = models.CharField(max_length=256, null=False)
-    questions = models.ManyToManyField(Question, related_name='quiz')
+    about = models.CharField(max_length=256, null=False, unique= False)
+    #questions = models.ManyToManyField(Question, related_name='quiz')
     club = models.ForeignKey(Club, on_delete=models.CASCADE,null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -86,8 +86,7 @@ class Quiz(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        unique_together  =(('name', 'created_by'))
+    
 
 
 class QuizTaken(models.Model):
@@ -126,6 +125,10 @@ class ClubUser(models.Model):
     class Meta:
         unique_together  =(('club_id', 'user_id'))
 
-
+class QuizQuestion(models.Model):
+    quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE,null=False, blank=True)
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE,null=False, blank=True)
+    class Meta:
+        unique_together  =(('quiz_id', 'question_id'))
 
 

@@ -8,7 +8,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import './HostMainPage.css';
 import { getCategories } from '../../../services/quiz-services';
-import QuestionInputPage from '../Question/QuestionInputPage';
+import QuestionInputPageLoop from '../Question/QuestionInputPage_loop';
 
 
 function QuestionTypePage() {
@@ -31,12 +31,8 @@ function QuestionTypePage() {
 
     useEffect(() => {
         const getData = async () => {
-            setLoading(true);
-            await getCategories().then(data => {
-                setCats(data);
-                setLoading(false);
+            setLoading(true);   
                 localStorage.setItem('nav-path', str);
-            })
         }
         getData();
     }, [])
@@ -62,7 +58,7 @@ function QuestionTypePage() {
     const handlerSubmit_MCQ = () => {
         Clicked(true);
         setType('mcq');
-        Inputpage = <QuestionInputPage />;
+        Inputpage = <QuestionInputPageLoop />;
     }
     const handlerSubmit_Written = () => {
         setType('written');
@@ -119,7 +115,7 @@ function QuestionTypePage() {
                             <div>
                                 {(ques_type_state == "mcq") ?
                                     <>
-                                        <QuestionInputPage nav_path={`${str}`} />
+                                        <QuestionInputPageLoop nav_path={`${str}`} />
                                         
                                     </>
                                     :

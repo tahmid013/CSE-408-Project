@@ -20,6 +20,8 @@ router.register(r'category', views.CategoryViewset)
 router.register(r'quiztaken', views.QuizTakenViewset)
 router.register(r'events', views.EventViewset)
 router.register(r'clubuser', views.ClubUserViewset)
+router.register(r'quiz', views.QuizViewset)
+router.register(r'quiz_question', views.QuizQuestionViewset)
 
 
 urlpatterns = [
