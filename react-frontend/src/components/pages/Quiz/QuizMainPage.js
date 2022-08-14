@@ -26,7 +26,7 @@ export default function QuizMainPage() {
                         </div>
                         <div>
 
-                            <Button path_name="quizmainpage" className='btns' buttonStyle='btn--fit' buttonSize='btn--large'>
+                            <Button path_name="quiz-list" className='btns' buttonStyle='btn--fit' buttonSize='btn--large'>
                                 Event
                             </Button>
                         </div>

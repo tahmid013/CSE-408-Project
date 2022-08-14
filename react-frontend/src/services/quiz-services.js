@@ -23,6 +23,14 @@ export function getCategories(){
         console.log(e)
     })
 }
+export function getQuizzes(){
+    return fetch(`http://127.0.0.1:8000/api/quiz/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
 export function getCategory(id){
     return fetch(`http://127.0.0.1:8000/api/category/${id}/`)
     .then(data => {
@@ -115,4 +123,14 @@ export function AddQuizQuestion(quiz_id,question_id){
     .catch(e =>{
        console.log(e)
     })
+}
+export function getQuestionsIdOfQuiz(id){
+
+    console.log("Id -> "+ id);
+    return fetch(`http://127.0.0.1:8000/api/quiz_question/?quiz_id_id=${id}/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })    
 }
