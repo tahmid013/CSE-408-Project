@@ -32,6 +32,7 @@ import ClubMembers from '../components/pages/Club/ClubMembers';
 import HostMainPage from '../components/pages/Hosting/HostMainPage';
 import QuestionTypePage from '../components/pages/Hosting/QuestionTypePage';
 import QuestionInputPageLoop from '../components/pages/Question/QuestionInputPage_loop';
+import EditProfile from '../components/pages/Users/EditProfile';
 
 const App = () =>  {
 
@@ -55,6 +56,8 @@ const App = () =>  {
           <Route exact path = "/type_mcq/quizcategory"  element = {<Category/>} />
           <Route exact path = "/type_written/quizcategory"  element = {<Category/>} />
           <Route exact path = "/type_fill/quizcategory"  element = {<Category/>} />
+
+          <Route exact path = "/editprofile" element = {<EditProfile />} />
 
           <Route path = "/demo"  element = {<DemoGuideVideo/>} />
           <Route exact path = "/clubspage"  element = {<ClubsPage/>} />

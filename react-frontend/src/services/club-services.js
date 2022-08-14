@@ -44,6 +44,17 @@ export function getClubMembersByClubId(clubId){
 
 }
 
+export function getClubsFromUserId(userId){
+    return fetch(`http://127.0.0.1:8000/api/clubuser/?user_id=${userId}`)
+    .then(data=>{
+        return data.json();
+
+    }).catch(e=>{
+        console.log(e)
+    })
+
+}
+
 export function getClubMembersByUserId(clubId, userId){
     return fetch(`http://127.0.0.1:8000/api/clubuser/?club_id=${clubId}&user_id=${userId}`)
     .then(data=>{

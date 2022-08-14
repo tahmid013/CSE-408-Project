@@ -1,81 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../../hooks/useAuth';
-import { Button } from '../../Button';
-import { getClub } from '../../../services/club-services';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
+import { Button } from "../../Button";
+import { getClub } from "../../../services/club-services";
+import { auth } from "../../../services/user-services";
+import { useFetchClubNames } from "../../../hooks/fetch-club-names";
 
 export default function User() {
   const { authData } = useAuth();
-  console.log(authData.user);
-  console.log(authData.user.profile.image);
-  console.log(authData.user.profile.club);
+  // console.log(authData.user);
+  // console.log(authData.user.profile.image);
+  // console.log(authData.user.profile.club);
+  // console.log("First name " + authData.user.first_name);
 
-  const [club, setClub] = useState('');
   const [loading, setLoading] = useState(false);
+  const [clubNames, setClubNames] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      await getClub(authData.user.profile.club).then(data => {
-          setClub(data);
-      })
-  }
-  getData().catch(console.error);
-  },[authData.user.profile.club]);
+  const[clubData, loading2, error2] = useFetchClubNames(authData.user.id);
+  console.log(clubData.length);
 
-  console.log(club);
+
+  
 
   return (
-    <div className='user'>
-
+    <div className="user">
       <img
         src={"http://127.0.0.1:8000" + authData.user.profile.image}
-
         alt="avatar"
       />
-      <br/>
-       <h4 className='userName'>{authData.user.username}</h4>
-       {
-        
-          authData.user.profile.club  ?
-          
-          <>
-          {authData.user.profile.is_club_admin ?
-          <>
-          <h4>Admin Member</h4>
-          </>
-          :
-          <>
-          <h4>Club Member</h4>
-          </>
+      <br />
+      <h4 className="userName">{authData.user.username}</h4>
+      <h5 className="userName">{authData.user.first_name} {authData.user.last_name}</h5>
+      
 
-          }
-          </>
-          :
-          <>
-            <h4>Normal User</h4>
-          </>
-       }
-       {authData && authData.user && authData.user.profile && authData.user.profile.club && authData.user.profile.club.name ? <h4>{club.name}</h4> : <h4>No Club</h4>}
-      <Button onClick={() => {}}>Edit Profile</Button>
-      <br/>
-       <p>{authData.user.profile.bio}</p>
-      
-        
-        <div className='add-btns'>
-        
-        
-        {
-          authData.user.profile.is_club_admin ?
-          <Button path_name='add_question' className='btns' buttonStyle='btn--fit' buttonSize='btn--small'>
-          Add Question
-        </Button>
-        :
-        null
+      <br />
+      <p>{authData.user.profile.bio}</p>
+      <div>
+        <h5>Clubs</h5>
+        {clubData.length > 0 ? (
+          <div>
+            {clubData.map((club) => (
+              <div key={club.id}>
+                <h6>{club.name}</h6>
+              </div>))}
+          </div>
+        ) : (
+          <p>No clubs</p>
+        )
         }
-        
       </div>
-      
-     
+
+      <div className="add-btns">
+        <Button
+          path_name="editprofile"
+          className="btns"
+          buttonStyle="btn--fit"
+          buttonSize="btn--small"
+        >
+          Edit Profile
+        </Button>
+        <br/>
+
+        {authData.user.profile.is_club_admin ? (
+          <Button
+            path_name="add_question"
+            className="btns"
+            buttonStyle="btn--fit"
+            buttonSize="btn--small"
+          >
+            Add Question
+          </Button>
+        ) : null}
+      </div>
     </div>
   );
 }
