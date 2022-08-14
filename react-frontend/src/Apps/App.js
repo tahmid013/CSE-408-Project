@@ -33,6 +33,8 @@ import HostMainPage from '../components/pages/Hosting/HostMainPage';
 import QuestionTypePage from '../components/pages/Hosting/QuestionTypePage';
 import QuestionInputPageLoop from '../components/pages/Question/QuestionInputPage_loop';
 import EditProfile from '../components/pages/Users/EditProfile';
+import QuizList from '../components/pages/Event/quizList';
+import SinglePlayerQuizStart from '../components/pages/Event/SinglePlayerQuizStart';
 
 const App = () =>  {
 
@@ -67,6 +69,9 @@ const App = () =>  {
           <Route exact path = "/club/:id/host-event/new-page"  element = {<QuestionTypePage/>} />
 
           <Route exact path = "/add_member"  element = {<AddMember/>} />
+
+          <Route exact path = "/quiz-list"  element = {<QuizList/>} />
+          <Route exact path = "/quiz/:id"  element = {<SinglePlayerQuizStart/>} />
 
           <Route exact path = "/questionspage"  element = {<QuestionsPage/>} />
           <Route exact path = "/club_input_form"  element = {<ClubsInputPage/>} />

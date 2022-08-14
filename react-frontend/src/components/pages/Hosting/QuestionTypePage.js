@@ -9,11 +9,12 @@ import LockIcon from '@mui/icons-material/Lock';
 import './HostMainPage.css';
 import { getCategories } from '../../../services/quiz-services';
 import QuestionInputPageLoop from '../Question/QuestionInputPage_loop';
+import { useNavigate } from 'react-router-dom';
 
 
 function QuestionTypePage() {
 
-
+    const navigate = useNavigate();
     var str = window.location.pathname.substring(1);
 
     const [club, setClub] = useState(null);
@@ -74,6 +75,7 @@ function QuestionTypePage() {
     const addQues = () => {
         setType('');
         Clicked(false);
+        navigate(`/club/${localStorage.getItem('clubId')}/host-event`);
         localStorage.setItem('nav-path', "");    
         //Inputpage = <QuestionsInputPage/>;
     }

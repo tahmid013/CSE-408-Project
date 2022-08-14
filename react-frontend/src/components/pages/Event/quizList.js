@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getQuestions } from '../../../services/quiz-services';
+import { getQuestions, getQuizzes } from '../../../services/quiz-services';
 
 
-function QuestionList() {
+function QuizList() {
 
-    const [questions, setQues] = useState(null);
+    const [quizzes, setQuizzes] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
     useEffect(() => {
         const getData = async () => {
             setLoading(true);
-            await getQuestions().then(data => {
-                setQues(data);
+            await getQuizzes().then(data => {
+                setQuizzes(data);
+
                 setLoading(false);
             })
         }
         getData();
     }, [])
-    const [btnpressed,SetPressed] = useState(false);
-    const  pressed =() =>{
-        SetPressed(true);
-    }   
+    
+
+    
  
     if (error) return <h1>Error</h1>
     if (loading) return <h1>Loading....</h1>
@@ -31,15 +30,13 @@ function QuestionList() {
             <div className='clubsList'>
 
 
-                {questions && questions.map(question => {
-                    return <Link key={question.id} to={`/question/${question.id}`}>
+                {quizzes && quizzes.map(quiz => {
+                    return <Link key={quiz.id} to={`/quiz/${quiz.id}`}>
                         <div className='eachClubBox'>
                             <div className="card">
-                                <p>{question.id}</p>
-                                <h1>{question.question}</h1>
-                                <button onClick={pressed}></button>
-
-                                <p>{question.answer}</p>
+                                <p>{quiz.name}</p>
+                                <h1>{quiz.about}</h1>
+                               
                                 
                             </div>
                         </div>
@@ -55,4 +52,4 @@ function QuestionList() {
     );
 }
 
-export default QuestionList;
+export default QuizList;

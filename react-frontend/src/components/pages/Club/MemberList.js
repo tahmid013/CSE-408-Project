@@ -15,7 +15,7 @@ function MemberList() {
     
     const fetchMembers = async () => {
         setLoading(true);
-            console.log("Printing ......")
+            console.log("Printing ......");
             console.log(memberSearchTerm);
             await getUsers(memberSearchTerm).then(data => {
 
