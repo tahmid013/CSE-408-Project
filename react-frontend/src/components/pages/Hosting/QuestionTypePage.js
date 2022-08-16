@@ -96,7 +96,7 @@ function QuestionTypePage() {
             <div className="login">
                 <div className="type-cont">
                     {!btn_clicked ? <>
-                        <div>{localStorage.getItem('ques_set_id')}</div>
+                        {/* <div>{localStorage.getItem('ques_set_id')}</div> */}
                             
                             <button onClick={handlerSubmit_MCQ}>MCQ</button>
                             <button onClick={handlerSubmit_Written}>Written</button>

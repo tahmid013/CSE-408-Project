@@ -34,8 +34,9 @@ function QuizList() {
                     return <Link key={quiz.id} to={`/quiz/${quiz.id}`}>
                         <div className='eachClubBox'>
                             <div className="card">
-                                <p>{quiz.name}</p>
-                                <h1>{quiz.about}</h1>
+                                <h2>{quiz.name}</h2>
+                                <hr/>
+                                <p>{quiz.about}</p>
                                
                                 
                             </div>

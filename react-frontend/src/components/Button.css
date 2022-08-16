@@ -24,8 +24,8 @@
   transition: all 0.3s ease-out;
 }
 .btn--fit{
-  background-color: burlywood;
-  color: #3466AA;
+  background-color: #114084;
+  color: #ffffff;
   width: 100%;
   padding: 8px 20px;
   border: 1px solid var(--primary);

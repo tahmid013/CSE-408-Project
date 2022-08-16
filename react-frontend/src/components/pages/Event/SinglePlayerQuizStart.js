@@ -141,7 +141,7 @@ export default function SinglePlayerQuizStart() {
             const quesList = await Promise.all(
                 ques_id_list.map(async (q_id) => {
 
-                    
+                    console.log(q_id);
                     const ques = await getQuestion(q_id.question_id);
                     
                     return ques;

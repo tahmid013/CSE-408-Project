@@ -130,7 +130,7 @@ function ClubDetails() {
                     :
                     null}
 
-                {isAdmin ?
+                {/* {isAdmin ?
                     <Button
                     className='btns'
                     buttonStyle='btn--outline'
@@ -148,7 +148,7 @@ function ClubDetails() {
                     path_name='events'
                 >
                     Events
-                </Button>
+                </Button> */}
                 {isMember ?
                     <Button
                     className='btns'

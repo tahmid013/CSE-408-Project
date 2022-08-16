@@ -82,8 +82,8 @@ const App = () =>  {
           <Route exact path = "/add_question" element={<QuestionInputPageLoop/>} />
           
           <Route exact path = "/type_mcq/quizcategory/:categoryID" element = {<QuizDetails/>}/>  
-          <Route exact path = "/type_written/quizcategory/:category" element = {<QuizDetails/>}/>  
-          <Route exact path = "/type_fill/quizcategory/:category" element = {<QuizDetails/>}/>  
+          <Route exact path = "/type_written/quizcategory/:categoryID" element = {<QuizDetails/>}/>  
+          <Route exact path = "/type_fill/quizcategory/:categoryID" element = {<QuizDetails/>}/>  
 
           <Route exact path = "/type_mcq/quizcategory/:category/practice" element = {<Practice/>}/>
           <Route exact path = "/type_written/quizcategory/:category/practice" element = {<Practice/>}/>  

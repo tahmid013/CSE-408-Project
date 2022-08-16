@@ -182,7 +182,7 @@ export default function SinglePlayer() {
     return (
         <div className="content-container">
 
-            <div className="quiz-type-heading"><b>MCQ Single Player</b></div>
+            <div className="quiz-type-heading"><b></b></div>
 
 
 
