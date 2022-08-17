@@ -57,6 +57,9 @@ export default function SinglePlayer() {
                 console.log("Navigating to result-> ");
                 console.log(cur_point);
                 localStorage.setItem('point',cur_point);
+                localStorage.setItem('ques_list', JSON.stringify( ques_list));
+                localStorage.setItem('ques_op_list', JSON.stringify( op_list));
+                localStorage.setItem('ques_choices', JSON.stringify( choices));
                 navigate('/result' );
                 setStatus(STATUS.STOPPED)
             }
@@ -113,8 +116,10 @@ export default function SinglePlayer() {
     const [ques_list, setQuesList] = useState(null);
 
     const [each_option_list, setEachOptionList] = useState(null);
-
+    const [op_list, setOpList] = useState([]);
+    const [choices, setChoices] = useState([]);
     const [id_toFetch, setIdFetch] = useState(1);
+
 
     useLayoutEffect(() => {
         const getData = async () => {
@@ -139,6 +144,7 @@ export default function SinglePlayer() {
             setLoading(true);
             await getOption(ques_list[cur_ques_count - 1].options).then(data => {
                 setEachOptionList(data);
+                setOpList(op_list => [...op_list, data]);
                 setLoading(false);
             })
         }
@@ -151,6 +157,7 @@ export default function SinglePlayer() {
 
 
     const optClickChange = param => e => {
+        choices.push(param);
 
         if (ques_list[cur_ques_count - 1].answer == param) {
             console.log("current point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
@@ -170,6 +177,9 @@ export default function SinglePlayer() {
             }
             console.log("Final point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
             localStorage.setItem('point',temp_point);
+            localStorage.setItem('ques_list', JSON.stringify( ques_list ));
+            localStorage.setItem('ques_op_list', JSON.stringify( op_list));
+            localStorage.setItem('ques_choices', JSON.stringify( choices));
             navigate('/result' );
             setStatus(STATUS.STOPPED)
         }

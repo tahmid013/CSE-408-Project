@@ -12,6 +12,7 @@ export default function AddMember() {
         <>
         Hello
         <SearchForm/>
+        
         <MemberList/>
         </>
     );

@@ -399,3 +399,26 @@ button:hover, a:hover {
   width: 40%;  
   text-align: left;
 }
+
+/*********View Quiz Answer*********/
+.choice-container{
+  width: 40%;
+  display: grid;
+  grid-template-columns: auto auto;
+  
+  
+}
+.my_choice{
+  
+  text-align: center;
+  margin: 5px;
+  color: aquamarine;
+  background-color: cadetblue;
+}
+.correct_choice{
+  margin: 5px;
+  text-align: center;
+
+  color: #114084;
+  background-color:#68f032;
+}

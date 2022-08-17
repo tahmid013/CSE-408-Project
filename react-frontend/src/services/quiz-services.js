@@ -127,10 +127,12 @@ export function AddQuizQuestion(quiz_id,question_id){
 export function getQuestionsIdOfQuiz(id){
 
     console.log("Id -> "+ id);
-    return fetch(`http://127.0.0.1:8000/api/quiz_question/?quiz_id_id=${id}/`)
+    return fetch(`http://127.0.0.1:8000/api/quiz_question/?quiz_id=${id}`)
     .then(data => {
         return data.json();
     }).catch(e => {
-        console.log(e)
+        console.log(e);
+        
     })    
 }
+

@@ -57,6 +57,9 @@ export default function SinglePlayerQuizStart() {
                 console.log("Navigating to result-> ");
                 console.log(cur_point);
                 localStorage.setItem('point', cur_point);
+                localStorage.setItem('ques_list', JSON.stringify( ques_list));
+                localStorage.setItem('ques_op_list', JSON.stringify( op_list));
+                localStorage.setItem('ques_choices', JSON.stringify( choices));
                 navigate('/result');
                 setStatus(STATUS.STOPPED)
             }
@@ -96,7 +99,7 @@ export default function SinglePlayerQuizStart() {
         }, [delay])
     }
 
-    // https://stackoverflow.com/a/2998874/1673761
+    
     const twoDigits = (num) => String(num).padStart(2, '0')
 
 
@@ -113,7 +116,8 @@ export default function SinglePlayerQuizStart() {
     const [ques_list, setQuesList] = useState(null);
     const [ques_id_list, setQuesIdList] = useState(null);
     const [each_option_list, setEachOptionList] = useState(null);
-
+    const [op_list, setOpList] = useState([]);
+    const [choices, setChoices] = useState([]);
     const [id_toFetch, setIdFetch] = useState(1);
 
     useLayoutEffect(() => {
@@ -143,7 +147,7 @@ export default function SinglePlayerQuizStart() {
 
                     console.log(q_id);
                     const ques = await getQuestion(q_id.question_id);
-                    
+
                     return ques;
                 })
             );
@@ -165,7 +169,9 @@ export default function SinglePlayerQuizStart() {
         const getData2 = async () => {
             setLoading(true);
             await getOption(ques_list[cur_ques_count - 1].options).then(data => {
+                
                 setEachOptionList(data);
+                setOpList(op_list => [...op_list, data]);
                 setLoading(false);
             })
         }
@@ -174,10 +180,13 @@ export default function SinglePlayerQuizStart() {
 
     }, [cur_ques_count])
 
-
+    
 
 
     const optClickChange = param => e => {
+
+        //setOpList(choices => [...choices, param]);
+        choices.push(param);
 
         if (ques_list[cur_ques_count - 1].answer == param) {
             console.log("current point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
@@ -188,6 +197,9 @@ export default function SinglePlayerQuizStart() {
             console.log("current ques count : " + cur_ques_count);
             setQuesCount(cur_ques_count + 1);
             console.log(cur_ques_count);
+            
+            
+
         }
         else {
             console.log("Navigating to result-> ");
@@ -195,6 +207,10 @@ export default function SinglePlayerQuizStart() {
             if (ques_list[cur_ques_count - 1].answer == param) {
                 temp_point = temp_point + ques_list[cur_ques_count - 1].point;
             }
+            localStorage.setItem('ques_list', JSON.stringify( ques_list));
+            localStorage.setItem('ques_op_list', JSON.stringify( op_list));
+            localStorage.setItem('ques_choices', JSON.stringify( choices));
+
             console.log("Final point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
             localStorage.setItem('point', temp_point);
             navigate('/result');
