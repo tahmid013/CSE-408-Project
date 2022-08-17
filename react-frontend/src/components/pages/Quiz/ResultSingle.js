@@ -73,7 +73,6 @@ export default function ResultSingle(props) {
     }
     const returnBack = () => {
 
-
         localStorage.removeItem('ques_list');
         localStorage.removeItem('ques_op_list');
         localStorage.removeItem('ques_choices');
