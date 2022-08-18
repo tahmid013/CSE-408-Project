@@ -88,7 +88,7 @@ class Quiz(models.Model):
 
     
 
-
+# here duration needed for quiz need to be considered
 class QuizTaken(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)

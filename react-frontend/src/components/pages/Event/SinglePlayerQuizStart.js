@@ -3,8 +3,9 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import AlarmIcon from '@mui/icons-material/Alarm';
 
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
-import { getCategories, getOption, getQuestion, getQuestions, getQuestionsIdOfQuiz, } from "../../../services/quiz-services";
+import { AddQuizTaken, getCategories, getOption, getQuestion, getQuestions, getQuestionsIdOfQuiz, } from "../../../services/quiz-services";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 
 const STATUS = {
     STARTED: 'Started',
@@ -39,7 +40,7 @@ export default function SinglePlayerQuizStart() {
 
 
     const { id } = useParams();
-
+    const { authData } = useAuth();
     const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT)
     const [status, setStatus] = useState(STATUS.STOPPED)
 
@@ -60,6 +61,10 @@ export default function SinglePlayerQuizStart() {
                 localStorage.setItem('ques_list', JSON.stringify( ques_list));
                 localStorage.setItem('ques_op_list', JSON.stringify( op_list));
                 localStorage.setItem('ques_choices', JSON.stringify( choices));
+                const op_added =  AddQuizTaken(
+                
+                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')),cur_point)
+                  );
                 navigate('/result');
                 setStatus(STATUS.STOPPED)
             }
@@ -210,9 +215,12 @@ export default function SinglePlayerQuizStart() {
             localStorage.setItem('ques_list', JSON.stringify( ques_list));
             localStorage.setItem('ques_op_list', JSON.stringify( op_list));
             localStorage.setItem('ques_choices', JSON.stringify( choices));
-
+            const op_added =  AddQuizTaken(
+                authData.user.id, id,temp_point
+              );
             console.log("Final point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
             localStorage.setItem('point', temp_point);
+            
             navigate('/result');
             setStatus(STATUS.STOPPED)
         }

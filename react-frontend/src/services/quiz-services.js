@@ -136,3 +136,17 @@ export function getQuestionsIdOfQuiz(id){
     })    
 }
 
+export function AddQuizTaken(user,quiz,score){
+
+    return fetch('http://127.0.0.1:8000/api/quiztaken/',{
+        method: 'POST', 
+        headers: {
+            'Content-Type' : 'application/json'
+        }, 
+        body: JSON.stringify({user,quiz,score}),
+     }).then(resp => resp.json())
+     .catch(e =>{
+        console.log(e)
+     })
+}
+    

@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import AlarmIcon from '@mui/icons-material/Alarm';
 
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
-import { getCategories, getOption, getQuestion, getQuestions } from "../../../services/quiz-services";
+import { AddQuizTaken, getCategories, getOption, getQuestion, getQuestions } from "../../../services/quiz-services";
 import { useNavigate } from "react-router-dom";
 
 const STATUS = {
@@ -60,7 +60,12 @@ export default function SinglePlayer() {
                 localStorage.setItem('ques_list', JSON.stringify( ques_list));
                 localStorage.setItem('ques_op_list', JSON.stringify( op_list));
                 localStorage.setItem('ques_choices', JSON.stringify( choices));
+                const op_added =  AddQuizTaken(
+                
+                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')),cur_point)
+                  );
                 navigate('/result' );
+
                 setStatus(STATUS.STOPPED)
             }
         },
@@ -180,6 +185,11 @@ export default function SinglePlayer() {
             localStorage.setItem('ques_list', JSON.stringify( ques_list ));
             localStorage.setItem('ques_op_list', JSON.stringify( op_list));
             localStorage.setItem('ques_choices', JSON.stringify( choices));
+
+            const op_added =  AddQuizTaken(
+                
+                localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')),temp_point)
+              );
             navigate('/result' );
             setStatus(STATUS.STOPPED)
         }
