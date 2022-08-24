@@ -61,7 +61,7 @@ class Category(models.Model):
 
 class Question(models.Model):
     ques_type = models.CharField(max_length=32, null=False, unique= False)
-    category = models.CharField(max_length=32, null=False, unique= False,default='GK')
+    #category = models.CharField(max_length=32, null=False, unique= False,default='GK')
 
     question = models.CharField(max_length=256, null=False, unique= False)
     options = models.ForeignKey(Options, on_delete=models.CASCADE,null=True)
@@ -71,7 +71,7 @@ class Question(models.Model):
     point = models.IntegerField(null=False)
 
     class Meta:
-        unique_together  =(('ques_type', 'options' , 'category', 'answer'))
+        unique_together  =(('ques_type','question', 'options' , 'answer'))
 
 
 class Quiz(models.Model):
@@ -132,3 +132,14 @@ class QuizQuestion(models.Model):
         unique_together  =(('quiz_id', 'question_id'))
 
 
+class QuestionCategory(models.Model):
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE,null=False, blank=True)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE,null=False, blank=True)
+    class Meta:
+        unique_together  =(('question_id', 'category_id'))
+
+class QuizCategory(models.Model):
+    quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE,null=False, blank=True)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE,null=False, blank=True)
+    class Meta:
+        unique_together  =(('quiz_id', 'category_id'))

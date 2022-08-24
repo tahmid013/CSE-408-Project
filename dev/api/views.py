@@ -86,3 +86,17 @@ class QuizQuestionViewset(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     search_fields = ['quiz_id', 'question_id']
     filterset_fields = ['quiz_id', 'question_id']    
+
+class QuestionCategoryViewset(viewsets.ModelViewSet):
+    queryset  = QuestionCategory.objects.all()
+    serializer_class = QuestionCategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['question_id', 'category_id']
+    filterset_fields = ['question_id', 'category_id']
+
+class QuizCategoryViewset(viewsets.ModelViewSet):
+    queryset  = QuizCategory.objects.all()
+    serializer_class = QuizCategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['quiz_id', 'category_id']
+    filterset_fields = ['quiz_id', 'category_id']

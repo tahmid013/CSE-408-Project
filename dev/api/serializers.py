@@ -73,5 +73,15 @@ class QuizQuestionSerializer(serializers.ModelSerializer   ):
         model = QuizQuestion
         fields = ('id', 'quiz_id', 'question_id')
 
+class QuestionCategorySerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = QuestionCategory
+        fields = ('id', 'question_id', 'category_id')
+
+class QuizCategorySerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = QuizCategory
+        fields = ('id', 'quiz_id', 'category_id')
+
 
                 
