@@ -35,7 +35,11 @@ import QuestionInputPageLoop from '../components/pages/Question/QuestionInputPag
 import EditProfile from '../components/pages/Users/EditProfile';
 import QuizList from '../components/pages/Event/quizList';
 import SinglePlayerQuizStart from '../components/pages/Event/SinglePlayerQuizStart';
+
 import MultiPlayerLobby from '../components/pages/Quiz/MultiplayerLobby';
+
+
+import DemoCategory from '../components/pages/Question/DemoCategory';
 
 
 const App = () =>  {
@@ -98,6 +102,8 @@ const App = () =>  {
           <Route exact path = "/type_mcq/quizcategory/:category/multi"  element = {<MultiPlayer/>} />
           <Route exact path = "/type_written/quizcategory/:category/multi" element = {<MultiPlayerWritten/>}/>   
           <Route exact path = "/type_fill/quizcategory/:category/multi" element = {<MultiPlayerWritten/>}/>   
+
+          <Route exact path = "/democat" element = {<DemoCategory/>} />
 
           <Route path = "/user"  element = {<User/>} />
           <Route path = "/result"  element = {<ResultSingle/>} />

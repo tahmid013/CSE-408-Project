@@ -9,8 +9,8 @@ class ClubAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    fields = ('ques_type', 'category','question', 'answer',  'point')
-    list_display = ('id', 'ques_type', 'category','question', 'answer',  'point')
+    fields = ('ques_type', 'question', 'answer',  'point')
+    list_display = ('id', 'ques_type','question', 'answer',  'point')
     
 @admin.register(Options)
 class OptionAdmin(admin.ModelAdmin):
@@ -48,3 +48,13 @@ class EventAdmin(admin.ModelAdmin):
 class QuizQuestionAdmin(admin.ModelAdmin):
     fields = ('quiz_id','question_id')
     list_display = ('id','quiz_id','question_id')
+
+@admin.register(QuestionCategory)
+class QuestionCategoryAdmin(admin.ModelAdmin):
+    fields = ('question_id','category_id')
+    list_display = ('id','question_id','category_id')
+
+@admin.register(QuizCategory)
+class QuizCategoryAdmin(admin.ModelAdmin):
+    fields = ('quiz_id','category_id')
+    list_display = ('id','quiz_id','category_id')
