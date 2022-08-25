@@ -14,6 +14,7 @@ export default function MultiPlayerLobby() {
     const [player_1, setPlayer1] = useState(null);
     const [player_2, setPlayer2] = useState(null);
 
+
     useEffect(() => {
         console.log("MultiPlayerLobby");
         const getData = async () => {
@@ -21,7 +22,7 @@ export default function MultiPlayerLobby() {
                 authData.user.profile.id, authData.user.username
             )
             if (uploaded) {
-                console.log("User added");
+                console.log("Lobby new user added");
                 setOnlinePlayers(uploaded);
             }
 
@@ -34,13 +35,19 @@ export default function MultiPlayerLobby() {
 
     useEffect(() => {
         console.log(online_players);
-        if ( online_players.id % 2 != 0 ) {
+        if ( online_players && (online_players.id % 2) != 0 ) {
 
-            getUser(online_players[0].user_id).then(data => {
+            console.log()
+            getUser(online_players.user_id).then(data => {
+                console.log("player 1");
+                console.log(data)
+
                 setPlayer1(data);
             })
 
-            getUser(online_players[1].user_id).then(data => {
+            getUser(online_players.user_id + 1).then(data => {
+                console.log("player 2");
+                console.log(data)
                 setPlayer2(data);
             })
 
@@ -48,7 +55,7 @@ export default function MultiPlayerLobby() {
     }, [online_players]);
 
     useEffect(() => {
-        if (online_players.id % 2 != 0) {
+        if (online_players && (online_players.id % 2) != 0) {
             console.log(player_1);
             console.log(player_2);
             console.log("MultiPlayerLobby");

@@ -29,6 +29,34 @@ class UserSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)
         return user
 
+
+    def update(self, instance, validated_data):
+        profile_data = validated_data.pop('profile')
+        profile = instance.profile
+
+        # * User Info
+        instance.first_name = validated_data.get(
+            'username', instance.username)
+        instance.first_name = validated_data.get(
+            'first_name', instance.first_name)
+        instance.last_name = validated_data.get(
+            'last_name', instance.last_name)
+        instance.email = validated_data.get(
+            'email', instance.email)
+        instance.email = validated_data.get(
+            'password', instance.password)    
+        instance.save()
+
+        # * AccountProfile Info
+        profile.gender = profile_data.get(
+            'bio', profile.bio)
+       
+        
+        profile.save()
+
+        return instance
+    
+
 class ClubSerializer(serializers.ModelSerializer   ):
     
     class Meta:
