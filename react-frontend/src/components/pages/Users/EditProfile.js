@@ -79,15 +79,18 @@ function EditProfile() {
         first_name:first_name,
         last_name:last_name,
         email:email,
+        password:password,
         
         profile: {
           is_club_member: false,
           bio: bio_data
-        },
+        }
       });
-    if (regData) {
-
-      navigate("/user");
+      if(regData){
+        
+          setAuth(regData);
+      
+        navigate('/');
     }
 
   };
@@ -159,16 +162,16 @@ function EditProfile() {
                 />
               </Box>
 
-              {<Box sx={{ display: "flex", alignItems: "flex-end" }}>
+              <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                 <LockIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
                 <TextField
                   id="input-with-sx"
                   label="Change Password"
-                  defaultValue="****"
+                  defaultValue="1234"
                   variant="standard"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                	</Box>}
+                	</Box>
 
 
               <div className="logging">

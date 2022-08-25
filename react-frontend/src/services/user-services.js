@@ -29,7 +29,9 @@ export function register(userData){
    })
 }
 export function Update(id, userData){
+   
 
+   console.log(userData);
    return fetch(`http://127.0.0.1:8000/api/users/${id}/`,{
       
       method: 'PATCH', 

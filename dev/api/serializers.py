@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
         fields = ('id', 'username','first_name','last_name' ,'email','password','profile')
-        extra_kwargs = {'password': {'write_only': True, 'required': False},'username': {'required': False} }
+        extra_kwargs = {'password': {'write_only': True, 'required': False},'username': {'required': False} ,'email': {'required': False}}
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile')
@@ -35,7 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
         profile = instance.profile
 
         # * User Info
-        instance.first_name = validated_data.get(
+        instance.username = validated_data.get(
             'username', instance.username)
         instance.first_name = validated_data.get(
             'first_name', instance.first_name)
@@ -43,7 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name', instance.last_name)
         instance.email = validated_data.get(
             'email', instance.email)
-        instance.email = validated_data.get(
+        instance.password = validated_data.get(
             'password', instance.password)    
         instance.save()
 
