@@ -45,6 +45,9 @@ class OptionsViewset(viewsets.ModelViewSet):
 class CategoryViewset(viewsets.ModelViewSet):
     queryset  = Category.objects.all()
     serializer_class = CategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['name']
+    filterset_fields = ['name']  
 
 class QuizTakenViewset(viewsets.ModelViewSet):
     queryset  = QuizTaken.objects.all()
