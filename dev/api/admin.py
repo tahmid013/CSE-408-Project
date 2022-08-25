@@ -58,3 +58,12 @@ class QuestionCategoryAdmin(admin.ModelAdmin):
 class QuizCategoryAdmin(admin.ModelAdmin):
     fields = ('quiz_id','category_id')
     list_display = ('id','quiz_id','category_id')
+
+@admin.register(MultiplayerInfo)
+class MultiplayerInfoAdmin(admin.ModelAdmin):
+    fields = ('player_1','player_2','cur_pt_1','cur_pt_2','name_1','name_2')
+    list_display = ('id','player_1','player_2','cur_pt_1','cur_pt_2','name_1','name_2')
+@admin.register(Lobby)
+class LobbyAdmin(admin.ModelAdmin):
+    fields = ('user_id', 'name', 'created_at', 'updated_at')
+    list_display = ('id', 'user_id', 'name', 'created_at', 'updated_at')

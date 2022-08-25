@@ -6,7 +6,7 @@ import { auth } from "../../../services/user-services";
 import { useFetchClubNames } from "../../../hooks/fetch-club-names";
 import "./user.css";
 
-export default function User() {
+export default function DemoUserProfile() {
     const { authData } = useAuth();
     // console.log(authData.user);
     // console.log(authData.user.profile.image);
