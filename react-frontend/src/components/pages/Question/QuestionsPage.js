@@ -32,6 +32,10 @@ import { Button } from "@mui/material";
 
 import { Routes, Route } from "react-router-dom";
 import QuestionList from "./ques-list";
+import {
+    getQuestions,
+    getCategorizedQuestions,
+  } from "../../../services/quiz-services";
 
 function QuestionsPage() {
   const ITEM_HEIGHT = 48;
@@ -94,7 +98,7 @@ function QuestionsPage() {
     //console.log(uploaded.id);
     setCat_id(cat_det[0].id);
     console.log(str);
-    //navigate(`${str}`);
+    navigate(`${str}`);
   };
 
   return (
@@ -141,7 +145,7 @@ function QuestionsPage() {
             </Button>
           </div>
           <Routes>
-            <Route path="/" element={<QuestionList category_id={cat_id} />} />
+            <Route path="/" element={<QuestionList category_name ={category} category_id={cat_id} />} />
           </Routes>
         </div>
       )}
