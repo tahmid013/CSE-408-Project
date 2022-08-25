@@ -76,8 +76,8 @@ function QuizDetails() {
                                         
                                     <p className='btn-Practice'><Button path_name={`${str}/practice`}  buttonStyle = 'btn--primary' buttonSize = 'btn--medium'>Practice</Button></p>
 
-                                    <p className='btn-Single'><Button  path_name={`${str}/single`} buttonStyle = 'btn--primary' buttonSize = 'btn--medium'>Single</Button></p>
-                                    <p className='btn-Double'><Button  path_name={`${str}/multi`}  buttonStyle = 'btn--primary' buttonSize = 'btn--medium'>Double</Button></p>
+                                    <p className='btn-Single'><Button  path_name={`${str}/single`} buttonStyle = 'btn--primary' buttonSize = 'btn--medium'>Single Player</Button></p>
+                                    <p className='btn-Double'><Button  path_name={`${str}/multi_lobby`}  buttonStyle = 'btn--primary' buttonSize = 'btn--medium'>Multi Player</Button></p>
                                     <p className='btn-leader'><Button buttonStyle = 'btn--primary' buttonSize = 'btn--medium'>LeaderBoard</Button></p>
                                 </div>
                             </div>

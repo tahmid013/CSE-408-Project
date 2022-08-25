@@ -103,3 +103,16 @@ class QuizCategoryViewset(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     search_fields = ['quiz_id', 'category_id']
     filterset_fields = ['quiz_id', 'category_id']
+
+class MultiplayerInfoViewset(viewsets.ModelViewSet):
+    queryset  = MultiplayerInfo.objects.all()
+    serializer_class = MultiplayerInfoSerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['name_1','name_2']
+    filterset_fields = ['name_1','name_2','player_1','player_2']
+class LobbyViewset(viewsets.ModelViewSet):
+    queryset  = Lobby.objects.all()
+    serializer_class = LobbySerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['user_id', 'name' ]
+    filterset_fields = ['user_id', 'name']

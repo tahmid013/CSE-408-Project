@@ -143,3 +143,19 @@ class QuizCategory(models.Model):
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE,null=False, blank=True)
     class Meta:
         unique_together  =(('quiz_id', 'category_id'))
+class MultiplayerInfo(models.Model):
+    player_1 =  models.IntegerField(null=False, default=0)
+    player_2 =  models.IntegerField(null=False, default=0)
+    cur_pt_1 = models.IntegerField(null=False, default=0)
+    cur_pt_2 = models.IntegerField(null=False, default=0)
+    name_1 = models.CharField(max_length=32, null=False, unique= False,default='Player 1')
+    name_2 = models.CharField(max_length=32, null=False, unique= False,default='Player 2')
+
+class Lobby(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,null=False, blank=True)
+    name = models.CharField(max_length=32, null=False,default='Default')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    class Meta:
+        unique_together  =(('user_id', 'name'))
+    

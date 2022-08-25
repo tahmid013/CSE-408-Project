@@ -82,6 +82,13 @@ class QuizCategorySerializer(serializers.ModelSerializer   ):
     class Meta:
         model = QuizCategory
         fields = ('id', 'quiz_id', 'category_id')
-
+class MultiplayerInfoSerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = MultiplayerInfo
+        fields = ('id', 'name_1','name_2','player_1','player_2', 'cur_pt_1', 'cur_pt_2')
+class LobbySerializer(serializers.ModelSerializer   ):
+    class Meta:
+        model = Lobby
+        fields = ('id', 'user_id', 'name', 'created_at', 'updated_at')
 
                 
