@@ -74,7 +74,7 @@ const App = () =>  {
           <Route exact path = "/quiz-list"  element = {<QuizList/>} />
           <Route exact path = "/quiz/:id"  element = {<SinglePlayerQuizStart/>} />
 
-          <Route exact path = "/questionspage"  element = {<QuestionsPage/>} />
+          <Route exact path = "/questionspage/*"  element = {<QuestionsPage/>} />
           <Route exact path = "/club_input_form"  element = {<ClubsInputPage/>} />
           <Route exact path = "/quizmainpage/single"  element = {<SinglePlayer/>} />
           <Route exact path = "/quizmainpage/multi"  element = {<MultiPlayer/>} />

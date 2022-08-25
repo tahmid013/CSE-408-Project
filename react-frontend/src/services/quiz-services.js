@@ -15,6 +15,16 @@ export function getQuestions(){
         console.log(e)
     })
 }
+
+export function getCategorizedQuestions(id){
+    return fetch(`http://127.0.0.1:8000/api/question_category/?category_id=${id}`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
+
 export function getCategories(){
     return fetch(`http://127.0.0.1:8000/api/category/`)
     .then(data => {
@@ -44,11 +54,11 @@ export function getCategory(id){
 
 
 
-export function AddQuestion(ques_type, category, question,options, answer,image, point){
+export function AddQuestion(ques_type, question,options, answer,image, point){
 
     console.log(ques_type);
-    console.log(category);
-    console.log(category);
+    //console.log(category);
+    //console.log(category);
     console.log(question);
     console.log(point);
 
@@ -57,7 +67,7 @@ export function AddQuestion(ques_type, category, question,options, answer,image,
        headers: {
            'Content-Type' : 'application/json'
        }, 
-       body: JSON.stringify({ques_type, category, question,options, answer, point}),
+       body: JSON.stringify({ques_type, question,options, answer, point}),
     }).then(resp => resp.json())
     .catch(e =>{
        console.log(e)
@@ -111,6 +121,19 @@ export function AddQuiz(name,about, club,created_by){
     })
 }
 
+export function AddQuestionCategory(question_id,category_id){
+    return fetch('http://127.0.0.1:8000/api/question_category/',{
+       method: 'POST', 
+       headers: {
+           'Content-Type' : 'application/json'
+       }, 
+       body: JSON.stringify({question_id,category_id}),
+    }).then(resp => resp.json())
+    .catch(e =>{
+       console.log(e)
+    })
+}
+
 export function AddQuizQuestion(quiz_id,question_id){
 
     return fetch('http://127.0.0.1:8000/api/quiz_question/',{
@@ -124,6 +147,8 @@ export function AddQuizQuestion(quiz_id,question_id){
        console.log(e)
     })
 }
+
+
 export function getQuestionsIdOfQuiz(id){
 
     console.log("Id -> "+ id);
