@@ -175,3 +175,18 @@ export function AddQuizTaken(user,quiz,score){
      })
 }
     
+
+export function AddClubUser(club_id,user_id){
+
+    return fetch('http://127.0.0.1:8000/api/clubuser/',{
+       method: 'POST', 
+       headers: {
+           'Content-Type' : 'application/json'
+       }, 
+       body: JSON.stringify({club_id,user_id}),
+    }).then(resp => resp.json())
+    .catch(e =>{
+       console.log(e)
+    })
+}
+

@@ -61,7 +61,7 @@ function QuestionsPage() {
   const [checkVal, setCheckVal] = useState(1);
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = async () => { 
       setLoading(true);
       await getCategories().then((data) => {
         setCats(data);
