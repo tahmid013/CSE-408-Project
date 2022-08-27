@@ -257,12 +257,30 @@ export default function QuastionInputPageLoop({ nav_path }) {
       <div>
         <form>
           <div>
-            <select value={value} onChange={handleChangeBtn}>
+            {/* <select value={value} onChange={handleChangeBtn}>
               {ques_type_list &&
                 ques_type_list.map((l_s) => {
                   return <option value={`${l_s}`}>{l_s}</option>;
                 })}
-            </select>
+            </select> */}
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <InputLabel id="demo-multiple-checkbox-label">
+                Category
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={ques_type}
+                label="Age"
+                onChange={handleChangeBtn}
+              >
+                {ques_type_list.map((qt) => (
+                  <MenuItem key={qt} value={qt}>
+                    <ListItemText primary={qt} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
 
           <div>
