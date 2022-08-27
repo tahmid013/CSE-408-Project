@@ -37,6 +37,7 @@ import QuizList from '../components/pages/Event/quizList';
 import SinglePlayerQuizStart from '../components/pages/Event/SinglePlayerQuizStart';
 
 import MultiPlayerLobby from '../components/pages/Quiz/MultiplayerLobby';
+import Leaderboard from '../components/pages/Quiz/Leaderboard';
 
 
 import DemoCategory from '../components/pages/Question/DemoCategory';
@@ -109,6 +110,7 @@ const App = () =>  {
 
           <Route path = "/user"  element = {<User/>} />
           <Route path = "/result"  element = {<ResultSingle/>} />
+          <Route exact path = "/leaderboard"  element = {<Leaderboard/>} />
           
           <Route path = "/result"  element = {<ResultSingle/>} />
           <Route exact path = "/type_mcq/quizcategory/:category/multi_lobby/"  element = {<MultiPlayerLobby/>} />

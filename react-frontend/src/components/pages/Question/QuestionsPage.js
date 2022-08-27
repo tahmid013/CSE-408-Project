@@ -49,6 +49,10 @@ function QuestionsPage() {
     },
   };
 
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
   const location = useLocation();
   var str = window.location.pathname.substring(0);
 
@@ -77,11 +81,12 @@ function QuestionsPage() {
     //console.log(cat_s);
   }, [cat_s]);
 
-  const handleChangeCategory = (event) => {
+  const handleChangeCategory = async (event) => {
     const {
       target: { value },
     } = event;
     setCategory(value);
+    await sleep(500);
   };
 
   const handleSubmit = async (e) => {

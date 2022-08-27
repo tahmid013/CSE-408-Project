@@ -43,13 +43,14 @@ function QuestionList(category) {
       setLoading(true);
       console.log(category.category_id);
       setFinalID(category.category_id);
+      setCatQues([]);
       await sleep(500);
       //console.log(finalID);
 
       setLoading(false);
     };
     getValues();
-  }, [category]);
+  }, [category.category_id]);
 
   //   useEffect(() => {
   //     const getData = async () => {
@@ -94,7 +95,7 @@ function QuestionList(category) {
     
 
     console.log(catQuestions);
-  }, [category, loading]);
+  }, [category]); 
 
   //   useEffect(() => {
   //     const getCategorizeData = async () => {
