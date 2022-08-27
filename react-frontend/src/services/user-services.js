@@ -113,3 +113,12 @@ export function AddMultiplayer(player_1,player_2,cur_pt_1,cur_pt_2,name_1,name_2
       console.log(e)
    })
 }
+
+export function getQuizTakenData(){
+   return fetch(`http://127.0.0.1:8000/api/quiztaken/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}

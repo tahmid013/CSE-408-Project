@@ -470,7 +470,7 @@ button:hover, a:hover {
 
 #profile .flex{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1em;
   text-align: left;
   margin-bottom: 2em;
