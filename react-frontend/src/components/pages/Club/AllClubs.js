@@ -7,7 +7,7 @@ import ClubList from "./club-list";
 export default function AllClubs() {
     return (
         <>
-        Hello
+        
         <SearchForm/>
         <ClubList/>
         </>
