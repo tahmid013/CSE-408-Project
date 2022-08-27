@@ -13,8 +13,8 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { register } from "../../../services/user-services";
 import { useNavigate } from "react-router-dom";
-import BadgeIcon from '@mui/icons-material/Badge';
-import InfoIcon from '@mui/icons-material/Info';
+import BadgeIcon from "@mui/icons-material/Badge";
+import InfoIcon from "@mui/icons-material/Info";
 
 function EditProfile() {
   const [first_name, setFirstName] = useState("");
@@ -24,7 +24,6 @@ function EditProfile() {
   const [email, setEmail] = useState("");
   const [bio_data, setBio] = useState("");
 
-
   const { authData, setAuth } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -33,9 +32,8 @@ function EditProfile() {
     setLoading(true);
   }, []);
   const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
-
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
 
   useEffect(() => {
     const setData = async () => {
@@ -48,66 +46,76 @@ function EditProfile() {
       setEmail(authData.user.email);
 
       setPassword(authData.user.password);
-      await sleep(1000)
+      await sleep(1000);
 
       //console.log("first_name: " + first_name);
       //console.log("last_name: " + last_name);
       //console.log("password: " + password);
 
       setLoading(false);
-    }
+    };
     setData();
-
   }, [authData]);
-
-
-
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
-    console.log(username) ;
-    console.log(password) ;
-    console.log(email) ;
-    console.log(first_name) ;
-    console.log(last_name) ;
-    console.log(bio_data) ;
-    const regData = await Update(
-      authData.user.id,
-      {
+    console.log(username);
+    console.log(password);
+    console.log(email);
+    console.log(first_name);
+    console.log(last_name);
+    console.log(bio_data);
+    const regData = await Update(authData.user.id, {
+      username: username,
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      password: password,
 
-        username: username,
-        first_name:first_name,
-        last_name:last_name,
-        email:email,
-        password:password,
-        
-        profile: {
-          is_club_member: false,
-          bio: bio_data
-        }
-      });
-      if(regData){
-        
-          setAuth(regData);
-      
-        navigate('/');
+      profile: {
+        is_club_member: false,
+        bio: bio_data,
+      },
+    });
+    if (regData) {
+      //setAuth(regData);
+      const tem = JSON.parse(localStorage.getItem("authData"));
+      const newUpdatedUserInfo = {
+        ...authData,
+        user: {
+          ...authData.user,
+          username: username, 
+          first_name: first_name,
+          last_name: last_name,
+          email: email,
+          
+          profile: {
+            ...authData.user.profile,
+            is_club_member: false,
+            bio: bio_data,
+          },
+        },
+      };
+
+     
+      localStorage.setItem("quizz-user", JSON.stringify(newUpdatedUserInfo));
+      setAuth(newUpdatedUserInfo);
+      navigate("/user");
     }
-
   };
 
-
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
     <>
-      {!loading ?
+      {!loading ? (
         <>
-          <div className="main" align='center'>
+          <div className="main" align="center">
             <div>.</div>
             <h1>Edit Profile</h1>
-            <form onSubmit={handlerSubmit} >
+            <form onSubmit={handlerSubmit}>
               <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                 <BadgeIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
                 <TextField
@@ -171,8 +179,7 @@ function EditProfile() {
                   variant="standard"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                	</Box>
-
+              </Box>
 
               <div className="logging">
                 <Button color="primary" variant="contained" type="submit">
@@ -181,15 +188,12 @@ function EditProfile() {
               </div>
             </form>
           </div>
-
         </>
-        :
-        <>
-        </>
-      }
+      ) : (
+        <></>
+      )}
     </>
   );
-
 }
 
 export default EditProfile;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Profiles from './Profiles';
 import { Leaderboard } from './Database';
+import { Button } from '@mui/material';
 
 export default function Board() {
 
@@ -16,9 +17,9 @@ export default function Board() {
         <h1 className='leaderboard'>Leaderboard</h1>
 
         <div className="duration">
-            <button onClick={handleClick} data-id='7'>7 Days</button>
-            <button onClick={handleClick} data-id='30'>30 Days</button>
-            <button onClick={handleClick} data-id='0'>All-Time</button>
+            <Button variant='contained' onClick={handleClick} data-id='7'>7 Days</Button>
+            <Button variant='contained' onClick={handleClick} data-id='30'>30 Days</Button>
+            <Button variant='contained' onClick={handleClick} data-id='0'>All-Time</Button>
         </div>
 
         <Profiles Leaderboard={between(Leaderboard, period)}></Profiles>

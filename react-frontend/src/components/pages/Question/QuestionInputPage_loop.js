@@ -265,7 +265,7 @@ export default function QuastionInputPageLoop({ nav_path }) {
             </select> */}
             <FormControl sx={{ m: 1, width: 300 }}>
               <InputLabel id="demo-multiple-checkbox-label">
-                Category
+                Question Type
               </InputLabel>
               <Select
                 labelId="demo-simple-select-label"

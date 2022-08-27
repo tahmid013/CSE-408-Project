@@ -64,7 +64,7 @@ function Navbar() {
                             </li>
                              :
                              <li className='nav-item'>
-                                <Link to = '/signin' className='nav-links' onClick={closeMobileMenu}>
+                                <Link to = '/user' className='nav-links' onClick={closeMobileMenu}>
                                 
                                 {authData.user ? 
                                 <>
@@ -90,4 +90,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default Navbar;

@@ -8,7 +8,6 @@ export default function Leaderboard() {
       
       <div className="main">
       <h5>-</h5>
-        <h1>Leaderboard</h1>
         <Board />
       </div>
     </>
