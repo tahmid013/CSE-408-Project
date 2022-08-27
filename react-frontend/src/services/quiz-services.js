@@ -15,7 +15,14 @@ export function getQuestions(){
         console.log(e)
     })
 }
-
+export function getQuestionsByQuesType(ques_type ){
+    return fetch(`http://127.0.0.1:8000/api/questions/?ques_type=${ques_type}`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
 export function getCategorizedQuestions(id){
     return fetch(`http://127.0.0.1:8000/api/question_category/?category_id=${id}`)
     .then(data => {

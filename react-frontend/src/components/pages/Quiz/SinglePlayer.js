@@ -3,8 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import AlarmIcon from '@mui/icons-material/Alarm';
 
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
-import { AddQuizTaken, getCategories, getOption, getQuestion, getQuestions } from "../../../services/quiz-services";
+import { AddQuizTaken, getCategories, getCategorizedQuestions, getOption, getQuestion, getQuestions, getQuestionsByQuesType } from "../../../services/quiz-services";
 import { useNavigate } from "react-router-dom";
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SelectInput from "@mui/material/Select/SelectInput";
+
 
 const STATUS = {
     STARTED: 'Started',
@@ -42,13 +45,19 @@ export default function SinglePlayer() {
 
     const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT)
     const [status, setStatus] = useState(STATUS.STOPPED)
+    const [is_mcq, setIs_mcq] = useState(false);
 
+  
     
+
+
+
+
 
     const handleStart = () => {
         setStatus(STATUS.STARTED)
     }
-    
+
     useInterval(
         () => {
             if (secondsRemaining > 0) {
@@ -56,15 +65,15 @@ export default function SinglePlayer() {
             } else {
                 console.log("Navigating to result-> ");
                 console.log(cur_point);
-                localStorage.setItem('point',cur_point);
-                localStorage.setItem('ques_list', JSON.stringify( ques_list));
-                localStorage.setItem('ques_op_list', JSON.stringify( op_list));
-                localStorage.setItem('ques_choices', JSON.stringify( choices));
-                const op_added =  AddQuizTaken(
-                
-                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')),cur_point)
-                  );
-                navigate('/result' );
+                localStorage.setItem('point', cur_point);
+                localStorage.setItem('ques_list', JSON.stringify(ques_list));
+                localStorage.setItem('ques_op_list', JSON.stringify(op_list));
+                localStorage.setItem('ques_choices', JSON.stringify(choices));
+                const op_added = AddQuizTaken(
+
+                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')), cur_point)
+                );
+                navigate('/result');
 
                 setStatus(STATUS.STOPPED)
             }
@@ -73,8 +82,8 @@ export default function SinglePlayer() {
         // passing null stops the interval
     )
     useEffect(() => {
-       handleStart();
-    }, )
+        handleStart();
+    })
 
 
     const location = useLocation();
@@ -123,15 +132,24 @@ export default function SinglePlayer() {
     const [choices, setChoices] = useState([]);
     const [id_toFetch, setIdFetch] = useState(1);
 
-
+    const sleep = (milliseconds) => {
+        return new Promise((resolve) => setTimeout(resolve, milliseconds));
+      };
     useLayoutEffect(() => {
         const getData = async () => {
             setLoading(true);
-            await getQuestions().then(data => {
+            
+            await sleep(500);
+
+            await getCategorizedQuestions().then(res => {
+                
+            });
+
+            await getQuestionsByQuesType(localStorage.getItem('quiz_type')).then(data => {
                 setQuesList(data);
                 setPoint(0);
                 setTotalQuesCount(data.length);
-                setSecondsRemaining(data.length*2);
+                setSecondsRemaining(data.length * 2);
                 setQuesCount(1);
                 setLoading(false);
 
@@ -141,6 +159,15 @@ export default function SinglePlayer() {
         getData();
 
     }, [])
+
+    useEffect(() => {
+        const getData = async () => {
+
+
+        }
+        getData();
+
+    }, [])	
 
     useEffect(() => {
         const getData2 = async () => {
@@ -159,11 +186,14 @@ export default function SinglePlayer() {
 
 
 
+
     const optClickChange = param => e => {
         choices.push(param);
+        if (param == "skipped") {
 
-        if (ques_list[cur_ques_count - 1].answer == param) {
-            console.log("current point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
+        }
+        else if (ques_list[cur_ques_count - 1].answer == param) {
+            console.log("current point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
             setPoint(cur_point + ques_list[cur_ques_count - 1].point);
         }
 
@@ -172,23 +202,23 @@ export default function SinglePlayer() {
             setQuesCount(cur_ques_count + 1);
             console.log(cur_ques_count);
         }
-        else{
+        else {
             console.log("Navigating to result-> ");
             var temp_point = cur_point;
             if (ques_list[cur_ques_count - 1].answer == param) {
                 temp_point = temp_point + ques_list[cur_ques_count - 1].point;
             }
-            console.log("Final point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
-            localStorage.setItem('point',temp_point);
-            localStorage.setItem('ques_list', JSON.stringify( ques_list ));
-            localStorage.setItem('ques_op_list', JSON.stringify( op_list));
-            localStorage.setItem('ques_choices', JSON.stringify( choices));
+            console.log("Final point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
+            localStorage.setItem('point', temp_point);
+            localStorage.setItem('ques_list', JSON.stringify(ques_list));
+            localStorage.setItem('ques_op_list', JSON.stringify(op_list));
+            localStorage.setItem('ques_choices', JSON.stringify(choices));
 
-            const op_added =  AddQuizTaken(
-                
-                localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')),temp_point)
-              );
-            navigate('/result' );
+            const op_added = AddQuizTaken(
+
+                localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')), temp_point)
+            );
+            navigate('/result');
             setStatus(STATUS.STOPPED)
         }
 
@@ -231,6 +261,14 @@ export default function SinglePlayer() {
 
 
             <div className="footer-container">
+                <div className="middle-footer" onClick={optClickChange("skipped")}>
+
+                    {"Skip "}
+                    <SkipNextIcon
+                        sx={{ fontSize: "40px", color: "action.active", mr: 1, my: 0.5 }}
+                    />
+
+                </div>
                 <div className="left-footer">TIME REMAINING </div>
                 <div className="middle-footer"> {secondsRemaining}s <AlarmIcon sx={{ fontSize: "40px", color: 'action.active', mr: 1, my: 0.5 }} />  {cur_point} </div>
                 <div className="right-footer">YOUR POINT </div>

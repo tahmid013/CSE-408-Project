@@ -7,6 +7,13 @@ import "../styles/QuizMainPage.css";
 export default function QuizMainPage() {
   const location = useLocation();
   let l_p = location.pathname.substring(1);
+  const mcqType = () => {
+      localStorage.setItem("quiz_type", "MCQ");
+  }
+  const writtenType = () => {
+      localStorage.setItem("quiz_type", "Written");
+  }
+
 
   return (
     <>
@@ -71,6 +78,7 @@ export default function QuizMainPage() {
                   className="btns"
                   buttonStyle="btn--fit"
                   buttonSize="btn--large"
+                  onClick={mcqType}
                 >
                   MCQ
                 </Button>
@@ -79,6 +87,7 @@ export default function QuizMainPage() {
                   className="btns"
                   buttonStyle="btn--fit"
                   buttonSize="btn--large"
+                  onClick={writtenType}
                 >
                   Written
                 </Button>

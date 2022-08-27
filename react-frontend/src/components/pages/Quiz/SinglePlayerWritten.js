@@ -5,8 +5,10 @@ import AlarmIcon from '@mui/icons-material/Alarm';
 import { Button } from "../../Button";
 
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { AddQuizTaken, getQuestions } from "../../../services/quiz-services";
+import { AddQuizTaken, getQuestions, getQuestionsByQuesType } from "../../../services/quiz-services";
 import { OpacitySharp } from "@mui/icons-material";
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+
 
 
 const STATUS = {
@@ -43,16 +45,16 @@ export default function SinglePlayerWritten() {
     const [cur_ans_text, setCur_ans_text] = useState('');
     const [quiz_u_id, setQuiz_u_id] = useState('');
     const [quiz_id, setQuiz_id] = useState('');
-    
+
     const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT)
     const [status, setStatus] = useState(STATUS.STOPPED)
 
-    
+
 
     const handleStart = () => {
         setStatus(STATUS.STARTED)
     }
-    
+
     useInterval(
         () => {
             if (secondsRemaining > 0) {
@@ -60,16 +62,16 @@ export default function SinglePlayerWritten() {
             } else {
                 console.log("Navigating to result-> ");
                 console.log(cur_point);
-                localStorage.setItem('point',cur_point);
-                localStorage.setItem('ques_list', JSON.stringify( ques_list));
+                localStorage.setItem('point', cur_point);
+                localStorage.setItem('ques_list', JSON.stringify(ques_list));
                 //localStorage.setItem('ques_op_list', JSON.stringify( op_list));
-                localStorage.setItem('ques_choices', JSON.stringify( choices));
-                const op_added =  AddQuizTaken(
-                
-                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')),cur_point)
-                  );
+                localStorage.setItem('ques_choices', JSON.stringify(choices));
+                const op_added = AddQuizTaken(
+
+                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')), cur_point)
+                );
                 op_added();
-                navigate('/result' );
+                navigate('/result');
 
                 setStatus(STATUS.STOPPED)
             }
@@ -78,8 +80,8 @@ export default function SinglePlayerWritten() {
         // passing null stops the interval
     )
     useEffect(() => {
-       handleStart();
-    }, )
+        handleStart();
+    })
 
 
     const location = useLocation();
@@ -110,7 +112,7 @@ export default function SinglePlayerWritten() {
     }
 
 
-    
+
     const navigate = useNavigate();
 
     const [cur_point, setPoint] = useState(1);
@@ -135,11 +137,11 @@ export default function SinglePlayerWritten() {
     useLayoutEffect(() => {
         const getData = async () => {
             setLoading(true);
-            await getQuestions().then(data => {
+            await getQuestionsByQuesType(localStorage.getItem('quiz_type')).then(data => {
                 setQuesList(data);
                 setPoint(0);
                 setTotalQuesCount(data.length);
-                setSecondsRemaining(data.length*2);
+                setSecondsRemaining(data.length * 2);
                 setQuesCount(1);
                 setQuiz_u_id(JSON.parse(localStorage.getItem('quizz-user')).user.id);
                 setQuiz_id(localStorage.getItem('quiz-info'));
@@ -152,13 +154,15 @@ export default function SinglePlayerWritten() {
 
     }, [])
 
-   
+
 
     const optClickChange = param => e => {
         choices.push(param);
+        if (param == "skipped") {
 
-        if (ques_list[cur_ques_count - 1].answer == param) {
-            console.log("current point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
+        }
+        else if (ques_list[cur_ques_count - 1].answer == param) {
+            console.log("current point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
             setPoint(cur_point + ques_list[cur_ques_count - 1].point);
         }
 
@@ -167,23 +171,23 @@ export default function SinglePlayerWritten() {
             setQuesCount(cur_ques_count + 1);
             console.log(cur_ques_count);
         }
-        else{
+        else {
             console.log("Navigating to result-> ");
             var temp_point = cur_point;
             if (ques_list[cur_ques_count - 1].answer == param) {
                 temp_point = temp_point + ques_list[cur_ques_count - 1].point;
             }
-            console.log("Final point " + cur_point + " ques no "+ques_list[cur_ques_count - 1].point );
-            localStorage.setItem('point',temp_point);
-            localStorage.setItem('ques_list', JSON.stringify( ques_list ));
-            localStorage.setItem('ques_op_list', JSON.stringify( null));
-            localStorage.setItem('ques_choices', JSON.stringify( choices));
+            console.log("Final point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
+            localStorage.setItem('point', temp_point);
+            localStorage.setItem('ques_list', JSON.stringify(ques_list));
+            localStorage.setItem('ques_op_list', JSON.stringify(null));
+            localStorage.setItem('ques_choices', JSON.stringify(choices));
 
-            const op_added =  AddQuizTaken(
-                
-                localStorage.getItem(quiz_u_id,quiz_id ,temp_point)
-              );
-            navigate('/result' );
+            const op_added = AddQuizTaken(
+
+                localStorage.getItem(quiz_u_id, quiz_id, temp_point)
+            );
+            navigate('/result');
             setStatus(STATUS.STOPPED)
         }
 
@@ -218,30 +222,38 @@ export default function SinglePlayerWritten() {
 
             <div className="question">{cur_ques_count}.    {ques_list && ques_list[cur_ques_count - 1].question}</div>
             <div className="option-container-written">
-                <form onSubmit={optClickChange(cur_ans_text)} className= "form-anser">
+                <form onSubmit={optClickChange(cur_ans_text)} className="form-anser">
                     <Box className="answer-field" >
                         <TextField
-                            onChange={(e) => {setCur_ans_text(e.target.value)}}
+                            onChange={(e) => { setCur_ans_text(e.target.value) }}
                             label=""
                             id="standard-size-normal"
                             defaultValue=""
                             variant="standard"
                         />
-                    
+
                     </Box>
                     <div className="option-container">
                         <div className="option" type="submit" onClick={optClickChange(cur_ans_text)}>Submit</div>
                     </div>
-                    
+
                 </form>
 
             </div>
             <div className="footer-container">
+                <div className="middle-footer" onClick={optClickChange("skipped")}>
+
+                    {"Skip "}
+                    <SkipNextIcon
+                        sx={{ fontSize: "40px", color: "action.active", mr: 1, my: 0.5 }}
+                    />
+
+                </div>
                 <div className="left-footer">TIME REMAINING </div>
                 <div className="middle-footer"> {secondsRemaining}s <AlarmIcon sx={{ fontSize: "40px", color: 'action.active', mr: 1, my: 0.5 }} />  {cur_point} </div>
                 <div className="right-footer">YOUR POINT </div>
             </div>
-            
+
         </div>
     )
 }

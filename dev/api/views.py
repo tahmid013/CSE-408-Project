@@ -36,7 +36,11 @@ class ClubViewset(viewsets.ModelViewSet):
 class QuestionViewset(viewsets.ModelViewSet):
     queryset  = Question.objects.all()
     serializer_class = QuestionSerializer
-    
+    filter_backends = (filters.SearchFilter,DjangoFilterBackend)
+    search_fields = ['ques_type','question']
+    filterset_fields = ['ques_type','question']  
+
+
 
 class OptionsViewset(viewsets.ModelViewSet):
     queryset  = Options.objects.all()
@@ -94,6 +98,13 @@ class QuizQuestionViewset(viewsets.ModelViewSet):
 
 class QuestionCategoryViewset(viewsets.ModelViewSet):
     queryset  = QuestionCategory.objects.all()
+    serializer_class = QuestionCategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['question_id', 'category_id']
+    filterset_fields = ['question_id', 'category_id']
+
+class QuestionCategoryCustomViewset(viewsets.ModelViewSet):
+    queryset  = QuestionCategory.objects.filter(category_id__name='sports')
     serializer_class = QuestionCategorySerializer
     filter_backends = [DjangoFilterBackend]
     search_fields = ['question_id', 'category_id']

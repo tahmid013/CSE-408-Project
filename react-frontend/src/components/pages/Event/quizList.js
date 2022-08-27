@@ -64,12 +64,8 @@ useEffect(() => {
 
                                 <div>Hosted by: { club_name_List && club_name_List[index] && club_name_List[index].name}</div>
 
-
                             </div>
                         </div>
-
-
-
 
                     </Link>
                 })}

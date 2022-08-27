@@ -26,6 +26,8 @@ router.register(r'question_category', views.QuestionCategoryViewset)
 router.register(r'quiz_category', views.QuizCategoryViewset)
 router.register(r'lobby', views.LobbyViewset)
 router.register(r'multiplayer', views.MultiplayerInfoViewset)
+router.register(r'question_category_sports', views.QuestionCategoryCustomViewset)
+
 
 
 urlpatterns = [

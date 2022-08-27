@@ -128,7 +128,7 @@ export default function ResultSingle(props) {
 
                     </div>
                     :
-                    <div>bye</div>
+                    <div></div>
                 }
 
 
