@@ -40,7 +40,7 @@ export default function QuizMainPage() {
                                 <div className="w3-dropdown-content w3-bar-block w3-border">
                                     <Button path_name="type_mcq/quizcategory" className='btns' buttonStyle='btn--fit' buttonSize='btn--large'>MCQ</Button>
                                     <Button path_name="type_written/quizcategory" className='btns' buttonStyle='btn--fit' buttonSize='btn--large'>Written</Button>
-                                    <Button path_name="type_fill/quizcategory" className='btns' buttonStyle='btn--fit' buttonSize='btn--large'>Fill Blanks</Button>
+                                    
                                 </div>
                             </div>
 

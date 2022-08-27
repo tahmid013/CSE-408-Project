@@ -2,6 +2,7 @@ from email.headerregistry import Group
 from django.contrib import admin
 from .models import  *
 # Register your models here.
+
 @admin.register(Club)
 class ClubAdmin(admin.ModelAdmin):
     fields = ('name', 'about', 'institute')

@@ -63,7 +63,7 @@ export default function SinglePlayerQuizStart() {
                 localStorage.setItem('ques_choices', JSON.stringify( choices));
                 const op_added =  AddQuizTaken(
                 
-                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, (localStorage.getItem('quiz-info')),cur_point)
+                    localStorage.getItem(JSON.parse(localStorage.getItem('quizz-user')).user.id, id,cur_point)
                   );
                 navigate('/result');
                 setStatus(STATUS.STOPPED)
@@ -112,7 +112,7 @@ export default function SinglePlayerQuizStart() {
 
     const [cur_point, setPoint] = useState(1);
     const [cur_ques_count, setQuesCount] = useState(0);
-    const [total_ques_count, setTotalQuesCount] = useState(4);
+    const [total_ques_count, setTotalQuesCount] = useState(0);
 
     const active_count = Array(cur_ques_count).fill(0);
     const inactive_count = Array(total_ques_count - cur_ques_count).fill(0);

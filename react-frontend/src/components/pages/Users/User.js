@@ -5,6 +5,7 @@ import { getClub } from "../../../services/club-services";
 import { auth } from "../../../services/user-services";
 import { useFetchClubNames } from "../../../hooks/fetch-club-names";
 import "./user.css";
+import { Link } from "react-router-dom";
 
 export default function User() {
     const { authData } = useAuth();
@@ -95,7 +96,7 @@ export default function User() {
                                 <div>
                                     {clubData.map((club) => (
                                         <div key={club.id}>
-                                            <h6>{club.name}</h6>
+                                            <Link to= {`/club/${club.id}`} ><h6>{club.name}</h6></Link>
                                         </div>))}
                                 </div>
                             ) : (
