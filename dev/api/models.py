@@ -1,6 +1,7 @@
 from distutils.command.upload import upload
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 def Upload_path_handler(instance, filename):
     return "avatars/{id}/{file}".format(id= instance.user.id, file = filename)

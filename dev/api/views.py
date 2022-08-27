@@ -12,6 +12,8 @@ from .models import *
 from .serializers import *
 
 # Create your views here.
+
+
 class UserProfileViewset(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
@@ -19,14 +21,14 @@ class UserProfileViewset(viewsets.ModelViewSet):
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter,DjangoFilterBackend)
     search_fields = ['username']
-
+    filterset_fields = ['username']  
 
 class ClubViewset(viewsets.ModelViewSet):
     queryset  = Club.objects.all()
     serializer_class = ClubSerializer
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter,DjangoFilterBackend)
     search_fields = ['name', 'about', 'institute']
     
 
