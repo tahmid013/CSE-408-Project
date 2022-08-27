@@ -62,7 +62,7 @@ useEffect(() => {
                                 <hr />
                                 <p>{quiz.about}</p>
 
-                                <div>Hosted by: { club_name_List[index].name}</div>
+                                <div>Hosted by: { club_name_List && club_name_List[index] && club_name_List[index].name}</div>
 
 
                             </div>
