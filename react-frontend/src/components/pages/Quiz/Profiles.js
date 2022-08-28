@@ -60,11 +60,12 @@ export default function Profiles({ Leaderboard }) {
 
                   <div className="info">
                     <h3 className="name text-dark">{value.user}</h3>
+                    <span>{value.score}</span>
+
                     {/* <span>{value.location}</span> */}
                   </div>
                 </div>
                 <div className="item">
-                  <span>{value.score}</span>
                 </div>
               </div>
             ))}
@@ -74,24 +75,3 @@ export default function Profiles({ Leaderboard }) {
   );
 }
 
-function Item(data) {
-  return (
-    <>
-      {data.map((value, index) => (
-        <div className="flex" key={index}>
-          <div className="item">
-            {/* <img className="pr" src={value.img} alt="" /> */}
-
-            <div className="info">
-              <h3 className="name text-dark">{value.user}</h3>
-              {/* <span>{value.location}</span> */}
-            </div>
-          </div>
-          <div className="item">
-            <span>{value.score}</span>
-          </div>
-        </div>
-      ))}
-    </>
-  );
-}

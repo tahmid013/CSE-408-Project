@@ -88,6 +88,14 @@ class QuizViewset(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     search_fields = ['name', 'about']
     filterset_fields = ['club', 'created_by']    
+
+
+class QuizTop3Viewset(viewsets.ModelViewSet):
+    queryset  = Quiz.objects.all()[:3]
+    serializer_class = QuizSerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['name', 'about']
+    filterset_fields = ['club', 'created_by']    
     
 class QuizQuestionViewset(viewsets.ModelViewSet):
     queryset  = QuizQuestion.objects.all()

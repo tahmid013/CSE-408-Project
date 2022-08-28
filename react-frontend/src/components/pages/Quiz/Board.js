@@ -43,7 +43,9 @@ export default function Board() {
             id: user.id,
             name: user.username,
           };
-        })
+        }
+        
+        )
       );
       setUserList(userList2);
       console.log(userList);
@@ -88,26 +90,24 @@ export default function Board() {
                     All-Time
                   </Button>
                 </div>
-
+          <div id ="profile">
                 {leaderboardData &&
             (leaderboardData.length > 0) &&
            
             leaderboardData.map((value, index) => (
               <div className="flex" key={index}>
-                <div className="item">
                   {/* <img className="pr" src={value.img} alt="" /> */}
 
                   <div className="info">
-                    <h3 className="name text-dark">{userList &&  (userList.length > 0)  && userList[index].name}</h3>
-                    {/* <span>{value.location}</span> */}
+                    <div className="item_l">{userList &&  (userList.length > 0)  && userList[index].name}</div>
+                    <div className="item_r">{leaderboardData[index].score}</div>
+                    
                   </div>
-                </div>
-                <div className="item">
-                  <span>{userList &&  userList[0] && userList[0].username}</span>
-                  <span>{leaderboardData[index].score}</span>
-                </div>
+
+                
               </div>
             ))}
+            </div>
                 {/* <Profiles
                   Leaderboard={between(leaderboardData, period)}
                 ></Profiles> */}
@@ -119,6 +119,7 @@ export default function Board() {
         </>
       )}
     </>
+    
   );
 }
 

@@ -1,6 +1,8 @@
-import React from "react";
-import { useLocation, Router, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, Router, Routes, Route, Link } from "react-router-dom";
 import "../../../Apps/App.css";
+import { getClub } from "../../../services/club-services";
+import { getQuizzesTop3 } from "../../../services/quiz-services";
 import { Button } from "../../Button";
 import "../styles/QuizMainPage.css";
 
@@ -8,11 +10,47 @@ export default function QuizMainPage() {
   const location = useLocation();
   let l_p = location.pathname.substring(1);
   const mcqType = () => {
-      localStorage.setItem("quiz_type", "MCQ");
+    localStorage.setItem("quiz_type", "MCQ");
   }
   const writtenType = () => {
-      localStorage.setItem("quiz_type", "Written");
+    localStorage.setItem("quiz_type", "Written");
   }
+
+
+  const [quizzes, setQuizzes] = useState([]);
+  const [club_name_List, setClubNameList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      await getQuizzesTop3().then(data => {
+        setQuizzes(data);
+        setLoading(false);
+      })
+    }
+    getData();
+  }, [])
+
+  useEffect(() => {
+    setLoading(true);
+    const getData = async () => {
+
+      const club_name_List = await Promise.all(
+        quizzes.map(async (each_q) => {
+          const club = await getClub(each_q.club);
+          return {
+            name: club.name,
+          };
+        })
+      );
+      setClubNameList(club_name_List);
+      console.log(club_name_List);
+      setLoading(false);
+    };
+    getData().catch(console.error);
+  }, [quizzes]);
+
 
 
   return (
@@ -96,7 +134,25 @@ export default function QuizMainPage() {
           </div>
         </div>
         <div id="main-body">
-          <div id="upcoming-quiz">Upcoming Quiz</div>
+          <div id="upcoming-quiz">
+          {quizzes && quizzes.map((quiz,index) => {
+                    return <Link key={quiz.id} to={`/quiz/${quiz.id}`}>
+                        <div className='eachClubBox_2'>
+                            <div className="card">
+                                <h2>{quiz.name}</h2>
+                                <hr />
+                                <p>{quiz.about}</p>
+
+                                <div>Hosted by: { club_name_List && club_name_List[index] && club_name_List[index].name}</div>
+
+                            </div>
+                        </div>
+
+                    </Link>
+                })}
+
+
+          </div>
           <div id="trivia">Random Trivia</div>
         </div>
       </div>

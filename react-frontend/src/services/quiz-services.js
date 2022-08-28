@@ -48,6 +48,14 @@ export function getQuizzes(){
         console.log(e)
     })
 }
+export function getQuizzesTop3(){
+    return fetch(`http://127.0.0.1:8000/api/quiz_top3/`)
+    .then(data => {
+        return data.json();
+    }).catch(e => {
+        console.log(e)
+    })
+}
 export function getCategory(id){
     return fetch(`http://127.0.0.1:8000/api/category/${id}/`)
     .then(data => {
