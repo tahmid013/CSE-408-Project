@@ -101,9 +101,9 @@ export default function ClubMembers() {
         for (let i = 0; i < members.length; i++) {
             console.log(userList[i]);
             rows.push(
-              createData(userList[i].name, members[i].designation, "Hello", "Hello")
+              createData(userList[i].name, members[i].designation, "None", "None")
             );
-            setListArr(listArr => [createData(userList[i].name, members[i].designation, "Hello", "Hello"),...listArr]);
+            setListArr(listArr => [createData(userList[i].name, members[i].designation, "None", "None"),...listArr]);
           } 
           console.log(rows);
           setLoading(false);

@@ -141,7 +141,7 @@ export default function SinglePlayerWritten() {
                 setQuesList(data);
                 setPoint(0);
                 setTotalQuesCount(data.length);
-                setSecondsRemaining(data.length * 2);
+                setSecondsRemaining(data.length * 10);
                 setQuesCount(1);
                 setQuiz_u_id(JSON.parse(localStorage.getItem('quizz-user')).user.id);
                 setQuiz_id(localStorage.getItem('quiz-info'));
@@ -226,9 +226,9 @@ export default function SinglePlayerWritten() {
                     <Box className="answer-field" >
                         <TextField
                             onChange={(e) => { setCur_ans_text(e.target.value) }}
-                            label=""
+                            label=" Answer"
                             id="standard-size-normal"
-                            defaultValue=""
+                            defaultValue=" "
                             variant="standard"
                         />
 

@@ -12,6 +12,7 @@ import Select from "@mui/material/Select";
 import { Checkbox, Chip, OutlinedInput } from "@mui/material";
 import { Box } from "@mui/material";
 import { AddClubUser } from "../../../services/quiz-services";
+import { Button } from "../../Button";
 
 
 export default function MemberList() {
@@ -101,7 +102,7 @@ export default function MemberList() {
         <>
           <FormControl sx={{ m: 1, width: 300 }}>
             <InputLabel id="demo-multiple-checkbox-label">
-              Category
+              Add Multiple Members
             </InputLabel>
             <Select
               labelId="demo-multiple-checkbox-label"
@@ -148,7 +149,7 @@ export default function MemberList() {
                       <div className="card">
                         <h1>{member.username}</h1>
                       </div>
-                      <button onClick={add_1st_into_table}>Add</button>
+                      {/* <button onClick={add_1st_into_table}>Add</button> */}
                     </div>
                   </>
                 );

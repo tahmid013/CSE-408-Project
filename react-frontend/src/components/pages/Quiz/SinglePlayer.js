@@ -149,7 +149,7 @@ export default function SinglePlayer() {
                 setQuesList(data);
                 setPoint(0);
                 setTotalQuesCount(data.length);
-                setSecondsRemaining(data.length * 2);
+                setSecondsRemaining(data.length * 10);
                 setQuesCount(1);
                 setLoading(false);
 
