@@ -3,32 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getQuestions } from "../../../services/quiz-services";
-
-const STATUS = {
-    STARTED: 'Started',
-    STOPPED: 'Stopped',
-}
-
-var INITIAL_COUNT = 10;
-
-function useInterval(callback, delay) {
-    const savedCallback = useRef()
-
-    useEffect(() => {
-        savedCallback.current = callback
-    }, [callback])
-
-    useEffect(() => {
-        function tick() {
-            savedCallback.current()
-        }
-        if (delay !== null) {
-            let id = setInterval(tick, delay)
-            return () => clearInterval(id)
-        }
-    }, [delay])
-}
-
+import NotInterestedIcon from '@mui/icons-material/NotInterested';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 export default function Practice() {
 
@@ -41,38 +17,10 @@ export default function Practice() {
     }
 
 
-    const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT)
-    const [status, setStatus] = useState(STATUS.STOPPED)
 
 
 
-    const handleStart = () => {
-        setStatus(STATUS.STARTED)
-    }
 
-    useInterval(
-        () => {
-            if (secondsRemaining > 0) {
-                setSecondsRemaining(secondsRemaining - 1)
-            } else {
-                console.log("Navigating to result-> ");
-                console.log(cur_point);
-                localStorage.setItem('point', cur_point);
-                localStorage.setItem('ques_list', JSON.stringify(ques_list));
-                localStorage.setItem('ques_op_list', JSON.stringify(op_list));
-                localStorage.setItem('ques_choices', JSON.stringify(choices));
-
-                navigate('/result');
-
-                setStatus(STATUS.STOPPED)
-            }
-        },
-        status === STATUS.STARTED ? 1000 : null,
-        // passing null stops the interval
-    )
-    useEffect(() => {
-        handleStart();
-    })
 
 
     const location = useLocation();
@@ -80,27 +28,6 @@ export default function Practice() {
     //var str ="/hello";
 
 
-    const [timer, setTimer] = useState('00');
-
-    function useInterval(callback, delay) {
-        const savedCallback = useRef()
-
-        // Remember the latest callback.
-        useEffect(() => {
-            savedCallback.current = callback
-        }, [callback])
-
-        // Set up the interval.
-        useEffect(() => {
-            function tick() {
-                savedCallback.current()
-            }
-            if (delay !== null) {
-                let id = setInterval(tick, delay)
-                return () => clearInterval(id)
-            }
-        }, [delay])
-    }
 
 
 
@@ -129,7 +56,6 @@ export default function Practice() {
                 setQuesList(data);
                 setPoint(0);
                 setTotalQuesCount(data.length);
-                setSecondsRemaining(data.length * 2);
                 setQuesCount(1);
                 setLoading(false);
 
@@ -148,28 +74,20 @@ export default function Practice() {
 
         setFlipped(false);
         choices.push(param);
+        if (param == "finish") {
+            navigate('/');
+        }
 
-        
+
 
         if (cur_ques_count < total_ques_count) {
-            console.log("current ques count : " + cur_ques_count);
+
             setQuesCount(cur_ques_count + 1);
-            console.log(cur_ques_count);
+
         }
         else {
             console.log("Navigating to result-> ");
-            var temp_point = cur_point;
-            if (ques_list[cur_ques_count - 1].answer == param) {
-                temp_point = temp_point + ques_list[cur_ques_count - 1].point;
-            }
-            console.log("Final point " + cur_point + " ques no " + ques_list[cur_ques_count - 1].point);
-            //localStorage.setItem('point', temp_point);
-            localStorage.setItem('ques_list', JSON.stringify(ques_list));
-            localStorage.setItem('ques_op_list', JSON.stringify(op_list));
-            localStorage.setItem('ques_choices', JSON.stringify(choices));
-
             navigate('/');
-            setStatus(STATUS.STOPPED)
         }
 
 
@@ -202,12 +120,12 @@ export default function Practice() {
                     <div className="card-flip">
                         {flipped ? <>
                             <div className="card front" onClick={() => flip()}>
-                            <div className="card-header">
-                                        Answer
-                                    </div>
+                                <div className="card-header">
+                                    Answer
+                                </div>
                                 <div className="card-block">
-                                <h4  className="title">  {ques_list && ques_list[cur_ques_count - 1].answer}</h4>
-                                    
+                                    <h4 className="title">  {ques_list && ques_list[cur_ques_count - 1].answer}</h4>
+
                                 </div>
                             </div>
                         </>
@@ -226,7 +144,7 @@ export default function Practice() {
                     </div>
                 </div>
             </div>
-            
+
 
 
 
@@ -235,13 +153,27 @@ export default function Practice() {
                 <div className="quiz-type-heading"><b></b></div>
 
 
-                <div className="option-container">
+                <Button
+                    variant="contained"
+                    size="large"
 
-                    <div className="option" onClick={optClickChange(each_option_list && each_option_list.op_1)}>Next</div>
-                    
-                </div>
+                    onClick={optClickChange(each_option_list && each_option_list.op_1)}
+                    startIcon={<ArrowCircleRightIcon />}
+                >
+                    Next
+                </Button>
+                <Button
+                    variant="contained"
+                    size="large"
+
+                    onClick={optClickChange("finish")}
+                    startIcon={<NotInterestedIcon />}
+                >
+                    Finish
+                </Button>
             </div>
-            
+
+
         </>
     )
 }

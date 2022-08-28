@@ -137,17 +137,16 @@ function QuestionList(category) {
                 {catQuestions &&
                   catQuestions.map((question) => {
                     return (
-                      <Link key={question.question.question_id} to={`/question/${question.question.question_id}`}>
+                     
                         <div className="eachClubBox">
                           <div className="card">
-                            <p>{question.question.question_id}</p>
-                            <h1>{question.question.question}</h1>
+                            <h1>Q. {question.question.question}</h1>
                             <button onClick={pressed}></button>
 
-                            <p>{question.question.answer}</p>
+                            <p>Ans. {question.question.answer}</p>
                           </div>
                         </div>
-                      </Link>
+                     
                     );
                   })}
               </div>
@@ -158,17 +157,16 @@ function QuestionList(category) {
                 {questions &&
                   questions.map((question) => {
                     return (
-                      <Link key={question.id} to={`/question/${question.id}`}>
+                      
                         <div className="eachClubBox">
                           <div className="card">
-                            <p>{question.id}</p>
-                            <h1>{question.question}</h1>
+                            <h1>Q. {question.question}</h1>
                             <button onClick={pressed}></button>
 
-                            <p>{question.answer}</p>
+                            <p>Ans. {question.answer}</p>
                           </div>
                         </div>
-                      </Link>
+                      
                     );
                   })}
               </div>
