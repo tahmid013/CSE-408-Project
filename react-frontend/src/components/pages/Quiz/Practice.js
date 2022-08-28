@@ -116,7 +116,7 @@ export default function Practice() {
                     </ul>
                 </div>
 
-                <div >
+                <div className="card-container-prc">
                     <div className="card-flip">
                         {flipped ? <>
                             <div className="card front" onClick={() => flip()}>
