@@ -8,7 +8,15 @@ import { getUser } from "../../../services/club-services";
 
 
 export default function MultiPlayerLobby() {
-
+    return(
+        <>
+        <div>.</div>
+        <h1>
+            This feature is not available yet.
+        </h1>
+        </>
+    
+    );
     const { authData } = useAuth();
     const [online_players, setOnlinePlayers] = useState(null);
     const [player_1, setPlayer1] = useState(null);

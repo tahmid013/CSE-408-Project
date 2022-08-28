@@ -17,13 +17,13 @@
     flex-direction: column;
     width: 100%;
     height: 600px;
-    background-color: beige;
+    background-color: white;
 }
 
 #upcoming-quiz {
     display: flex;
     flex-direction: row;
-    width: 1200pxpx;
+    width: 100%;
     height: 400px;
     overflow-x: scroll;
     overflow-y: scroll;

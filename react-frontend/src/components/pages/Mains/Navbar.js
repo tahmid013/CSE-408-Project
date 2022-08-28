@@ -41,21 +41,7 @@ function Navbar() {
                             <i className={Click ? 'fas fa-times' : 'fas fa-bars'}></i>
                         </div>
                         <ul className={Click ? 'nav-menu active' : 'nav-menu'}>
-                            <li className='nav-item'>
-                                <Link to='/howitworks' className='nav-links' onClick={closeMobileMenu}>
-                                    How it works
-                                </Link>
-                            </li>
-                            <li className='nav-item'>
-                                <Link to='/features' className='nav-links' onClick={closeMobileMenu}>
-                                    Features
-                                </Link>
-                            </li>
-                            <li className='nav-item'>
-                                <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
-                                    About Us
-                                </Link>
-                            </li>
+                            
                             {!authData ? 
                             <li className='nav-item'>
                                 <Link to='/signin' className='nav-links-mobile' onClick={closeMobileMenu}>

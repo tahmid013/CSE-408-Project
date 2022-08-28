@@ -153,7 +153,7 @@ export default function QuizMainPage() {
 
 
           </div>
-          <div id="trivia">Random Trivia</div>
+         
         </div>
       </div>
     </>
