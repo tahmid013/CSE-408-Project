@@ -10,25 +10,35 @@ export default function Board() {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [userList, setUserList] = useState([]);
+  const [finalList, setFinalList] = useState([]);
 
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
+  };
 
+  // var output = input.reduce(function(result, value) {
+  //   result[value.album] = result[value.album] || [];
+  //   result[value.album].push({ title: value.title, artist: value.artist });
+  //   return result;
+  // }, {});
 
   useEffect(() => {
-
     setLoading(true);
     const getData = async () => {
       await getQuizTakenData().then((data) => {
         setLeaderboardData(data);
-        
       });
       await sleep(500);
     };
 
     getData();
-   
+    // const output = leaderboardData.reduce(function(result,value){
+    //   result[value.user] = result[value.user] || [];
+    //   result[value.user].push({score: value.score});
+    //   return result;
+    // },{});
+    
+    //setFinalList(output);
 
     //console.log(leaderboardData);
   }, []);
@@ -36,16 +46,16 @@ export default function Board() {
   useEffect(() => {
     const getData = async () => {
       const userList2 = await Promise.all(
-        leaderboardData&& leaderboardData.map(async (member) => {
-          const user = await getUser(member.user);
-          //console.log(user);
-          return {
-            id: user.id,
-            name: user.username,
-          };
-        }
-        
-        )
+        leaderboardData &&
+          leaderboardData.map(async (member) => {
+            const user = await getUser(member.user);
+            //console.log(user);
+            return {
+              id: user.id,
+              name: user.username,
+              score: member.score,
+            };
+          })
       );
       setUserList(userList2);
       console.log(userList);
@@ -55,12 +65,26 @@ export default function Board() {
 
   useEffect(() => {
     console.log(leaderboardData);
-    setLoading(false);
-  }, [userList,]);
+    console.log(finalList);
 
-  const handleClick =async (e) => {
+    const cats = userList  .reduce((catsSoFar, { name, score }) => {
+      if (!catsSoFar[name]) catsSoFar[name] = [];
+      catsSoFar[name].push(score);
+      return catsSoFar;
+    
+      
+    }, {});
+    console.log(cats);
+    setFinalList(cats);
+    setLoading(false);
+  }, [userList]);
+
+  const handleClick = async (e) => {
     console.log(userList);
     console.log(leaderboardData);
+
+   
+
     setPeriod(e.target.dataset.id);
   };
 
@@ -73,7 +97,7 @@ export default function Board() {
           {leaderboardData ? (
             <>
               <div className="board">
-                <h1 className="leaderboard">Leaderboard</h1>  
+                <h1 className="leaderboard">Leaderboard</h1>
 
                 <div className="duration">
                   <Button variant="contained" onClick={handleClick} data-id="7">
@@ -90,24 +114,26 @@ export default function Board() {
                     All-Time
                   </Button>
                 </div>
-          <div id ="profile">
-                {leaderboardData &&
-            (leaderboardData.length > 0) &&
-           
-            leaderboardData.map((value, index) => (
-              <div className="flex" key={index}>
-                  {/* <img className="pr" src={value.img} alt="" /> */}
+                <div id="profile">
+                  {userList &&
+                    userList.length > 0 &&
+                    userList.map((value, index) => (
+                      <div className="flex" key={index}>
+                        {/* <img className="pr" src={value.img} alt="" /> */}
 
-                  <div className="info">
-                    <div className="item_l">{userList &&  (userList.length > 0)  && userList[index].name}</div>
-                    <div className="item_r">{leaderboardData[index].score}</div>
-                    
-                  </div>
-
-                
-              </div>
-            ))}
-            </div>
+                        <div className="info">
+                          <div className="item_l">
+                            {userList &&
+                              userList.length > 0 &&
+                              userList[index].name}
+                          </div>
+                          <div className="item_r">
+                            {userList[index].score}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
                 {/* <Profiles
                   Leaderboard={between(leaderboardData, period)}
                 ></Profiles> */}
@@ -119,7 +145,6 @@ export default function Board() {
         </>
       )}
     </>
-    
   );
 }
 

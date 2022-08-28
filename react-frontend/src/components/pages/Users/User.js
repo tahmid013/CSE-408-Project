@@ -62,7 +62,7 @@ export default function User() {
           </Button>
           <br />
 
-          {authData.user.profile.is_club_admin ? (
+          {/* {authData.user.profile.is_club_admin ? (
             <Button
               path_name="add_question"
               className="btns"
@@ -71,7 +71,7 @@ export default function User() {
             >
               Add Question
             </Button>
-          ) : null}
+          ) : null} */}
           <Button
            path_name="signin" 
            className="btns"
