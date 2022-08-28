@@ -488,3 +488,12 @@ button:hover, a:hover {
   margin-left: 20%;
   display: inline-block;
 }
+.card-container-prc{
+  
+}
+.card-flip{
+  align-items: center;
+  display: flex;
+  width: 50%; 
+  height: 300px;
+}
